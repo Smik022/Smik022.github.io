@@ -103,3 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     link.setAttribute('target', '_blank');
   });
 });
+
+document.querySelector('.scroll-down-indicator').addEventListener('click', () => {
+  document.querySelector('#about').scrollIntoView({ behavior: 'smooth' });
+});

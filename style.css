@@ -681,3 +681,64 @@
   color: #00ffe7; /* bright cyan, matches your theme */
   font-weight: 600; /* optional: makes keywords bold */
 }
+
+.scroll-down-indicator {
+  position: absolute;   /* position relative to hero section */
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 10;          /* ensure it’s above background and image */
+}
+
+.scroll-down-indicator {
+  position: absolute;
+  bottom: 40px; /* adjust vertical position */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+}
+
+.scroll-down-indicator .line {
+  width: 2px;
+  height: 40px;
+  background-color: #00ffe7;
+  margin-bottom: 8px;
+  animation: lineBounce 1.5s infinite;
+}
+
+.scroll-down-indicator .arrow {
+  font-size: 24px;
+  color: #00ffe7;
+  animation: arrowBounce 1.5s infinite;
+}
+
+@keyframes arrowBounce {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+}
+
+@keyframes lineBounce {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(5px);
+    opacity: 1;
+  }
+}
+

@@ -98,3 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(el);
   });
 });
+
+document.querySelectorAll('a').forEach(link => {
+  link.setAttribute('target', '_blank');
+});

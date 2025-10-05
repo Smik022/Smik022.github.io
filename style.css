@@ -676,3 +676,8 @@
   color: #fff; /* text color for skill name */
   font-size: 0.95rem;
 }
+
+.highlight {
+  color: #00ffe7; /* bright cyan, matches your theme */
+  font-weight: 600; /* optional: makes keywords bold */
+}

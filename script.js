@@ -97,8 +97,9 @@ document.addEventListener('DOMContentLoaded', () => {
     el.style.transition = 'all 0.6s ease-out';
     observer.observe(el);
   });
-});
 
-document.querySelectorAll('a').forEach(link => {
-  link.setAttribute('target', '_blank');
+  // ===== Make all links open in a new tab =====
+  document.querySelectorAll('a').forEach(link => {
+    link.setAttribute('target', '_blank');
+  });
 });

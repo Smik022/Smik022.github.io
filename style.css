@@ -742,3 +742,163 @@
   }
 }
 
+.futuristic-projects {
+  background: transparent; /* remove dark gradient */
+  color: #fff;
+  padding: 80px 0;
+  width: 100%;
+  overflow: hidden;
+  position: relative; /* needed if you want glow effects */
+}
+
+
+.section-title {
+  text-align: center;
+  font-size: 2.6rem;
+  font-weight: 600;
+  color: #00ffe7;
+  letter-spacing: 2px;
+  margin-bottom: 60px;
+  text-shadow: 0 0 20px rgba(0,255,231,0.5);
+}
+
+.project-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto 90px;
+  width: 90%;
+  max-width: 1400px;
+  background: rgba(0,255,231,0.03);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,255,231,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 35px rgba(0,255,231,0.1);
+}
+
+.project-image {
+  flex: 1 1 45%;
+  overflow: hidden;
+}
+
+.project-image img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 20px; /* add this to round the image */
+  filter: brightness(0.85);
+  transition: all 0.5s ease;
+}
+
+.project-card:hover .project-image img {
+  filter: brightness(1);
+  transform: scale(1.05);
+}
+
+
+.project-info {
+  flex: 1 1 55%;
+  padding: 2.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(0,255,231,0.06);
+  border-left: 2px solid rgba(0,255,231,0.2);
+  backdrop-filter: blur(10px);
+  min-height: 350px;
+}
+
+.project-info h3 {
+  font-size: 1.8rem;
+  color: #00ffe7;
+  margin-bottom: 1rem;
+}
+
+.project-info p {
+  color: #cfcfcf;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+.project-btn {
+  align-self: flex-start;
+  background: transparent;
+  border: 1px solid #00ffe7;
+  color: #00ffe7;
+  padding: 0.7rem 1.5rem;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.project-btn span {
+  position: relative;
+  z-index: 2; /* make sure text is always above the hover bg */
+}
+
+.project-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #00ffe7;
+  opacity: 0; /* hidden initially */
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.project-btn:hover::before {
+  opacity: 0.15; /* subtle cyan glow without hiding text */
+}
+
+.project-btn:hover {
+  color: #0a0a0a; /* or #111827 for softer black */
+  box-shadow: 0 0 25px #00ffe7;
+  border-color: #00ffe7;
+}
+
+
+
+/* Alternate layout */
+.project-card:nth-child(even) {
+  flex-direction: row-reverse;
+  border-right: 2px solid rgba(0,255,231,0.2);
+  border-left: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .project-card {
+    flex-direction: column;
+    width: 95%;
+  }
+
+  .project-image img {
+    height: 280px;
+  }
+
+  .project-info {
+    border: none;
+    padding: 1.8rem;
+  }
+
+  .project-card:nth-child(even) {
+    flex-direction: column;
+  }
+}

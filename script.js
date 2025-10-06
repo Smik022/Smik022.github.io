@@ -70,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
     particle.style.animationDuration = Math.random() * 10 + 10 + 's';
     particle.style.animationDelay = Math.random() * 5 + 's';
     document.getElementById('hero').appendChild(particle);
-    
     setTimeout(() => particle.remove(), 20000);
   }
 
@@ -102,8 +101,13 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('a').forEach(link => {
     link.setAttribute('target', '_blank');
   });
-});
 
-document.querySelector('.scroll-down-indicator').addEventListener('click', () => {
-  document.querySelector('#about').scrollIntoView({ behavior: 'smooth' });
+  // ===== Scroll down indicator click =====
+  const scrollIndicator = document.querySelector('.scroll-down-indicator');
+  if (scrollIndicator) {
+    scrollIndicator.addEventListener('click', () => {
+      document.querySelector('#about').scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
 });

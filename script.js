@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   // ===== Typing Animation =====
   const roles = [
+    'Aspiring Product Manager',
     'Software Engineer',
     'Business System Analyst',
-    'Project Manager',
     'AI Solutions Architect'
   ];
 

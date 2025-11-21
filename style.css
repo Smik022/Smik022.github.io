@@ -8,7 +8,7 @@
       scroll-behavior: smooth;
     }
 
-    /* Animated gradient background */
+    /* Animated gradient background 12324 */
     body::before {
       content: '';
       position: fixed;

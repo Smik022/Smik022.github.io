@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // ===== Typing Animation =====
+  // ===== Typing Animation ===== 1231321
   const roles = [
     'Aspiring Product Manager',
     'Software Engineer',

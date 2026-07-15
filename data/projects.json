@@ -162,7 +162,12 @@
       }
     ],
     "summary": "A voice-first field app that tells a preacher which house to visit next, draws the route, and records the outcome.",
-    "links": [],
+    "links": [
+      {
+        "label": "Live demo",
+        "url": "https://web-tan-theta-96.vercel.app/"
+      }
+    ],
     "situation": "Door-to-door outreach forgets. Who was visited, who actually answered, who is overdue — it lives in volunteers' heads, and someone walking a street cannot stop to update a spreadsheet.",
     "task": [
       "Make the record keep itself, hands-free, while a volunteer walks.",

@@ -424,4 +424,17 @@ for (const p of projects) {
 console.log("Building…");
 write("index.html", renderHome());
 projects.forEach((p) => write(`project/${p.slug}/index.html`, renderProject(p)));
+
+// Delete pages for projects that are no longer in projects.json. Without this,
+// a removed project keeps its URL live forever — unlinked but still reachable
+// and still indexed.
+const projectDir = path.join(ROOT, "project");
+if (fs.existsSync(projectDir)) {
+  for (const dir of fs.readdirSync(projectDir)) {
+    if (seen.has(dir)) continue;
+    fs.rmSync(path.join(projectDir, dir), { recursive: true, force: true });
+    console.log("  ✗ removed project/" + dir + "/ (no longer in projects.json)");
+  }
+}
+
 console.log(`Done — 1 home page, ${projects.length} project pages.`);

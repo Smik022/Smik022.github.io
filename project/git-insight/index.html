@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Green Legal Aid | Sardar Asif Ahmed</title>
-<meta name="description" content="A centralized legal aid application system for an NGO — documented, analyzed, and delivered end to end.">
-<link rel="canonical" href="https://asifahmed.me/project/green-legal-aid/">
+<title>Git Insight | Sardar Asif Ahmed</title>
+<meta name="description" content="Feed it a GitHub username and it reads the public profile and repositories, then returns a card-based developer assessment written for recruiters.">
+<link rel="canonical" href="https://asifahmed.me/project/git-insight/">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Green Legal Aid | Sardar Asif Ahmed">
-<meta property="og:description" content="A centralized legal aid application system for an NGO — documented, analyzed, and delivered end to end.">
-<meta property="og:url" content="https://asifahmed.me/project/green-legal-aid/">
+<meta property="og:title" content="Git Insight | Sardar Asif Ahmed">
+<meta property="og:description" content="Feed it a GitHub username and it reads the public profile and repositories, then returns a card-based developer assessment written for recruiters.">
+<meta property="og:url" content="https://asifahmed.me/project/git-insight/">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,37 +54,58 @@
   <a class="back" href="../../index.html">← All work</a>
 <div class="article-inner">
   <ul class="pills">
-    <li class="pill">System Analysis</li>
-    <li class="pill pill-solid">Impact</li>
-    <li class="pill pill-outline">Documentation</li>
-    <li class="pill">2025</li>
-    <li class="pill pill-draft">Draft</li>
+    <li class="pill">Developer Tool</li>
+    <li class="pill pill-solid">LLM</li>
+    <li class="pill pill-outline">GitHub API</li>
+    <li class="pill">2026</li>
   </ul>
-  <h1 class="article-title" id="modal-title">Green Legal Aid</h1>
-  <p class="byline"><span class="byline-role">System Analyst</span><span class="byline-dot">•</span><span class="byline-org">Green Legal Aid (NGO)</span></p>
-  <p class="lede">A centralized legal aid application system for an NGO — documented, analyzed, and delivered end to end.</p>
-  <p class="notice">This case study is still being written. The links are real — the write-up is on its way.</p>
+  <h1 class="article-title" id="modal-title">Git Insight</h1>
+  <p class="byline"><span class="byline-role">Builder</span><span class="byline-dot">•</span><span class="byline-org">Personal project</span></p>
+  <p class="lede">Feed it a GitHub username and it reads the public profile and repositories, then returns a card-based developer assessment written for recruiters.</p>
   <div class="article-grid">
     <div class="article-main">
+    <section class="block">
+      <h2>Situation</h2>
+      <p>A GitHub profile is a wall of repository names. Anyone trying to judge a developer from it — a recruiter, a hiring manager — is reading raw material and hoping to infer a shape from it.</p>
+    </section>
+    <section class="block">
+      <h2>Task</h2>
+      <ul>
+        <li>Turn a username into a structured read: archetype, stack, strengths, weaknesses, role fit.</li>
+        <li>Accept whatever someone pastes — a username or a full profile URL.</li>
+      </ul>
+    </section>
+    <section class="block">
+      <h2>Result</h2>
+      <p>A working tool that takes a username or profile URL and returns a seven-card assessment. Built in three bursts across early 2026, deployed on Vercel.</p>
+    </section>
+    <section class="block">
+      <h2>My Contribution</h2>
+      <ul>
+        <li>Moved both API keys behind serverless functions. The original design read them from Vite-prefixed variables, which are inlined into the client bundle — it would have shipped the Gemini key to every visitor. This is the change I&#39;d call the most important one in the project.</li>
+        <li>Aggregated the language histogram server-side and sliced to the top 30 repositories, projected down to seven fields each, to keep the payload and the token bill sane.</li>
+        <li>Constrained the model with an explicit JSON contract rather than parsing prose, so the response maps straight onto the cards.</li>
+        <li>Hedged against the model not complying anyway — stripping markdown fences the prompt already forbids, and tolerating a string where an array was specified.</li>
+      </ul>
+    </section>
     </div>
     <aside class="article-rail">
       <div class="card">
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
-          <span class="metric-value">25%</span>
-          <span class="metric-label">Efficiency Increase</span>
-          
+          <span class="metric-name">Keys moved off the client</span>
+          <span class="metric-label">A security refactor mid-project</span>
+          <p class="metric-note">Vite inlines prefixed env vars into the bundle. The migration to serverless proxies is the difference between a demo and something you can actually put a link to.</p>
+        </div>
+        <div class="metric">
+          <span class="metric-name">Schema-constrained prompting</span>
+          <span class="metric-label">Eight-key JSON contract</span>
+          <p class="metric-note">The model fills a structure rather than writing prose someone has to parse.</p>
         </div>
       </div>
       <div class="card">
         <h2 class="card-title">Skills &amp; Technologies</h2>
-        <ul class="tags"><li>SRS Documentation</li><li>Requirements Analysis</li><li>System Design</li></ul>
-      </div>
-      <div class="card">
-        <h2 class="card-title">Links</h2>
-        <div class="article-links">
-          <a class="button" href="https://greenlegalaid.com" target="_blank" rel="noopener">Live site ↗</a>
-        </div>
+        <ul class="tags"><li>Developer Tooling</li><li>React</li><li>Vite</li><li>Gemini</li><li>GitHub REST API</li><li>Vercel Serverless</li></ul>
       </div>
     </aside>
   </div>

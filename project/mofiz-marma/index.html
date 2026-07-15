@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ImaGEN AI Image Generator | Sardar Asif Ahmed</title>
-<meta name="description" content="A full-stack AI image generation platform built with Django REST Framework and React, integrated with Pollination AI.">
-<link rel="canonical" href="https://asifahmed.me/project/imagen-ai-image-generator/">
+<title>Mofiz Marma | Sardar Asif Ahmed</title>
+<meta name="description" content="Talk, and Mofiz draws. A voice agent that renders live Mermaid diagrams — flowcharts, sequence, ER, mindmaps — as you describe them, in English or Bangla.">
+<link rel="canonical" href="https://asifahmed.me/project/mofiz-marma/">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="ImaGEN AI Image Generator | Sardar Asif Ahmed">
-<meta property="og:description" content="A full-stack AI image generation platform built with Django REST Framework and React, integrated with Pollination AI.">
-<meta property="og:url" content="https://asifahmed.me/project/imagen-ai-image-generator/">
+<meta property="og:title" content="Mofiz Marma | Sardar Asif Ahmed">
+<meta property="og:description" content="Talk, and Mofiz draws. A voice agent that renders live Mermaid diagrams — flowcharts, sequence, ER, mindmaps — as you describe them, in English or Bangla.">
+<meta property="og:url" content="https://asifahmed.me/project/mofiz-marma/">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,28 +54,68 @@
   <a class="back" href="../../index.html">← All work</a>
 <div class="article-inner">
   <ul class="pills">
-    <li class="pill">Full-Stack</li>
-    <li class="pill pill-solid">GenAI</li>
-    <li class="pill pill-outline">React + Django</li>
-    <li class="pill">2025</li>
-    <li class="pill pill-draft">Draft</li>
+    <li class="pill">Voice AI</li>
+    <li class="pill pill-solid">Diagrams</li>
+    <li class="pill pill-outline">Bilingual</li>
+    <li class="pill">2026</li>
   </ul>
-  <h1 class="article-title" id="modal-title">ImaGEN AI Image Generator</h1>
-  <p class="byline"><span class="byline-role">Developer</span><span class="byline-dot">•</span><span class="byline-org">Personal project</span></p>
-  <p class="lede">A full-stack AI image generation platform built with Django REST Framework and React, integrated with Pollination AI.</p>
-  <p class="notice">This case study is still being written. The links are real — the write-up is on its way.</p>
+  <h1 class="article-title" id="modal-title">Mofiz Marma</h1>
+  <p class="byline"><span class="byline-role">Builder</span><span class="byline-dot">•</span><span class="byline-org">Personal project</span></p>
+  <p class="lede">Talk, and Mofiz draws. A voice agent that renders live Mermaid diagrams — flowcharts, sequence, ER, mindmaps — as you describe them, in English or Bangla.</p>
   <div class="article-grid">
     <div class="article-main">
+    <section class="block">
+      <h2>Situation</h2>
+      <p>Describing a system is easy; drawing it is the slow part. Diagramming tools ask you to stop thinking and start placing boxes, and the diagram you wanted is usually clearer in conversation than in the editor.</p>
+    </section>
+    <section class="block">
+      <h2>Task</h2>
+      <ul>
+        <li>Let someone describe a system out loud and watch the diagram appear as they speak.</li>
+        <li>Work in Bangla as naturally as in English, switching mid-conversation.</li>
+      </ul>
+    </section>
+    <section class="block">
+      <h2>Result</h2>
+      <p>Deployed and working, built in a single day. Voice in, diagram out, with barge-in interruption, a pan-zoom canvas, live code editing and SVG export — plus a text path for pasting in context when speaking isn&#39;t practical.</p>
+    </section>
+    <section class="block">
+      <h2>My Contribution</h2>
+      <ul>
+        <li>Locked the model, prompt, tools and voice into the ephemeral token itself. The browser gets direct-to-Google audio latency, but the client physically cannot alter the persona — and the system prompt never ships in the bundle.</li>
+        <li>Closed the loop on bad diagrams: Mermaid parse errors are handed back to the model as the tool&#39;s response so it corrects itself, capped at three retries per turn before admitting a syntax hiccup rather than looping forever.</li>
+        <li>Validated diagram code before rendering rather than after, so a malformed diagram never reaches the canvas.</li>
+        <li>Tracked down a Windows-specific bug where tooling injects BOM and zero-width characters into the API key — invisible in an editor, but HTTP headers reject anything above 0xFF. The key is now sanitised at the boundary.</li>
+      </ul>
+    </section>
     </div>
     <aside class="article-rail">
       <div class="card">
+        <h2 class="card-title">Key Results</h2>
+        <div class="metric">
+          <span class="metric-name">Self-correcting diagrams</span>
+          <span class="metric-label">Parse errors fed back to the model</span>
+          <p class="metric-note">Three attempts per turn. The model sees its own syntax error and fixes it, instead of the user seeing a broken render.</p>
+        </div>
+        <div class="metric">
+          <span class="metric-name">Barge-in interruption</span>
+          <span class="metric-label">Talk over it and it stops</span>
+          <p class="metric-note">The audio queue flushes synchronously on interrupt, so it stops mid-word like a person would.</p>
+        </div>
+        <div class="metric">
+          <span class="metric-name">Bilingual by default</span>
+          <span class="metric-label">English and Bangla</span>
+          <p class="metric-note">Switches automatically with the speaker rather than hiding behind a language setting.</p>
+        </div>
+      </div>
+      <div class="card">
         <h2 class="card-title">Skills &amp; Technologies</h2>
-        <ul class="tags"><li>Django REST Framework</li><li>React</li><li>Pollination AI</li><li>Full-Stack</li></ul>
+        <ul class="tags"><li>Voice UX</li><li>Gemini Live API</li><li>Next.js</li><li>React</li><li>Mermaid</li><li>Web Audio</li><li>Bangla</li></ul>
       </div>
       <div class="card">
         <h2 class="card-title">Links</h2>
         <div class="article-links">
-          <a class="button" href="https://ima-gen-ten.vercel.app/" target="_blank" rel="noopener">Live demo ↗</a>
+          <a class="button" href="https://mofiz-marma.vercel.app" target="_blank" rel="noopener">Live demo ↗</a>
         </div>
       </div>
     </aside>

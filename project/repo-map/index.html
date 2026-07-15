@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tech-Skill Development Project | Sardar Asif Ahmed</title>
-<meta name="description" content="Analyzed training system needs and defined functional requirements for a program that trained 1,000+ people in digital skills.">
-<link rel="canonical" href="https://asifahmed.me/project/tech-skill-development/">
+<title>RepoMap | Sardar Asif Ahmed</title>
+<meta name="description" content="Point it at a GitHub repo or a local folder and get architecture diagrams, module descriptions, onboarding steps and a generated README.">
+<link rel="canonical" href="https://asifahmed.me/project/repo-map/">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Tech-Skill Development Project | Sardar Asif Ahmed">
-<meta property="og:description" content="Analyzed training system needs and defined functional requirements for a program that trained 1,000+ people in digital skills.">
-<meta property="og:url" content="https://asifahmed.me/project/tech-skill-development/">
+<meta property="og:title" content="RepoMap | Sardar Asif Ahmed">
+<meta property="og:description" content="Point it at a GitHub repo or a local folder and get architecture diagrams, module descriptions, onboarding steps and a generated README.">
+<meta property="og:url" content="https://asifahmed.me/project/repo-map/">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,37 +54,64 @@
   <a class="back" href="../../index.html">← All work</a>
 <div class="article-inner">
   <ul class="pills">
-    <li class="pill">Program Delivery</li>
-    <li class="pill pill-solid">Scale</li>
-    <li class="pill pill-outline">Requirements</li>
-    <li class="pill">2025</li>
-    <li class="pill pill-draft">Draft</li>
+    <li class="pill">Developer Tool</li>
+    <li class="pill pill-solid">Code Analysis</li>
+    <li class="pill pill-outline">Privacy</li>
+    <li class="pill">2026</li>
   </ul>
-  <h1 class="article-title" id="modal-title">Tech-Skill Development Project</h1>
-  <p class="byline"><span class="byline-role">Business System Analyst</span><span class="byline-dot">•</span><span class="byline-org">Dulles Global Investment</span></p>
-  <p class="lede">Analyzed training system needs and defined functional requirements for a program that trained 1,000+ people in digital skills.</p>
-  <p class="notice">This case study is still being written. The links are real — the write-up is on its way.</p>
+  <h1 class="article-title" id="modal-title">RepoMap</h1>
+  <p class="byline"><span class="byline-role">Builder</span><span class="byline-dot">•</span><span class="byline-org">Personal project</span></p>
+  <p class="lede">Point it at a GitHub repo or a local folder and get architecture diagrams, module descriptions, onboarding steps and a generated README.</p>
   <div class="article-grid">
     <div class="article-main">
+    <section class="block">
+      <h2>Situation</h2>
+      <p>Understanding an unfamiliar codebase is mostly archaeology — reading entry points, guessing at structure, and building a mental map that already exists in someone else&#39;s head. The people who need that map most are the ones who just joined.</p>
+    </section>
+    <section class="block">
+      <h2>Task</h2>
+      <ul>
+        <li>Turn a repo into a readable map: what the architecture is, how requests flow, where the data goes.</li>
+        <li>Make it usable on private code, not just public repos.</li>
+      </ul>
+    </section>
+    <section class="block">
+      <h2>Result</h2>
+      <p>A working tool producing three Mermaid diagrams, module cards, onboarding steps and a README from either a GitHub URL or a local folder, with results cached so a repeat look costs nothing.</p>
+    </section>
+    <section class="block">
+      <h2>My Contribution</h2>
+      <ul>
+        <li>Analysed local folders entirely in the browser via the File System Access API, so private code never leaves the machine — only the selected files&#39; truncated text is ever sent.</li>
+        <li>Chose the model on quota, not benchmarks: the lite model allows 500 requests a day against the standard model&#39;s 20. For a free tool anyone can try, that difference is the product.</li>
+        <li>Budgeted the prompt deliberately — around a dozen ranked files, truncated, plus a file-tree summary — because sending a whole repo is neither affordable nor more accurate.</li>
+        <li>Wrote a Mermaid label sanitiser that runs only after a raw render fails, so it can never break a diagram that already worked. It stashes quoted strings and multi-character shapes before quoting, then restores them.</li>
+        <li>Kept the exact diagram that broke on a real repo as a regression fixture, so the bug that prompted the fix can never come back quietly.</li>
+      </ul>
+    </section>
     </div>
     <aside class="article-rail">
       <div class="card">
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
-          <span class="metric-value">1,000+</span>
-          <span class="metric-label">People Trained</span>
-          
+          <span class="metric-value">37</span>
+          <span class="metric-label">Tests over the parts that actually break</span>
+          <p class="metric-note">URL parsing, file selection, JSON extraction and Mermaid sanitising — the pure logic where a silent regression would be invisible. One fixture is the real diagram that failed to render for a public repo.</p>
+        </div>
+        <div class="metric">
+          <span class="metric-name">Local folders never leave the browser</span>
+          <span class="metric-label">File System Access API</span>
+          <p class="metric-note">Private repos get analysed without uploading the codebase — the folder is walked client-side and only the chosen excerpts are sent.</p>
+        </div>
+        <div class="metric">
+          <span class="metric-name">Belt-and-braces JSON handling</span>
+          <span class="metric-label">Three layers</span>
+          <p class="metric-note">Response MIME type, a fence-stripping extractor, and a stricter-prompt retry — because a model that returns prose instead of JSON breaks the whole page.</p>
         </div>
       </div>
       <div class="card">
         <h2 class="card-title">Skills &amp; Technologies</h2>
-        <ul class="tags"><li>Requirements Analysis</li><li>Stakeholder Management</li><li>Project Management</li></ul>
-      </div>
-      <div class="card">
-        <h2 class="card-title">Links</h2>
-        <div class="article-links">
-          <a class="button" href="https://www.notion.so/DGI-Training-Implementation-Project-21f6c36859a980b787f9cb2ac4d93883" target="_blank" rel="noopener">Case notes ↗</a>
-        </div>
+        <ul class="tags"><li>Developer Tooling</li><li>React</li><li>TypeScript</li><li>Gemini</li><li>Mermaid</li><li>File System Access API</li><li>Vercel</li></ul>
       </div>
     </aside>
   </div>

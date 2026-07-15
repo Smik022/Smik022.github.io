@@ -1,5 +1,132 @@
 [
   {
+    "slug": "zerotouch-onboarding",
+    "title": "ZeroTouch Onboarding",
+    "category": "Compliance Product",
+    "role": "Product Manager",
+    "company": "Femia Accountants",
+    "year": "2026",
+    "draft": false,
+    "tags": [
+      { "label": "Compliance" },
+      { "label": "Product Decisions", "variant": "solid" },
+      { "label": "Fintech", "variant": "outline" }
+    ],
+    "summary": "Client onboarding for an Australian accounting firm, built against a hard AML/CTF deadline — quote, intake, due diligence, and write-back into the firm's practice-management system.",
+    "links": [],
+    "situation": "From 1 July 2026, Australian AML/CTF rules required Femia Accountants to identify, verify and prove every client. The principal was running those checks by hand, across three separate Excel quote calculators and paper due-diligence forms. The deadline was not negotiable, and the evidence trail had to survive an audit.",
+    "task": [
+      "Turn the firm's manual quote calculators and AML due-diligence forms into one system, before the compliance date.",
+      "Keep the firm's pricing private from clients — a hard requirement that shaped the whole flow.",
+      "Write every ID and AML check back into Karbon, the firm's practice-management system, so the evidence lives where auditors look for it."
+    ],
+    "result": "A working system covering quote → client intake → AML record → write-back, proven end to end against the firm's live Karbon, Microsoft Graph and Stripe Identity tenants. At last commit it was feature-complete on staging; production infrastructure and per-user SSO are the remaining gates before real client data.",
+    "contributions": [
+      "Split the flow into two forms — staff-facing with pricing, client-facing without — once the firm made clear that clients must never see the price grid. That single constraint drove the entire information architecture.",
+      "Ruled that dry-run and live must share one code path. Karbon writes are permanent and have no delete, so what we tested had to be exactly what fired; a flag decides whether the call goes out, nothing else changes.",
+      "Caught that Karbon's Director ID field is number-typed, which silently drops the leading zero from Australian Director IDs beginning '036'. Rather than store a corrupted compliance identifier, we skip the field and write the ID verbatim into the AML timeline note.",
+      "Held every integration awaiting a client decision as a dormant adapter — fully built, returning 'not configured', sending nothing externally until switched on. No client name leaves the server before the firm says so.",
+      "Reconciled the principal's master pricing workbook live from SharePoint, surfacing stale fees for one-click review instead of asking him to re-key them."
+    ],
+    "keyResults": {
+      "metric": "576",
+      "metricLabel": "Row business price matrix",
+      "metricNote": "Generated directly from the firm's own Excel quote builder rather than transcribed by hand, so the source of truth stays with the client.",
+      "items": [
+        {
+          "name": "Three quote engines",
+          "label": "Individual ITR, SMSF, Business",
+          "note": "Classify-then-price: tick the activities, land on exactly one return type by precedence, then stack schedules for CGT, dividends, foreign income and rentals."
+        },
+        {
+          "name": "AML/CTF due diligence",
+          "label": "Individual, Company, Trust",
+          "note": "The firm's paper forms digitised into a register with risk, PEP status and CDD level, plus one-click document export and an automatic timeline note against the client record."
+        },
+        {
+          "name": "269 assertions",
+          "label": "14 harnesses, no test framework",
+          "note": "The pricing engines are the part a client would notice being wrong, so they get a regression net that transpiles the TypeScript in-process — no test dependency to install or maintain."
+        }
+      ]
+    },
+    "skills": [
+      "Product Strategy",
+      "AML/CTF Compliance",
+      "Requirements Analysis",
+      "Next.js",
+      "TypeScript",
+      "Prisma",
+      "Supabase",
+      "Karbon API",
+      "Microsoft Graph",
+      "Stripe Identity"
+    ]
+  },
+  {
+    "slug": "merlin",
+    "title": "Merlin",
+    "category": "Voice AI",
+    "role": "Product Manager",
+    "company": "The Artificer's AI",
+    "year": "2026",
+    "draft": false,
+    "tags": [
+      { "label": "Voice AI" },
+      { "label": "Realtime", "variant": "solid" },
+      { "label": "Agent Design", "variant": "outline" }
+    ],
+    "summary": "A realtime voice agent that answers inbound prospects in the browser, qualifies them, and either books a discovery briefing or captures a structured requirements brief.",
+    "links": [{ "label": "Live", "url": "https://merlin.artificersai.com" }],
+    "situation": "Discovery meetings were being spent on calls that could have been qualified up front. The intake brief puts the goal plainly: let a caller describe what they want built without sitting through a meeting.",
+    "task": [
+      "Ship a voice agent that handles an inbound prospect end to end — greet, qualify, explain the offering, book a 45-minute briefing.",
+      "Add a second mode that interviews a caller and turns the conversation into a structured requirements brief the team can act on."
+    ],
+    "result": "Live at merlin.artificersai.com and embedded on the studio's intake page, with a push-button deploy that health-checks the running commit and can roll back. Both modes run off one binary.",
+    "contributions": [
+      "Decided the model gets treated as untrusted. It can call tools, but it does not get the final say on whether the work actually happened.",
+      "A live call once ended by announcing the brief had been submitted when no brief existed — no file, no email, nothing. The recap gate lived inside the submit tool, so skipping the tool skipped the gate. Moved the gate up into the dispatcher: the agent cannot end a call claiming success unless the submit actually succeeded.",
+      "Required booking tools to prove they know what time it is — any of the five booking calls is rejected unless the clock was checked in the last 60 seconds, because a confidently wrong booking time is worse than a retry.",
+      "Decoupled the caller identity form from the model after live calls showed it looping on the greeting and calling the tool late or never. The form now paints on a timer regardless, with a watchdog that reprompts and eventually cuts the call.",
+      "Suppressed caller transcripts until the form is submitted, because the model emits phantom transcriptions from mic noise the moment the socket opens."
+    ],
+    "keyResults": {
+      "metric": "20",
+      "metricLabel": "Tools the agent can call mid-conversation",
+      "metricNote": "Filtered per variant — the sales agent sees 18, the intake interviewer sees 8, from one registry on one deployed binary.",
+      "items": [
+        {
+          "name": "Two variants, one binary",
+          "label": "Sales funnel and intake interview",
+          "note": "Same process and audio pipeline; the URL decides which prompt and which slice of the tool registry the caller gets."
+        },
+        {
+          "name": "Full booking lifecycle",
+          "label": "Find, book, reschedule, cancel",
+          "note": "Including recovery when a slot is taken between offer and confirmation — it re-fetches alternatives rather than failing the call."
+        },
+        {
+          "name": "Under 900ms",
+          "label": "Latency budget, speech-stop to audio",
+          "note": "The design target the audio pipeline was built around — raw PCM frames forwarded the moment they arrive, never buffering a full response."
+        }
+      ]
+    },
+    "skills": [
+      "Product Strategy",
+      "Voice UX",
+      "Agent Design",
+      "Gemini Live API",
+      "OpenAI Realtime",
+      "TypeScript",
+      "WebSocket",
+      "Cal.com API",
+      "Docker",
+      "Traefik"
+    ]
+  },
+  {
     "slug": "socratic-ai",
     "title": "Socratic AI Learning Platform",
     "category": "AI Product",
@@ -7,7 +134,11 @@
     "company": "Australian startup (stealth)",
     "year": "2026",
     "draft": true,
-    "tags": [{ "label": "AI Product" }, { "label": "EdTech", "variant": "solid" }, { "label": "Product Strategy", "variant": "outline" }],
+    "tags": [
+      { "label": "AI Product" },
+      { "label": "EdTech", "variant": "solid" },
+      { "label": "Product Strategy", "variant": "outline" }
+    ],
     "summary": "Collaborating with an Australian startup to build interactive, intelligent learning experiences driven by Socratic questioning.",
     "links": [],
     "situation": "",
@@ -18,58 +149,296 @@
     "skills": ["AI Product", "Prompt Engineering", "Requirements Analysis"]
   },
   {
-    "slug": "imagen-ai-image-generator",
-    "title": "ImaGEN AI Image Generator",
-    "category": "Full-Stack AI",
-    "role": "Developer",
+    "slug": "narawe",
+    "title": "Narawe",
+    "category": "Document Intelligence",
+    "role": "Product Manager",
+    "company": "The Artificer's AI",
+    "year": "2026",
+    "draft": false,
+    "tags": [
+      { "label": "Document AI" },
+      { "label": "Search", "variant": "solid" },
+      { "label": "Multi-tenant", "variant": "outline" }
+    ],
+    "summary": "Document intelligence for professional-services firms — scan or upload client PDFs, OCR them, and search across everything with fused keyword and semantic retrieval.",
+    "links": [],
+    "situation": "Law offices, accountants and consultancies hold their client history in scanned paper. Once a document is an image, it is invisible to search — the knowledge exists but nobody can retrieve it without knowing which folder to open.",
+    "task": [
+      "Get paper into the system with as little friction as possible, including straight from a phone camera.",
+      "Make everything searchable afterwards — by wording people half-remember, and by meaning when they don't.",
+      "Keep every firm's documents strictly separated from every other firm's."
+    ],
+    "result": "A working prototype running the full path: camera scan or bulk upload → OCR → keyword extraction → embedding → hybrid search, plus an auto-synthesised portfolio summarising everything known about a client. Prepared for deploy; not yet in production use.",
+    "contributions": [
+      "Consolidated three AI providers onto one. The project started split across Clarifai for OCR, OpenRouter for keywords and OpenAI for embeddings; it now runs entirely on Gemini, which removed two vendor relationships and three failure modes.",
+      "Chose to fuse keyword and semantic search rather than pick one. People search for the exact phrase on the invoice and for the vague idea of what a letter was about — reciprocal rank fusion serves both from a single query.",
+      "Treated 'the model returned garbage' as a different failure from 'the network failed'. Transport errors retry with backoff; a response that is empty, too short, or echoing the prompt back triggers a separate content-aware retry that keeps the best attempt rather than returning nothing.",
+      "Made the client portfolio fire-and-forget, so an AI summary can never fail a document upload. The document reaching 'ready' is what the user is waiting on; the summary catches up on its own.",
+      "Set up scanning from a phone into a laptop-hosted stack over Tailscale, so the camera path could be tested against real paper rather than fixtures."
+    ],
+    "keyResults": {
+      "metric": "",
+      "metricLabel": "",
+      "metricNote": "",
+      "items": [
+        {
+          "name": "Hybrid search with RRF fusion",
+          "label": "Keyword and semantic, one query",
+          "note": "Postgres full-text and pgvector cosine run as separate passes, then fuse by reciprocal rank — with highlighted snippets so people can see why a result matched."
+        },
+        {
+          "name": "Task-typed embeddings",
+          "label": "Documents and queries embedded differently",
+          "note": "A stored document and a search query are not the same kind of text; embedding them with different task types measurably helps recall."
+        },
+        {
+          "name": "Markdown to PDF engine",
+          "label": "583 lines, written from scratch",
+          "note": "Recompiles OCR'd text into a real searchable PDF — block parsing, font-metric word wrap, proportional table columns, pagination. The original scan is always preserved alongside it."
+        }
+      ]
+    },
+    "skills": [
+      "Product Strategy",
+      "Document AI",
+      "Next.js",
+      "React",
+      "Supabase",
+      "Postgres",
+      "pgvector",
+      "Gemini",
+      "OCR",
+      "Multi-tenant RLS"
+    ]
+  },
+  {
+    "slug": "siratul-mustakim",
+    "title": "Siratul Mustakim",
+    "category": "Voice AI",
+    "role": "Builder",
     "company": "Personal project",
-    "year": "2025",
-    "draft": true,
-    "tags": [{ "label": "Full-Stack" }, { "label": "GenAI", "variant": "solid" }, { "label": "React + Django", "variant": "outline" }],
-    "summary": "A full-stack AI image generation platform built with Django REST Framework and React, integrated with Pollination AI.",
-    "links": [{ "label": "Live demo", "url": "https://ima-gen-ten.vercel.app/" }],
-    "situation": "",
-    "task": "",
-    "result": "",
-    "contributions": [],
-    "keyResults": { "metric": "", "metricLabel": "", "metricNote": "", "items": [] },
-    "skills": ["Django REST Framework", "React", "Pollination AI", "Full-Stack"]
+    "year": "2026",
+    "draft": false,
+    "tags": [
+      { "label": "Voice AI" },
+      { "label": "Field Tool", "variant": "solid" },
+      { "label": "Maps", "variant": "outline" }
+    ],
+    "summary": "A voice-first field app where an AI guide tells a preacher which house to visit next in Mirrabooka, draws the route, and records what happened at each door — hands-free.",
+    "links": [],
+    "situation": "Door-to-door outreach loses its memory. Teams forget who was visited, when, and whether anyone actually answered — and a volunteer walking a street cannot stop to fill in a spreadsheet. The distinction that matters is not whether a door was knocked but whether a real conversation happened.",
+    "task": [
+      "Make the whole loop hands-free: which house next, how to get there, and what happened — all by voice, while walking.",
+      "Pick the next house by who most needs a visit, based on when someone last actually answered."
+    ],
+    "result": "A working prototype with the full voice loop running: the agent answers status questions, picks the next house, draws the route on the map, and records outcomes by speech. Demo mode runs it with no backend at all. Persisting visits to the database is the next milestone.",
+    "contributions": [
+      "Cut an always-on server process entirely. Moving to short-lived ephemeral tokens let the browser talk to Gemini directly and run the tools client-side, while the API key still never leaves the server.",
+      "Banned the agent from inventing navigation. It is forbidden from saying street names or 'continue for 200 metres' — the drawn route line handles turn-by-turn, because a voice confidently inventing a street sends someone to the wrong door.",
+      "Kept the last-sent house in server-side context so the agent never has to echo an ID back to record a visit — removing a whole class of hallucination rather than prompting against it.",
+      "Modelled status on contact recency and never stored the colour. Green, yellow and red are derived from when someone last answered, so the map cannot drift out of date.",
+      "Batched mic audio into ~100ms chunks — ten messages a second instead of fifty — and fell back to the masjid as route origin when GPS is off, so the line always draws."
+    ],
+    "keyResults": {
+      "metric": "",
+      "metricLabel": "",
+      "metricNote": "",
+      "items": [
+        {
+          "name": "Six voice tools",
+          "label": "Status, next house, directions, find, record, show",
+          "note": "The agent drives the map and the record-keeping through tool calls; the preacher never touches the screen."
+        },
+        {
+          "name": "Contact-recency model",
+          "label": "14 days warm, 42 days cooling",
+          "note": "Derived from the last time someone actually answered — a no-answer does not reset the clock, because it is not contact."
+        },
+        {
+          "name": "CSV import with geocoding",
+          "label": "Address list to map pins",
+          "note": "Quote-aware parser, fuzzy column matching and throttled address lookup, reporting back exactly which rows failed rather than silently dropping them."
+        }
+      ]
+    },
+    "skills": [
+      "Voice UX",
+      "Gemini Live API",
+      "React",
+      "TypeScript",
+      "Leaflet",
+      "OSRM",
+      "Supabase",
+      "Web Audio"
+    ]
   },
   {
-    "slug": "green-legal-aid",
-    "title": "Green Legal Aid",
-    "category": "System Analysis",
-    "role": "System Analyst",
-    "company": "Green Legal Aid (NGO)",
-    "year": "2025",
-    "draft": true,
-    "tags": [{ "label": "System Analysis" }, { "label": "Impact", "variant": "solid" }, { "label": "Documentation", "variant": "outline" }],
-    "summary": "A centralized legal aid application system for an NGO — documented, analyzed, and delivered end to end.",
-    "links": [{ "label": "Live site", "url": "https://greenlegalaid.com" }],
-    "situation": "",
-    "task": "",
-    "result": "",
-    "contributions": [],
-    "keyResults": { "metric": "25%", "metricLabel": "Efficiency Increase", "metricNote": "", "items": [] },
-    "skills": ["SRS Documentation", "Requirements Analysis", "System Design"]
+    "slug": "mofiz-marma",
+    "title": "Mofiz Marma",
+    "category": "Voice AI",
+    "role": "Builder",
+    "company": "Personal project",
+    "year": "2026",
+    "draft": false,
+    "tags": [
+      { "label": "Voice AI" },
+      { "label": "Diagrams", "variant": "solid" },
+      { "label": "Bilingual", "variant": "outline" }
+    ],
+    "summary": "Talk, and Mofiz draws. A voice agent that renders live Mermaid diagrams — flowcharts, sequence, ER, mindmaps — as you describe them, in English or Bangla.",
+    "links": [{ "label": "Live demo", "url": "https://mofiz-marma.vercel.app" }],
+    "situation": "Describing a system is easy; drawing it is the slow part. Diagramming tools ask you to stop thinking and start placing boxes, and the diagram you wanted is usually clearer in conversation than in the editor.",
+    "task": [
+      "Let someone describe a system out loud and watch the diagram appear as they speak.",
+      "Work in Bangla as naturally as in English, switching mid-conversation."
+    ],
+    "result": "Deployed and working, built in a single day. Voice in, diagram out, with barge-in interruption, a pan-zoom canvas, live code editing and SVG export — plus a text path for pasting in context when speaking isn't practical.",
+    "contributions": [
+      "Locked the model, prompt, tools and voice into the ephemeral token itself. The browser gets direct-to-Google audio latency, but the client physically cannot alter the persona — and the system prompt never ships in the bundle.",
+      "Closed the loop on bad diagrams: Mermaid parse errors are handed back to the model as the tool's response so it corrects itself, capped at three retries per turn before admitting a syntax hiccup rather than looping forever.",
+      "Validated diagram code before rendering rather than after, so a malformed diagram never reaches the canvas.",
+      "Tracked down a Windows-specific bug where tooling injects BOM and zero-width characters into the API key — invisible in an editor, but HTTP headers reject anything above 0xFF. The key is now sanitised at the boundary."
+    ],
+    "keyResults": {
+      "metric": "",
+      "metricLabel": "",
+      "metricNote": "",
+      "items": [
+        {
+          "name": "Self-correcting diagrams",
+          "label": "Parse errors fed back to the model",
+          "note": "Three attempts per turn. The model sees its own syntax error and fixes it, instead of the user seeing a broken render."
+        },
+        {
+          "name": "Barge-in interruption",
+          "label": "Talk over it and it stops",
+          "note": "The audio queue flushes synchronously on interrupt, so it stops mid-word like a person would."
+        },
+        {
+          "name": "Bilingual by default",
+          "label": "English and Bangla",
+          "note": "Switches automatically with the speaker rather than hiding behind a language setting."
+        }
+      ]
+    },
+    "skills": [
+      "Voice UX",
+      "Gemini Live API",
+      "Next.js",
+      "React",
+      "Mermaid",
+      "Web Audio",
+      "Bangla"
+    ]
   },
   {
-    "slug": "tech-skill-development",
-    "title": "Tech-Skill Development Project",
-    "category": "Program Delivery",
-    "role": "Business System Analyst",
-    "company": "Dulles Global Investment",
-    "year": "2025",
-    "draft": true,
-    "tags": [{ "label": "Program Delivery" }, { "label": "Scale", "variant": "solid" }, { "label": "Requirements", "variant": "outline" }],
-    "summary": "Analyzed training system needs and defined functional requirements for a program that trained 1,000+ people in digital skills.",
-    "links": [{ "label": "Case notes", "url": "https://www.notion.so/DGI-Training-Implementation-Project-21f6c36859a980b787f9cb2ac4d93883" }],
-    "situation": "",
-    "task": "",
-    "result": "",
-    "contributions": [],
-    "keyResults": { "metric": "1,000+", "metricLabel": "People Trained", "metricNote": "", "items": [] },
-    "skills": ["Requirements Analysis", "Stakeholder Management", "Project Management"]
+    "slug": "repo-map",
+    "title": "RepoMap",
+    "category": "Developer Tool",
+    "role": "Builder",
+    "company": "Personal project",
+    "year": "2026",
+    "draft": false,
+    "tags": [
+      { "label": "Developer Tool" },
+      { "label": "Code Analysis", "variant": "solid" },
+      { "label": "Privacy", "variant": "outline" }
+    ],
+    "summary": "Point it at a GitHub repo or a local folder and get architecture diagrams, module descriptions, onboarding steps and a generated README.",
+    "links": [],
+    "situation": "Understanding an unfamiliar codebase is mostly archaeology — reading entry points, guessing at structure, and building a mental map that already exists in someone else's head. The people who need that map most are the ones who just joined.",
+    "task": [
+      "Turn a repo into a readable map: what the architecture is, how requests flow, where the data goes.",
+      "Make it usable on private code, not just public repos."
+    ],
+    "result": "A working tool producing three Mermaid diagrams, module cards, onboarding steps and a README from either a GitHub URL or a local folder, with results cached so a repeat look costs nothing.",
+    "contributions": [
+      "Analysed local folders entirely in the browser via the File System Access API, so private code never leaves the machine — only the selected files' truncated text is ever sent.",
+      "Chose the model on quota, not benchmarks: the lite model allows 500 requests a day against the standard model's 20. For a free tool anyone can try, that difference is the product.",
+      "Budgeted the prompt deliberately — around a dozen ranked files, truncated, plus a file-tree summary — because sending a whole repo is neither affordable nor more accurate.",
+      "Wrote a Mermaid label sanitiser that runs only after a raw render fails, so it can never break a diagram that already worked. It stashes quoted strings and multi-character shapes before quoting, then restores them.",
+      "Kept the exact diagram that broke on a real repo as a regression fixture, so the bug that prompted the fix can never come back quietly."
+    ],
+    "keyResults": {
+      "metric": "37",
+      "metricLabel": "Tests over the parts that actually break",
+      "metricNote": "URL parsing, file selection, JSON extraction and Mermaid sanitising — the pure logic where a silent regression would be invisible. One fixture is the real diagram that failed to render for a public repo.",
+      "items": [
+        {
+          "name": "Local folders never leave the browser",
+          "label": "File System Access API",
+          "note": "Private repos get analysed without uploading the codebase — the folder is walked client-side and only the chosen excerpts are sent."
+        },
+        {
+          "name": "Belt-and-braces JSON handling",
+          "label": "Three layers",
+          "note": "Response MIME type, a fence-stripping extractor, and a stricter-prompt retry — because a model that returns prose instead of JSON breaks the whole page."
+        }
+      ]
+    },
+    "skills": [
+      "Developer Tooling",
+      "React",
+      "TypeScript",
+      "Gemini",
+      "Mermaid",
+      "File System Access API",
+      "Vercel"
+    ]
+  },
+  {
+    "slug": "git-insight",
+    "title": "Git Insight",
+    "category": "Developer Tool",
+    "role": "Builder",
+    "company": "Personal project",
+    "year": "2026",
+    "draft": false,
+    "tags": [
+      { "label": "Developer Tool" },
+      { "label": "LLM", "variant": "solid" },
+      { "label": "GitHub API", "variant": "outline" }
+    ],
+    "summary": "Feed it a GitHub username and it reads the public profile and repositories, then returns a card-based developer assessment written for recruiters.",
+    "links": [],
+    "situation": "A GitHub profile is a wall of repository names. Anyone trying to judge a developer from it — a recruiter, a hiring manager — is reading raw material and hoping to infer a shape from it.",
+    "task": [
+      "Turn a username into a structured read: archetype, stack, strengths, weaknesses, role fit.",
+      "Accept whatever someone pastes — a username or a full profile URL."
+    ],
+    "result": "A working tool that takes a username or profile URL and returns a seven-card assessment. Built in three bursts across early 2026, deployed on Vercel.",
+    "contributions": [
+      "Moved both API keys behind serverless functions. The original design read them from Vite-prefixed variables, which are inlined into the client bundle — it would have shipped the Gemini key to every visitor. This is the change I'd call the most important one in the project.",
+      "Aggregated the language histogram server-side and sliced to the top 30 repositories, projected down to seven fields each, to keep the payload and the token bill sane.",
+      "Constrained the model with an explicit JSON contract rather than parsing prose, so the response maps straight onto the cards.",
+      "Hedged against the model not complying anyway — stripping markdown fences the prompt already forbids, and tolerating a string where an array was specified."
+    ],
+    "keyResults": {
+      "metric": "",
+      "metricLabel": "",
+      "metricNote": "",
+      "items": [
+        {
+          "name": "Keys moved off the client",
+          "label": "A security refactor mid-project",
+          "note": "Vite inlines prefixed env vars into the bundle. The migration to serverless proxies is the difference between a demo and something you can actually put a link to."
+        },
+        {
+          "name": "Schema-constrained prompting",
+          "label": "Eight-key JSON contract",
+          "note": "The model fills a structure rather than writing prose someone has to parse."
+        }
+      ]
+    },
+    "skills": [
+      "Developer Tooling",
+      "React",
+      "Vite",
+      "Gemini",
+      "GitHub REST API",
+      "Vercel Serverless"
+    ]
   },
   {
     "slug": "otsukare",
@@ -79,33 +448,24 @@
     "company": "Otsukare",
     "year": "2025",
     "draft": true,
-    "tags": [{ "label": "Marketplace" }, { "label": "AI Matching", "variant": "solid" }, { "label": "Product Strategy", "variant": "outline" }],
+    "tags": [
+      { "label": "Marketplace" },
+      { "label": "AI Matching", "variant": "solid" },
+      { "label": "Product Strategy", "variant": "outline" }
+    ],
     "summary": "A Japan-focused freelance platform connecting global IT talent with Japanese firms through AI-driven matching.",
     "links": [{ "label": "Live site", "url": "https://www.otsukare.work/" }],
     "situation": "",
     "task": "",
     "result": "",
     "contributions": [],
-    "keyResults": { "metric": "400K", "metricLabel": "Talent Gap Addressed", "metricNote": "", "items": [] },
+    "keyResults": {
+      "metric": "400K",
+      "metricLabel": "Talent gap addressed",
+      "metricNote": "",
+      "items": []
+    },
     "skills": ["Product Strategy", "AI Matching", "Marketplace Design"]
-  },
-  {
-    "slug": "fabric-visualizer",
-    "title": "AI-Powered Fabric Visualizer",
-    "category": "AI Tool",
-    "role": "Builder",
-    "company": "RMG industry",
-    "year": "2025",
-    "draft": true,
-    "tags": [{ "label": "AI Tool" }, { "label": "Rapid Prototype", "variant": "solid" }, { "label": "RMG", "variant": "outline" }],
-    "summary": "Converts fabric images into RMG previews using Nano Banana AI, automating a slow manual design step.",
-    "links": [{ "label": "Live demo", "url": "https://smik-echo.lovable.app/" }],
-    "situation": "",
-    "task": "",
-    "result": "",
-    "contributions": [],
-    "keyResults": { "metric": "", "metricLabel": "", "metricNote": "", "items": [] },
-    "skills": ["Nano Banana AI", "Rapid Prototyping", "RMG Domain"]
   },
   {
     "slug": "fabric-qr-web-app",
@@ -115,7 +475,11 @@
     "company": "RMG industry",
     "year": "2025",
     "draft": true,
-    "tags": [{ "label": "Internal Tool" }, { "label": "Automation", "variant": "solid" }, { "label": "Workflow", "variant": "outline" }],
+    "tags": [
+      { "label": "Internal Tool" },
+      { "label": "Automation", "variant": "solid" },
+      { "label": "Workflow", "variant": "outline" }
+    ],
     "summary": "Shares fabric details — images, GSM, type, references — over QR codes, killing a repetitive workflow and its errors.",
     "links": [{ "label": "Live demo", "url": "https://fabric-link-maker.lovable.app/" }],
     "situation": "",

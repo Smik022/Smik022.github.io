@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZeroTouch Onboarding | Sardar Asif Ahmed</title>
+<meta name="description" content="Client onboarding for an Australian accounting firm, built against a hard AML/CTF deadline — quote, intake, due diligence, and write-back into the firm&#39;s practice-management system.">
+<link rel="canonical" href="https://asifahmed.me/project/zerotouch-onboarding/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="ZeroTouch Onboarding | Sardar Asif Ahmed">
+<meta property="og:description" content="Client onboarding for an Australian accounting firm, built against a hard AML/CTF deadline — quote, intake, due diligence, and write-back into the firm&#39;s practice-management system.">
+<meta property="og:url" content="https://asifahmed.me/project/zerotouch-onboarding/">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/site.css">
+
+<script>
+// Set the theme before first paint so there is no flash of the wrong one.
+(function () {
+  try {
+    var t = localStorage.getItem("theme");
+    if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {
+    document.documentElement.setAttribute("data-theme", "light");
+  }
+})();
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XF56S93S3H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XF56S93S3H');
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="backdrop" aria-hidden="true">
+  <div class="backdrop-base"></div>
+  <div class="backdrop-grid"></div>
+  <div class="aurora aurora-teal"></div>
+  <div class="aurora aurora-emerald"></div>
+  <div class="aurora aurora-spring"></div>
+  <div class="aurora aurora-jade"></div>
+  <div class="backdrop-noise"></div>
+</div>
+<main class="article" id="main">
+  <a class="back" href="../../index.html">← All work</a>
+<div class="article-inner">
+  <ul class="pills">
+    <li class="pill">Compliance</li>
+    <li class="pill pill-solid">Product Decisions</li>
+    <li class="pill pill-outline">Fintech</li>
+    <li class="pill">2026</li>
+  </ul>
+  <h1 class="article-title" id="modal-title">ZeroTouch Onboarding</h1>
+  <p class="byline"><span class="byline-role">Product Manager</span><span class="byline-dot">•</span><span class="byline-org">Femia Accountants</span></p>
+  <p class="lede">Client onboarding for an Australian accounting firm, built against a hard AML/CTF deadline — quote, intake, due diligence, and write-back into the firm&#39;s practice-management system.</p>
+  <div class="article-grid">
+    <div class="article-main">
+    <section class="block">
+      <h2>Situation</h2>
+      <p>From 1 July 2026, Australian AML/CTF rules required Femia Accountants to identify, verify and prove every client. The principal was running those checks by hand, across three separate Excel quote calculators and paper due-diligence forms. The deadline was not negotiable, and the evidence trail had to survive an audit.</p>
+    </section>
+    <section class="block">
+      <h2>Task</h2>
+      <ul>
+        <li>Turn the firm&#39;s manual quote calculators and AML due-diligence forms into one system, before the compliance date.</li>
+        <li>Keep the firm&#39;s pricing private from clients — a hard requirement that shaped the whole flow.</li>
+        <li>Write every ID and AML check back into Karbon, the firm&#39;s practice-management system, so the evidence lives where auditors look for it.</li>
+      </ul>
+    </section>
+    <section class="block">
+      <h2>Result</h2>
+      <p>A working system covering quote → client intake → AML record → write-back, proven end to end against the firm&#39;s live Karbon, Microsoft Graph and Stripe Identity tenants. At last commit it was feature-complete on staging; production infrastructure and per-user SSO are the remaining gates before real client data.</p>
+    </section>
+    <section class="block">
+      <h2>My Contribution</h2>
+      <ul>
+        <li>Split the flow into two forms — staff-facing with pricing, client-facing without — once the firm made clear that clients must never see the price grid. That single constraint drove the entire information architecture.</li>
+        <li>Ruled that dry-run and live must share one code path. Karbon writes are permanent and have no delete, so what we tested had to be exactly what fired; a flag decides whether the call goes out, nothing else changes.</li>
+        <li>Caught that Karbon&#39;s Director ID field is number-typed, which silently drops the leading zero from Australian Director IDs beginning &#39;036&#39;. Rather than store a corrupted compliance identifier, we skip the field and write the ID verbatim into the AML timeline note.</li>
+        <li>Held every integration awaiting a client decision as a dormant adapter — fully built, returning &#39;not configured&#39;, sending nothing externally until switched on. No client name leaves the server before the firm says so.</li>
+        <li>Reconciled the principal&#39;s master pricing workbook live from SharePoint, surfacing stale fees for one-click review instead of asking him to re-key them.</li>
+      </ul>
+    </section>
+    </div>
+    <aside class="article-rail">
+      <div class="card">
+        <h2 class="card-title">Key Results</h2>
+        <div class="metric">
+          <span class="metric-value">576</span>
+          <span class="metric-label">Row business price matrix</span>
+          <p class="metric-note">Generated directly from the firm&#39;s own Excel quote builder rather than transcribed by hand, so the source of truth stays with the client.</p>
+        </div>
+        <div class="metric">
+          <span class="metric-name">Three quote engines</span>
+          <span class="metric-label">Individual ITR, SMSF, Business</span>
+          <p class="metric-note">Classify-then-price: tick the activities, land on exactly one return type by precedence, then stack schedules for CGT, dividends, foreign income and rentals.</p>
+        </div>
+        <div class="metric">
+          <span class="metric-name">AML/CTF due diligence</span>
+          <span class="metric-label">Individual, Company, Trust</span>
+          <p class="metric-note">The firm&#39;s paper forms digitised into a register with risk, PEP status and CDD level, plus one-click document export and an automatic timeline note against the client record.</p>
+        </div>
+        <div class="metric">
+          <span class="metric-name">269 assertions</span>
+          <span class="metric-label">14 harnesses, no test framework</span>
+          <p class="metric-note">The pricing engines are the part a client would notice being wrong, so they get a regression net that transpiles the TypeScript in-process — no test dependency to install or maintain.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h2 class="card-title">Skills &amp; Technologies</h2>
+        <ul class="tags"><li>Product Strategy</li><li>AML/CTF Compliance</li><li>Requirements Analysis</li><li>Next.js</li><li>TypeScript</li><li>Prisma</li><li>Supabase</li><li>Karbon API</li><li>Microsoft Graph</li><li>Stripe Identity</li></ul>
+      </div>
+    </aside>
+  </div>
+</div>
+</main>
+
+<nav class="dock glass" aria-label="Quick links">
+  <button class="dock-item" data-theme-toggle aria-pressed="false" data-label="Toggle theme">
+    <span class="visually-hidden">Toggle theme</span>
+    <span class="icon-sun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></span>
+    <span class="icon-moon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span>
+  </button>
+  <span class="dock-sep"></span>
+  <a class="dock-item" href="../../index.html" data-label="Portfolio">
+    <span class="visually-hidden">Portfolio</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21v-7h6v7"/></svg>
+  </a>
+  <a class="dock-item" href="https://drive.google.com/file/d/1eRryiAVV3M2ouD-1OQJeVtlBhOHEK1yq/view?usp=sharing" target="_blank" rel="noopener" data-label="Resume">
+    <span class="visually-hidden">Resume</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>
+  </a>
+  <button class="dock-item" data-copy-email="asifsmik19@gmail.com" data-label="Copy email">
+    <span class="visually-hidden">Copy email address</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+  </button>
+  <a class="dock-item" href="https://www.linkedin.com/in/smik022/" target="_blank" rel="noopener" data-label="LinkedIn">
+    <span class="visually-hidden">LinkedIn</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-13h4v1.5A6 6 0 0 1 16 8z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+  </a>
+  <a class="dock-item" href="https://github.com/smik022" target="_blank" rel="noopener" data-label="GitHub">
+    <span class="visually-hidden">GitHub</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-1-2.6c3-.3 6.2-1.5 6.2-6.7A5.2 5.2 0 0 0 19.8 5a4.9 4.9 0 0 0-.1-3.6s-1.2-.4-3.9 1.5a13.4 13.4 0 0 0-7 0C6.1 1 4.9 1.4 4.9 1.4A4.9 4.9 0 0 0 4.8 5a5.2 5.2 0 0 0-1.4 3.6c0 5.2 3.2 6.4 6.2 6.7a3.4 3.4 0 0 0-1 2.6V22"/></svg>
+  </a>
+  
+</nav>
+
+<script src="../../assets/js/site.js"></script>
+</body>
+</html>

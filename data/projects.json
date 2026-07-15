@@ -64,31 +64,31 @@
     ],
     "summary": "Client onboarding for an Australian accounting firm, built against a hard AML/CTF compliance deadline.",
     "links": [{ "label": "Femia Accountants", "url": "https://femia-accountants.com.au/" }],
-    "situation": "New AML/CTF rules meant Femia had to identify, verify and prove every client — all of it by hand.",
+    "situation": "Femia is a $5M accounting practice. New AML/CTF rules meant identifying, verifying and proving every client — all of it by hand.",
     "task": [
       "Replace three Excel calculators and paper forms with one system.",
       "Keep pricing private from clients; write every check back to Karbon."
     ],
-    "result": "Quote → intake → AML record → write-back, proven against live Karbon, Graph and Stripe tenants.",
+    "result": "Now runs the firm's client onboarding end to end — quote → intake → AML record → write-back into Karbon.",
     "contributions": [
       "Split the flow in two: staff see pricing, clients never do. That constraint drove the architecture.",
       "Ruled dry-run and live share one code path — Karbon writes are permanent, with no delete.",
       "Caught that Karbon's number-typed Director ID field silently drops the leading zero from IDs starting 036."
     ],
     "keyResults": {
-      "metric": "576",
-      "metricLabel": "Row price matrix",
-      "metricNote": "Generated from the firm's own Excel builder.",
+      "metric": "$5M",
+      "metricLabel": "Practice running on it",
+      "metricNote": "Quote through AML evidence, running on ZeroTouch.",
       "items": [
+        {
+          "name": "576 rows",
+          "label": "Price matrix, generated not typed",
+          "note": "Built from the firm's own Excel quote builder."
+        },
         {
           "name": "269 assertions",
           "label": "14 harnesses, no framework",
           "note": "Pricing is what a client notices being wrong."
-        },
-        {
-          "name": "3 quote engines",
-          "label": "Individual ITR, SMSF, Business",
-          "note": "Classify by precedence, then stack schedules."
         }
       ]
     },

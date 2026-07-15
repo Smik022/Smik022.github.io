@@ -228,7 +228,12 @@
       }
     ],
     "summary": "Point it at a GitHub repo or a local folder and get architecture diagrams, module notes and a generated README.",
-    "links": [],
+    "links": [
+      {
+        "label": "Live",
+        "url": "https://repo-map-live.vercel.app/"
+      }
+    ],
     "situation": "A new engineer's first week is archaeology — reading entry points, guessing at structure, rebuilding a map that already exists in someone else's head.",
     "task": [
       "Turn a repo into a readable map: architecture, request flow, where the data goes.",
@@ -289,7 +294,16 @@
       }
     ],
     "summary": "Feed it a GitHub username and it returns a card-based developer assessment written for recruiters.",
-    "links": [],
+    "links": [
+      {
+        "label": "Live",
+        "url": "https://git-insight-chi.vercel.app/"
+      },
+      {
+        "label": "Source",
+        "url": "https://github.com/Smik022/Git-Insight"
+      }
+    ],
     "situation": "A GitHub profile is a wall of repository names. Recruiters judge developers from it every day with no real way to read it, so good candidates get missed and bad ones get through.",
     "task": [
       "Turn a username into a structured read: archetype, stack, strengths, role fit.",

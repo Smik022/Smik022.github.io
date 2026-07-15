@@ -285,6 +285,47 @@ a { color: inherit; text-decoration: none; }
 .tagline { margin: 0.75rem 0 0; color: var(--text-muted); font-size: 1.0625rem; }
 .intro { margin: 1.5rem 0 0; max-width: 46ch; color: var(--text-muted); font-size: 0.9375rem; }
 
+/* Contact sits under the intro — where someone lands after working out who you
+   are. The dock carries the same links persistently, but icon-only; these are
+   labelled, because a dock icon doesn't say "get in touch". */
+.panel-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.pill-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card-bg);
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.pill-link svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pill-link:hover {
+  color: var(--accent-text);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
 /* ---------- Ethos ---------- */
 
 .ethos { margin-top: 2.5rem; }

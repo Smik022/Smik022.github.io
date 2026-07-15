@@ -422,6 +422,18 @@ ${profile.failures
     <p class="tagline">${esc(profile.tagline)}</p>
     <p class="intro">${esc(profile.intro)}</p>
 
+    <div class="panel-links">
+      <a class="pill-link" href="${esc(profile.links.linkedin)}" target="_blank" rel="noopener">
+        ${svg("linkedin")}<span>LinkedIn</span>
+      </a>
+      <a class="pill-link" href="${esc(profile.links.github)}" target="_blank" rel="noopener">
+        ${svg("github")}<span>GitHub</span>
+      </a>
+      <a class="pill-link" href="mailto:${esc(profile.email)}">
+        ${svg("mail")}<span>Email</span>
+      </a>
+    </div>
+
     <section class="ethos">
       <h2 class="eyebrow">${esc(profile.ethos.heading)}</h2>
       <ul class="ethos-list">

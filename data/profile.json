@@ -1,0 +1,39 @@
+{
+  "name": "Sardar Asif Ahmed",
+  "firstName": "Asif",
+  "title": "AI Product Strategist & Builder",
+  "tagline": "Builder & problem-solver, shipping what people actually need",
+  "location": "Dhaka, Bangladesh",
+  "email": "asifsmik19@gmail.com",
+  "lastUpdated": "July, 2026",
+  "aside": "Built with a lot of coffee and curiosity",
+  "avatar": "assets/images/hs.png",
+
+  "ethos": {
+    "heading": "How I Work",
+    "items": [
+      { "word": "Discover", "note": "analysis" },
+      { "word": "Prototype", "note": "speed" },
+      { "word": "Ship", "note": "impact" }
+    ]
+  },
+
+  "intro": "AI Product Strategist with a foundation in software development. I turn business needs into clear technical requirements, then prototype fast to prove them out.",
+
+  "links": {
+    "resume": "https://drive.google.com/file/d/1eRryiAVV3M2ouD-1OQJeVtlBhOHEK1yq/view?usp=sharing",
+    "linkedin": "https://www.linkedin.com/in/smik022/",
+    "github": "https://github.com/smik022"
+  },
+
+  "analyticsId": "G-XF56S93S3H",
+  "domain": "https://asifahmed.me",
+
+  "failures": [
+    {
+      "draft": true,
+      "title": "Placeholder — replace me",
+      "note": "This is where you write the things that did not work and what they taught you. Mukit's site has this and it is the most disarming part of it. Send me two or three real ones and I will write them up properly."
+    }
+  ]
+}

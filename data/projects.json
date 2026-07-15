@@ -489,16 +489,16 @@
       "Kill the repetition: capture a fabric once, share it any number of times.",
       "Make the spec travel with the photo so nothing gets retyped."
     ],
-    "result": "Photograph the fabric, get a QR, share the QR. Five minutes of photographing and retyping became ten seconds.",
+    "result": "Photograph the fabric, get a QR, share the QR. Five minutes of photographing and retyping became thirty seconds.",
     "contributions": [
       "Traced the cost to repetition rather than effort. The task was never hard — it was done again from scratch for every person who asked, which is why nobody had flagged it as a problem.",
       "Made the QR the deliverable instead of the message. One code carries the image, GSM, type and references, so the spec stops being retyped and stops drifting between people.",
       "Fixed the workflow where it already lived. People were going to keep working over WhatsApp, so the output had to be one shareable thing — not another system to log into."
     ],
     "keyResults": {
-      "metric": "5 min → 10 sec",
+      "metric": "5 min → 30 sec",
       "metricLabel": "Sharing a fabric spec",
-      "metricNote": "Thirty times faster, and the details stop depending on who typed them that time.",
+      "metricNote": "A 90% cut, and the details stop depending on who typed them that time.",
       "items": [
         {
           "name": "Typed once, not every time",

@@ -421,7 +421,18 @@ a { color: inherit; text-decoration: none; }
 
 .work-link:hover .work-title { color: var(--accent-text); }
 
-.work-meta { font-size: 0.8125rem; color: var(--text-faint); white-space: nowrap; }
+/* Who it was built for. Real client names carry weight; "Personal" steps back,
+   so a scan reads the paid work first without either being hidden. */
+.work-meta {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.work-meta.is-personal {
+  color: var(--text-faint);
+  font-style: italic;
+}
 
 .work-summary {
   margin: 0.15rem 0 0;

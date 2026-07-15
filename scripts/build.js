@@ -54,6 +54,22 @@ function prose(value) {
 const normalizeTag = (t) => (typeof t === "string" ? { label: t } : t);
 
 /**
+ * What the work list shows on the right: who it was built for. A real client
+ * name is the point — it separates paid work from self-directed at a glance,
+ * without hiding either. Falls back to the category when a company name would
+ * only repeat the title.
+ */
+function clientLabel(p) {
+  const c = (p.company || "").trim();
+  if (!c) return { text: p.category, personal: false };
+  if (/^personal project$/i.test(c)) return { text: "Personal", personal: true };
+  if (c.toLowerCase() === (p.title || "").trim().toLowerCase()) {
+    return { text: p.category, personal: false }; // Otsukare at Otsukare
+  }
+  return { text: c, personal: false };
+}
+
+/**
  * Find a project's logo. Drop a file named after the slug into
  * assets/images/logos/ (merlin.svg, narawe.png …) and it is picked up — no
  * JSON edit needed. An explicit "logo" path in projects.json wins if set.
@@ -324,6 +340,7 @@ function renderHome() {
   const items = projects
     .map((p) => {
       const logoSrc = logoFor(p);
+      const client = clientLabel(p);
       return `      <li class="work-item" data-slug="${esc(p.slug)}">
         <a class="work-link" href="project/${esc(p.slug)}/" data-project="${esc(p.slug)}">
 ${
@@ -337,7 +354,7 @@ ${
 }          <span class="work-title">${esc(p.title)}${
         p.draft ? '<span class="chip">Draft</span>' : ""
       }</span>
-          <span class="work-meta">${esc(p.category)}</span>
+          <span class="work-meta${client.personal ? " is-personal" : ""}">${esc(client.text)}</span>
           <p class="work-summary">${esc(p.summary)}</p>
         </a>
       </li>`;

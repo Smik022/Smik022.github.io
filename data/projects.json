@@ -140,69 +140,6 @@
     ]
   },
   {
-    "slug": "narawe",
-    "title": "Narawe",
-    "category": "Document Intelligence",
-    "role": "Product Manager",
-    "company": "The Artificer's AI",
-    "year": "2026",
-    "draft": false,
-    "logo": "",
-    "tags": [
-      {
-        "label": "Document AI"
-      },
-      {
-        "label": "Search",
-        "variant": "solid"
-      },
-      {
-        "label": "Multi-tenant",
-        "variant": "outline"
-      }
-    ],
-    "summary": "Document intelligence for professional-services firms — scan client PDFs and search them by word or by meaning.",
-    "links": [],
-    "situation": "Professional-services firms hold years of client history in scanned paper. Finding one document meant people searching by hand for hours — so firms staffed for the searching rather than the work.",
-    "task": [
-      "Get paper in with no friction, including straight from a phone camera.",
-      "Make it findable by the words people half-remember and the ideas they can't name."
-    ],
-    "result": "A firm's scanned history becomes searchable by phrase and by meaning. Hours of hunting collapse into a query, and the people left are verifying results rather than looking for them.",
-    "contributions": [
-      "Reframed the cost from time to headcount: firms weren't only losing hours, they were staffing around a search problem. That reframing is what made the business case.",
-      "Identified capture as the real adoption risk, not accuracy. A system nobody feeds is a system nobody uses, so scanning had to work from the phone already in someone's hand.",
-      "Chose to fuse keyword and semantic search rather than pick one: the exact phrase on an invoice and the vague idea of a letter are different questions, and firms ask both.",
-      "Consolidated three AI vendors into one — fewer contracts, fewer failure modes, one bill to defend.",
-      "Made the AI summary fire-and-forget. An assistant that can fail someone's upload is worse than no assistant."
-    ],
-    "keyResults": {
-      "metric": "A team → 1–2",
-      "metricLabel": "People needed, once search works",
-      "metricNote": "What is left is verifying what came back, not hunting for it — hours of manual searching become a query.",
-      "items": [
-        {
-          "name": "Phrase and meaning",
-          "label": "One search, both questions",
-          "note": "Fused results with matched words highlighted, so people trust what came back."
-        },
-        {
-          "name": "3 → 1",
-          "label": "AI vendors consolidated",
-          "note": "Clarifai, OpenRouter and OpenAI became one — two supplier relationships and three failure modes removed."
-        }
-      ]
-    },
-    "skills": [
-      "Product Strategy",
-      "Document AI",
-      "Next.js",
-      "pgvector",
-      "Gemini",
-      "Multi-tenant RLS"
-    ]
-  },
-  {
     "slug": "siratul-mustakim",
     "title": "Siratul Mustakim",
     "category": "Voice AI",
@@ -635,6 +572,69 @@
       "Rapid Prototyping",
       "Workflow Automation",
       "QR Systems"
+    ]
+  },
+  {
+    "slug": "narawe",
+    "title": "Narawe",
+    "category": "Document Intelligence",
+    "role": "Product Manager",
+    "company": "The Artificer's AI",
+    "year": "2026",
+    "draft": false,
+    "logo": "",
+    "tags": [
+      {
+        "label": "Document AI"
+      },
+      {
+        "label": "Search",
+        "variant": "solid"
+      },
+      {
+        "label": "Multi-tenant",
+        "variant": "outline"
+      }
+    ],
+    "summary": "Document intelligence for professional-services firms — scan client PDFs and search them by word or by meaning.",
+    "links": [],
+    "situation": "Professional-services firms hold years of client history in scanned paper. Finding one document meant people searching by hand for hours — so firms staffed for the searching rather than the work.",
+    "task": [
+      "Get paper in with no friction, including straight from a phone camera.",
+      "Make it findable by the words people half-remember and the ideas they can't name."
+    ],
+    "result": "A firm's scanned history becomes searchable by phrase and by meaning. Hours of hunting collapse into a query, and the people left are verifying results rather than looking for them.",
+    "contributions": [
+      "Reframed the cost from time to headcount: firms weren't only losing hours, they were staffing around a search problem. That reframing is what made the business case.",
+      "Identified capture as the real adoption risk, not accuracy. A system nobody feeds is a system nobody uses, so scanning had to work from the phone already in someone's hand.",
+      "Chose to fuse keyword and semantic search rather than pick one: the exact phrase on an invoice and the vague idea of a letter are different questions, and firms ask both.",
+      "Consolidated three AI vendors into one — fewer contracts, fewer failure modes, one bill to defend.",
+      "Made the AI summary fire-and-forget. An assistant that can fail someone's upload is worse than no assistant."
+    ],
+    "keyResults": {
+      "metric": "A team → 1–2",
+      "metricLabel": "People needed, once search works",
+      "metricNote": "What is left is verifying what came back, not hunting for it — hours of manual searching become a query.",
+      "items": [
+        {
+          "name": "Phrase and meaning",
+          "label": "One search, both questions",
+          "note": "Fused results with matched words highlighted, so people trust what came back."
+        },
+        {
+          "name": "3 → 1",
+          "label": "AI vendors consolidated",
+          "note": "Clarifai, OpenRouter and OpenAI became one — two supplier relationships and three failure modes removed."
+        }
+      ]
+    },
+    "skills": [
+      "Product Strategy",
+      "Document AI",
+      "Next.js",
+      "pgvector",
+      "Gemini",
+      "Multi-tenant RLS"
     ]
   }
 ]

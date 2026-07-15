@@ -140,73 +140,6 @@
     ]
   },
   {
-    "slug": "siratul-mustakim",
-    "title": "Siratul Mustakim",
-    "category": "Voice AI",
-    "role": "Builder",
-    "company": "CIEA",
-    "year": "2026",
-    "draft": false,
-    "logo": "",
-    "tags": [
-      {
-        "label": "Voice AI"
-      },
-      {
-        "label": "Field Tool",
-        "variant": "solid"
-      },
-      {
-        "label": "Maps",
-        "variant": "outline"
-      }
-    ],
-    "summary": "A voice-first field app that tells a preacher which house to visit next, draws the route, and records the outcome.",
-    "links": [
-      {
-        "label": "Live demo",
-        "url": "https://web-tan-theta-96.vercel.app/"
-      }
-    ],
-    "situation": "Door-to-door outreach forgets. Who was visited, who actually answered, who is overdue — it lives in volunteers' heads, and someone walking a street cannot stop to update a spreadsheet.",
-    "task": [
-      "Make the record keep itself, hands-free, while a volunteer walks.",
-      "Send people to the door that most needs them, not the one that happens to be nearest."
-    ],
-    "result": "A volunteer is told where to go, shown the route, and records what happened by speaking. Piloted with Masjidul Ibrahim — the team's memory survives the walk instead of ending with it.",
-    "contributions": [
-      "Found the distinction the whole model turns on: a knock is not contact. Only an answered door resets the clock, so the map reflects conversations rather than attempts.",
-      "Ruled the agent may never invent navigation. A confidently wrong street name sends a volunteer to a stranger's door — worse than saying nothing at all.",
-      "Built it as an agent rather than a form: the volunteer talks, and the tools behind the conversation pick the house, draw the route and file the outcome.",
-      "Cut the server entirely once it was clear the browser could hold the conversation. A community organisation shouldn't carry hosting costs between walks."
-    ],
-    "keyResults": {
-      "metric": "Piloted",
-      "metricLabel": "With Masjidul Ibrahim",
-      "metricNote": "Built for CIEA and put in front of a real congregation's outreach team, rather than left as a demo.",
-      "items": [
-        {
-          "name": "Hands-free",
-          "label": "The whole loop, while walking",
-          "note": "Which house, what route, what happened — spoken, with the phone still in a pocket."
-        },
-        {
-          "name": "14 / 42 days",
-          "label": "Warm and cooling thresholds",
-          "note": "Priority follows when someone last answered, so nobody is forgotten or knocked twice."
-        }
-      ]
-    },
-    "skills": [
-      "Agentic AI",
-      "Voice UX",
-      "Gemini Live API",
-      "React",
-      "Leaflet",
-      "OSRM"
-    ]
-  },
-  {
     "slug": "mofiz-marma",
     "title": "Mofiz Marma",
     "category": "Voice AI",
@@ -649,6 +582,73 @@
       "React",
       "TypeScript",
       "Vite"
+    ]
+  },
+  {
+    "slug": "siratul-mustakim",
+    "title": "Siratul Mustakim",
+    "category": "Voice AI",
+    "role": "Builder",
+    "company": "CIEA",
+    "year": "2026",
+    "draft": false,
+    "logo": "",
+    "tags": [
+      {
+        "label": "Voice AI"
+      },
+      {
+        "label": "Field Tool",
+        "variant": "solid"
+      },
+      {
+        "label": "Maps",
+        "variant": "outline"
+      }
+    ],
+    "summary": "A voice-first field app that tells a preacher which house to visit next, draws the route, and records the outcome.",
+    "links": [
+      {
+        "label": "Live demo",
+        "url": "https://web-tan-theta-96.vercel.app/"
+      }
+    ],
+    "situation": "Door-to-door outreach forgets. Who was visited, who actually answered, who is overdue — it lives in volunteers' heads, and someone walking a street cannot stop to update a spreadsheet.",
+    "task": [
+      "Make the record keep itself, hands-free, while a volunteer walks.",
+      "Send people to the door that most needs them, not the one that happens to be nearest."
+    ],
+    "result": "A volunteer is told where to go, shown the route, and records what happened by speaking. Piloted with Masjidul Ibrahim — the team's memory survives the walk instead of ending with it.",
+    "contributions": [
+      "Found the distinction the whole model turns on: a knock is not contact. Only an answered door resets the clock, so the map reflects conversations rather than attempts.",
+      "Ruled the agent may never invent navigation. A confidently wrong street name sends a volunteer to a stranger's door — worse than saying nothing at all.",
+      "Built it as an agent rather than a form: the volunteer talks, and the tools behind the conversation pick the house, draw the route and file the outcome.",
+      "Cut the server entirely once it was clear the browser could hold the conversation. A community organisation shouldn't carry hosting costs between walks."
+    ],
+    "keyResults": {
+      "metric": "Piloted",
+      "metricLabel": "With Masjidul Ibrahim",
+      "metricNote": "Built for CIEA and put in front of a real congregation's outreach team, rather than left as a demo.",
+      "items": [
+        {
+          "name": "Hands-free",
+          "label": "The whole loop, while walking",
+          "note": "Which house, what route, what happened — spoken, with the phone still in a pocket."
+        },
+        {
+          "name": "14 / 42 days",
+          "label": "Warm and cooling thresholds",
+          "note": "Priority follows when someone last answered, so nobody is forgotten or knocked twice."
+        }
+      ]
+    },
+    "skills": [
+      "Agentic AI",
+      "Voice UX",
+      "Gemini Live API",
+      "React",
+      "Leaflet",
+      "OSRM"
     ]
   },
   {

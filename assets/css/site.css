@@ -27,7 +27,7 @@
   --dock-bg: rgba(255, 255, 255, 0.72);
   --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   --scrim: rgba(255, 255, 255, 0.55);
-  --logo-plate: transparent;
+  --logo-plate: #14191b;
 
   --font-display: "Inter Tight", system-ui, sans-serif;
   --font-body: "Manrope", system-ui, sans-serif;
@@ -59,7 +59,7 @@
   --dock-bg: rgba(7, 13, 12, 0.62);
   --shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
   --scrim: rgba(2, 8, 7, 0.62);
-  --logo-plate: rgba(255, 255, 255, 0.07);
+  --logo-plate: #14191b;
 }
 
 *,
@@ -377,23 +377,28 @@ a { color: inherit; text-decoration: none; }
    has to stay one screen tall. The column is reserved on every row as soon as
    any project has a logo, so a project still missing its file leaves a gap
    rather than pulling its title out of line with the rest. */
-.work-list.with-logos .work-link { grid-template-columns: 34px 1fr auto; }
+.work-list.with-logos .work-link { grid-template-columns: 64px 1fr auto; }
 .work-list.with-logos .work-year,
 .work-list.with-logos .work-summary { grid-column: 2 / -1; }
 .work-list.with-logos .work-title { grid-column: 2; }
 .work-list.with-logos .work-meta { grid-column: 3; }
 
+/* A logo strip, not a square. These are wordmarks — the Artificers mark is
+   4.3:1 — so a square slot renders them as unreadable slivers. */
 .work-logo {
   grid-column: 1;
   grid-row: 1 / span 3;
   align-self: start;
-  width: 26px;
-  height: 26px;
-  margin-top: 0.2rem;
+  width: 56px;
+  height: 24px;
+  margin-top: 0.25rem;
   object-fit: contain;
-  border-radius: 5px;
-  /* A plate keeps dark marks legible on the dark theme without washing out
-     logos that carry their own background. */
+  object-position: left center;
+  border-radius: 4px;
+  /* The plate only shows through logos with a transparent background — the
+     solid-background ones cover it entirely. It is dark in both themes because
+     the only transparent mark here is white-on-nothing, which would otherwise
+     vanish on the light theme. */
   background: var(--logo-plate);
   padding: 2px;
 }
@@ -489,8 +494,8 @@ body.modal-open .work-link {
 }
 body.modal-open .work-link::before { display: none; }
 body.modal-open .work-title { font-size: 0.9375rem; }
-body.modal-open .work-list.with-logos .work-link { grid-template-columns: 22px 1fr; gap: 0 0.5rem; }
-body.modal-open .work-logo { width: 18px; height: 18px; margin-top: 0.15rem; }
+body.modal-open .work-list.with-logos .work-link { grid-template-columns: 40px 1fr; gap: 0 0.5rem; }
+body.modal-open .work-logo { width: 36px; height: 16px; margin-top: 0.2rem; }
 
 /* Active item in the rail */
 body.modal-open .work-item.is-active .work-link {

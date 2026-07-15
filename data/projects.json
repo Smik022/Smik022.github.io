@@ -323,24 +323,27 @@
     "slug": "socratic-ai",
     "title": "Socratic AI Tutor",
     "category": "EdTech",
-    "role": "Builder",
-    "company": "Personal project",
+    "role": "Product Strategist",
+    "company": "ilm AI",
     "year": "2025",
     "draft": false,
     "logo": "",
     "tags": [
       { "label": "EdTech" },
-      { "label": "Voice", "variant": "solid" },
+      { "label": "Proof of Concept", "variant": "solid" },
       { "label": "Prompt Design", "variant": "outline" }
     ],
-    "summary": "A tutor that refuses to just answer. It asks guiding questions until the student gets there themselves.",
-    "links": [{ "label": "Source", "url": "https://github.com/Smik022/Socratic-AI-Tutor" }],
-    "situation": "Ask a chatbot a homework question and it hands over the answer. The student gets unstuck and learns nothing.",
-    "task": [
-      "Hold the Socratic line: guiding questions instead of answers.",
-      "Let a student talk to it rather than type at it."
+    "summary": "The proof of concept for ilm AI — a tutor that refuses to just answer, asking guiding questions until the student gets there themselves.",
+    "links": [
+      { "label": "ilm AI", "url": "https://www.ilmtech.app/" },
+      { "label": "Source", "url": "https://github.com/Smik022/Socratic-AI-Tutor" }
     ],
-    "result": "A working prototype — Django REST on Gemini, a React front end, and a full voice loop, by speech or text.",
+    "situation": "Students use AI to finish assignments without learning. ilm's bet was a tutor that refuses to answer — which only works if the refusal holds.",
+    "task": [
+      "Prove the Socratic line survives a student pushing for the answer.",
+      "Show it working by voice, not just text."
+    ],
+    "result": "A working proof of concept — Django REST on Gemini, React front end, full voice loop by speech or text.",
     "contributions": [
       "Wrote the constraint into the prompt: an answer only after two or three hints, and only for general knowledge.",
       "Used the browser's own speech APIs both ways, so voice costs nothing and needs no realtime audio service.",

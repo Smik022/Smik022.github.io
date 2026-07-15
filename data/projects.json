@@ -432,17 +432,17 @@
       "Prove the Socratic line holds under pressure, not just in a demo.",
       "Show it working by voice, since that is how tutoring actually sounds."
     ],
-    "result": "A working proof of concept that held the line — guiding questions, by speech or text — and carried ilm to nomination for the Innovation Booster Grant.",
+    "result": "A working proof of concept that held the line — guiding questions, by speech or text — and helped win ilm a $12,000 WA Government Innovation Grant.",
     "contributions": [
+      "Authored the technical proposal and requirement artifacts the grant application rested on. The proof of concept is what let ilm demonstrate the idea in the room rather than describe it.",
       "Put the constraint in the prompt rather than hoping for it: an answer only after two or three hints, and only for general knowledge. 'Be Socratic' does not survive a student who keeps asking.",
       "Aimed the product at the policy question, not just the classroom one. Australia's concern is children using AI safely, and a tutor that refuses to do the homework is an answer to it.",
-      "Chose the browser's own speech engines, so voice costs nothing per minute — the difference between a pilot a school can afford and one it cannot.",
-      "Kept it stateless on purpose. A proof of concept's job is to answer one question, not to be architecture."
+      "Chose the browser's own speech engines, so voice costs nothing per minute — the difference between a pilot a school can afford and one it cannot."
     ],
     "keyResults": {
-      "metric": "AU$50K",
-      "metricLabel": "Innovation Booster Grant — nominated",
-      "metricNote": "The proof of concept is what took ilm from a proposition to something demonstrable in the room.",
+      "metric": "AU$12,000",
+      "metricLabel": "WA Government Innovation Grant, won",
+      "metricNote": "Secured within three months, on the technical proposal and requirement artifacts I authored.",
       "items": [
         {
           "name": "Safe AI for children",

@@ -74,25 +74,25 @@
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>Describing a system is easy; drawing it is the slow part. Diagram tools make you stop thinking and place boxes.</p>
+      <p>Describing a system takes a minute; drawing it takes an hour. Diagram tools make you stop thinking and start placing boxes, so the diagram in your head rarely survives the trip to the screen.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Describe a system out loud and watch the diagram appear.</li>
+        <li>Let someone talk and watch the diagram appear.</li>
         <li>Work in Bangla as naturally as in English.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>Deployed and working, built in a single day. Voice in, diagram out, with barge-in and SVG export.</p>
+      <p>Speak a system and it draws itself — flowchart, sequence, ER, mindmap — with the code editable and exportable. Idea to deployed in a single day.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Locked the model, prompt and voice into the token — direct audio latency, but the client can&#39;t alter the persona.</li>
-        <li>Fed Mermaid parse errors back to the model so it self-corrects, capped at three tries.</li>
-        <li>Found a Windows bug: tooling injects invisible BOM characters into the API key, which HTTP headers reject.</li>
+        <li>Bet that the bottleneck was the drawing, not the thinking, so the product&#39;s only job is to get out of the way between the two.</li>
+        <li>Made the model fix its own diagrams — parse errors go back to it as feedback, capped — so the user never sees a broken render.</li>
+        <li>Locked the persona and tools into the session token, so the product cannot be quietly repurposed by whoever opens the page.</li>
       </ul>
     </section>
     </div>
@@ -101,18 +101,18 @@
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
           <span class="metric-value">1 day</span>
-          <span class="metric-label">Idea to deployed</span>
-          <p class="metric-note">12 commits — voice, diagrams, canvas and export.</p>
+          <span class="metric-label">Spoken idea to deployed product</span>
+          <p class="metric-note">Voice, diagrams, canvas and export — the whole thing, shipped.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">3 retries</span>
-          <span class="metric-label">Self-correcting diagrams</span>
-          <p class="metric-note">The model fixes its own syntax error, not the user.</p>
+          <span class="metric-name">Talk → diagram</span>
+          <span class="metric-label">No boxes placed by hand</span>
+          <p class="metric-note">The conversation is the input; the diagram keeps up with it.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">2 languages</span>
-          <span class="metric-label">English and Bangla</span>
-          <p class="metric-note">Switches with the speaker, not with a setting.</p>
+          <span class="metric-name">English and Bangla</span>
+          <span class="metric-label">Switches with the speaker</span>
+          <p class="metric-note">Not a language setting — it follows whoever is talking.</p>
         </div>
       </div>
       <div class="rail-skills">

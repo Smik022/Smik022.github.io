@@ -71,25 +71,25 @@
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>Understanding an unfamiliar codebase is archaeology — and whoever needs the map most has just joined.</p>
+      <p>A new engineer&#39;s first week is archaeology — reading entry points, guessing at structure, rebuilding a map that already exists in someone else&#39;s head.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Turn a repo into a readable map of architecture and data flow.</li>
-        <li>Make it work on private code, not just public repos.</li>
+        <li>Turn a repo into a readable map: architecture, request flow, where the data goes.</li>
+        <li>Make it usable on private code, not just public repos.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>A working tool producing three Mermaid diagrams, module cards, onboarding steps and a README — cached after the first look.</p>
+      <p>Point it at a repo — public, or a folder on your own machine — and get three diagrams, module notes, onboarding steps and a README, cached after the first look.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Analysed local folders entirely in the browser, so private code never leaves the machine.</li>
-        <li>Chose the model on quota, not benchmarks: 500 requests a day against 20. For a free tool, that is the product.</li>
-        <li>Wrote a Mermaid repair pass that runs only after a render fails, so it can&#39;t break a diagram that worked.</li>
+        <li>Decided privacy was the adoption blocker, not accuracy. Nobody uploads their employer&#39;s codebase to a stranger&#39;s website, so private folders never leave the browser.</li>
+        <li>Chose the model on quota rather than benchmarks: a free tool that dies after 20 uses a day isn&#39;t a tool. 500 against 20 settled it.</li>
+        <li>Budgeted the prompt deliberately — a dozen ranked files beat the whole repo, cheaper and more accurate than sending everything.</li>
       </ul>
     </section>
     </div>
@@ -97,19 +97,19 @@
       <div class="card">
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
-          <span class="metric-value">37</span>
-          <span class="metric-label">Tests over the parts that break</span>
-          <p class="metric-note">One fixture is the real diagram that failed on a public repo.</p>
-        </div>
-        <div class="metric">
-          <span class="metric-name">500 vs 20</span>
-          <span class="metric-label">Requests per day</span>
-          <p class="metric-note">A free tool that dies after 20 uses isn&#39;t a tool.</p>
+          <span class="metric-value">500 vs 20</span>
+          <span class="metric-label">Daily uses the model choice bought</span>
+          <p class="metric-note">The difference between a tool people can actually try and a demo that runs out by lunchtime.</p>
         </div>
         <div class="metric">
           <span class="metric-name">0 uploads</span>
           <span class="metric-label">Private code stays local</span>
-          <p class="metric-note">The folder is walked client-side.</p>
+          <p class="metric-note">The folder is read in the browser, so an employer&#39;s repo never leaves the machine.</p>
+        </div>
+        <div class="metric">
+          <span class="metric-name">Diagrams, modules, README</span>
+          <span class="metric-label">From a URL or a folder</span>
+          <p class="metric-note">The map someone would otherwise spend their first week rebuilding by hand.</p>
         </div>
       </div>
       <div class="rail-skills">

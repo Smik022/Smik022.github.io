@@ -18,31 +18,32 @@
       { "label": "Live intake", "url": "https://www.artificersai.com/intake" },
       { "label": "Merlin", "url": "https://merlin.artificersai.com" }
     ],
-    "situation": "Discovery meetings were being spent qualifying callers who could have been qualified up front.",
+    "situation": "Every inbound enquiry cost a discovery meeting before anyone knew whether it was worth having. The studio was spending its scarcest asset — senior time — qualifying strangers.",
     "task": [
-      "Handle an inbound prospect end to end — greet, qualify, book.",
-      "Add a mode that returns a structured brief instead of a meeting."
+      "Qualify inbound prospects without putting a person on the call.",
+      "Send the good ones to a booked briefing; turn the rest into a written brief."
     ],
-    "result": "Live and embedded on the studio's intake page. Two variants, one binary, rollback-capable deploy.",
+    "result": "Prospects qualify themselves in conversation and leave with a briefing booked or a structured brief in the team's inbox. Senior time now goes to calls that are already worth having.",
     "contributions": [
-      "Treated the model as untrusted — it can call tools, but it doesn't decide whether the work happened.",
-      "A live call ended claiming a brief was sent when none existed. Moved the gate out of the skipped tool into the dispatcher.",
-      "Decoupled the caller form from the model, which looped on greetings and called the tool late or never."
+      "Framed the problem as qualification, not automation. The goal was never to replace discovery — it was to stop paying for discovery that shouldn't happen.",
+      "Split one product into two front doors once it was clear a cold prospect and a client with a spec want completely different conversations.",
+      "Ruled that the agent doesn't get the last word on whether work happened, after a live call ended announcing a brief that was never submitted.",
+      "Set the standard that a wrong booking costs more trust than a retry costs patience — so booking tools must prove they know the time before they can act."
     ],
     "keyResults": {
-      "metric": "20",
-      "metricLabel": "Tools callable mid-conversation",
-      "metricNote": "18 for sales, 8 for intake — one registry, one binary.",
+      "metric": "24/7",
+      "metricLabel": "Qualification with nobody on the call",
+      "metricNote": "Inbound prospects qualify themselves at any hour and book only when there is something worth discussing.",
       "items": [
         {
-          "name": "~400 tests",
-          "label": "Across ~10.5k lines",
-          "note": "Three guards written from real call failures."
+          "name": "Meeting → brief",
+          "label": "Discovery, async",
+          "note": "A caller describes what they want built without sitting through a meeting to do it."
         },
         {
-          "name": "Under 900ms",
-          "label": "Speech-to-audio budget",
-          "note": "Frames forward on arrival; nothing is buffered."
+          "name": "Books, reschedules, cancels",
+          "label": "It closes the loop",
+          "note": "The agent completes the transaction rather than handing off a lead."
         }
       ]
     },
@@ -64,31 +65,32 @@
     ],
     "summary": "Client onboarding for an Australian accounting firm, built against a hard AML/CTF compliance deadline.",
     "links": [{ "label": "Femia Accountants", "url": "https://femia-accountants.com.au/" }],
-    "situation": "Femia is a $5M accounting practice. New AML/CTF rules meant identifying, verifying and proving every client — all of it by hand.",
+    "situation": "New AML/CTF rules meant a $5M practice had to identify, verify and prove every client. The principal was doing it by hand across three Excel calculators and paper forms — and the evidence an auditor would ask for existed nowhere a system could produce it.",
     "task": [
-      "Replace three Excel calculators and paper forms with one system.",
-      "Keep pricing private from clients; write every check back to Karbon."
+      "Make the firm provably compliant before the date, without slowing down how it sells.",
+      "Keep pricing confidential from clients — the firm's one non-negotiable."
     ],
-    "result": "Now runs the firm's client onboarding end to end — quote → intake → AML record → write-back into Karbon.",
+    "result": "The firm quotes, onboards and evidences a client in a single flow, with every ID and AML check landing automatically on the client's record in the practice system its auditors already read.",
     "contributions": [
-      "Split the flow in two: staff see pricing, clients never do. That constraint drove the architecture.",
-      "Ruled dry-run and live share one code path — Karbon writes are permanent, with no delete.",
-      "Caught that Karbon's number-typed Director ID field silently drops the leading zero from IDs starting 036."
+      "Mapped the firm's real process before designing anything — three calculators, paper CDD forms — and found the gap that mattered: compliance was being done, but not provably.",
+      "Made pricing confidentiality the architectural constraint the moment the firm named it, rather than a feature bolted on later. It split the product into two forms and shaped everything after.",
+      "Decided the evidence writes into Karbon rather than a new database, so compliance lives where the firm already works and nobody has to be trained onto a second system.",
+      "Caught a compliance-grade defect in testing: the practice system silently corrupts Director IDs beginning 036. Chose to preserve the identifier over using the field it belonged in."
     ],
     "keyResults": {
-      "metric": "$5M",
-      "metricLabel": "Practice running on it",
-      "metricNote": "Quote through AML evidence, running on ZeroTouch.",
+      "metric": "0",
+      "metricLabel": "Client details typed twice",
+      "metricNote": "Entered once at quote; the intake, the AML record and the practice system stay in step on their own.",
       "items": [
         {
-          "name": "576 rows",
-          "label": "Price matrix, generated not typed",
-          "note": "Built from the firm's own Excel quote builder."
+          "name": "Evidence, automatically",
+          "label": "Where auditors already look",
+          "note": "Every ID and AML check writes to the client's timeline as it happens, not afterwards."
         },
         {
-          "name": "269 assertions",
-          "label": "14 harnesses, no framework",
-          "note": "Pricing is what a client notices being wrong."
+          "name": "One price, every time",
+          "label": "576-row matrix, from the firm's own workbook",
+          "note": "Quotes stop depending on who answered the phone."
         }
       ]
     },
@@ -110,31 +112,32 @@
     ],
     "summary": "Document intelligence for professional-services firms — scan client PDFs and search them by word or by meaning.",
     "links": [],
-    "situation": "Firms keep client history in scanned paper. Once a document is an image, it is invisible to search.",
+    "situation": "Professional-services firms hold years of client history in scanned paper. It is legally theirs and sitting on their own server, and it is unfindable — the moment a document becomes an image, search stops working.",
     "task": [
-      "Get paper in with no friction, including from a phone camera.",
-      "Make it searchable by exact words and by meaning."
+      "Get paper in with no friction, including straight from a phone camera.",
+      "Make it findable by the words people half-remember and the ideas they can't name."
     ],
-    "result": "A working prototype running scan → OCR → keywords → embedding → hybrid search, plus an auto-written client summary.",
+    "result": "A firm's scanned history becomes searchable — by exact phrase and by meaning — with an automatic written summary of everything known about a client.",
     "contributions": [
-      "Consolidated three AI providers onto one — Clarifai, OpenRouter and OpenAI became Gemini alone.",
-      "Fused keyword and semantic search: people search the exact phrase on an invoice and the vague idea of a letter.",
-      "Treated 'the model returned garbage' as a different failure from 'the network failed' — each gets its own retry."
+      "Identified capture as the real adoption risk, not accuracy. A system nobody feeds is a system nobody uses, so scanning had to work from the phone already in someone's hand.",
+      "Chose to fuse keyword and semantic search rather than pick one: the exact phrase on an invoice and the vague idea of a letter are different questions, and firms ask both.",
+      "Consolidated three AI vendors into one — fewer contracts, fewer failure modes, one bill to defend.",
+      "Made the AI summary fire-and-forget. An assistant that can fail someone's upload is worse than no assistant."
     ],
     "keyResults": {
-      "metric": "2",
-      "metricLabel": "Search engines fused into one query",
-      "metricNote": "Full-text and pgvector, fused by reciprocal rank.",
+      "metric": "3 → 1",
+      "metricLabel": "AI vendors consolidated",
+      "metricNote": "Clarifai, OpenRouter and OpenAI became one — two supplier relationships and three failure modes removed.",
       "items": [
         {
-          "name": "583 lines",
-          "label": "Markdown to PDF, from scratch",
-          "note": "Rebuilds OCR'd text into a searchable PDF."
+          "name": "Phrase and meaning",
+          "label": "One search, both questions",
+          "note": "Fused results, with the matched words highlighted so people trust what came back."
         },
         {
-          "name": "3 into 1",
-          "label": "AI vendors consolidated",
-          "note": "Two relationships and three failure modes removed."
+          "name": "Scan from a phone",
+          "label": "Capture where the paper is",
+          "note": "No scanner queue, no upload step between the document and the system."
         }
       ]
     },
@@ -156,31 +159,31 @@
     ],
     "summary": "A voice-first field app that tells a preacher which house to visit next, draws the route, and records the outcome.",
     "links": [],
-    "situation": "Door-to-door outreach loses its memory, and a volunteer walking a street cannot stop to fill in a spreadsheet.",
+    "situation": "Door-to-door outreach forgets. Who was visited, who actually answered, who is overdue — it lives in volunteers' heads, and someone walking a street cannot stop to update a spreadsheet.",
     "task": [
-      "Make the loop hands-free: which house, what route, what happened.",
-      "Pick by who most needs a visit, not by who is closest."
+      "Make the record keep itself, hands-free, while a volunteer walks.",
+      "Send people to the door that most needs them, not the one that happens to be nearest."
     ],
-    "result": "A working prototype with the full voice loop running. Demo mode runs it with no backend at all.",
+    "result": "A volunteer is told where to go, shown the route, and records what happened by speaking. The team's memory survives the walk instead of ending with it.",
     "contributions": [
-      "Cut an always-on server: ephemeral tokens let the browser talk to Gemini while the key stays server-side.",
-      "Banned the agent from inventing navigation — a confidently invented street sends someone to the wrong door.",
-      "Kept the last house in server context so the agent never echoes an ID back, removing a class of hallucination."
+      "Found the distinction the whole model turns on: a knock is not contact. Only an answered door resets the clock, so the map reflects conversations rather than attempts.",
+      "Ruled the agent may never invent navigation. A confidently wrong street name sends a volunteer to a stranger's door — worse than saying nothing.",
+      "Cut the server entirely once it was clear the browser could hold the conversation, leaving nothing to run or pay for between walks."
     ],
     "keyResults": {
-      "metric": "6",
-      "metricLabel": "Voice tools driving the map",
-      "metricNote": "The preacher never touches the screen.",
+      "metric": "Hands-free",
+      "metricLabel": "The whole loop, while walking",
+      "metricNote": "Which house, what route, what happened — spoken, with the phone in a pocket.",
       "items": [
         {
           "name": "14 / 42 days",
           "label": "Warm and cooling thresholds",
-          "note": "A no-answer isn't contact, so it never resets the clock."
+          "note": "Priority is driven by when someone last answered, so nobody gets forgotten or knocked twice."
         },
         {
-          "name": "10 msg/sec",
-          "label": "Down from 50",
-          "note": "Mic audio batched into ~100ms chunks."
+          "name": "Nothing to maintain",
+          "label": "No server between walks",
+          "note": "Runs from the browser, and works with no backend at all in demo mode."
         }
       ]
     },
@@ -202,31 +205,31 @@
     ],
     "summary": "Talk, and Mofiz draws. A voice agent that renders live Mermaid diagrams as you describe them, in English or Bangla.",
     "links": [{ "label": "Live demo", "url": "https://mofiz-marma.vercel.app" }],
-    "situation": "Describing a system is easy; drawing it is the slow part. Diagram tools make you stop thinking and place boxes.",
+    "situation": "Describing a system takes a minute; drawing it takes an hour. Diagram tools make you stop thinking and start placing boxes, so the diagram in your head rarely survives the trip to the screen.",
     "task": [
-      "Describe a system out loud and watch the diagram appear.",
+      "Let someone talk and watch the diagram appear.",
       "Work in Bangla as naturally as in English."
     ],
-    "result": "Deployed and working, built in a single day. Voice in, diagram out, with barge-in and SVG export.",
+    "result": "Speak a system and it draws itself — flowchart, sequence, ER, mindmap — with the code editable and exportable. Idea to deployed in a single day.",
     "contributions": [
-      "Locked the model, prompt and voice into the token — direct audio latency, but the client can't alter the persona.",
-      "Fed Mermaid parse errors back to the model so it self-corrects, capped at three tries.",
-      "Found a Windows bug: tooling injects invisible BOM characters into the API key, which HTTP headers reject."
+      "Bet that the bottleneck was the drawing, not the thinking, so the product's only job is to get out of the way between the two.",
+      "Made the model fix its own diagrams — parse errors go back to it as feedback, capped — so the user never sees a broken render.",
+      "Locked the persona and tools into the session token, so the product cannot be quietly repurposed by whoever opens the page."
     ],
     "keyResults": {
       "metric": "1 day",
-      "metricLabel": "Idea to deployed",
-      "metricNote": "12 commits — voice, diagrams, canvas and export.",
+      "metricLabel": "Spoken idea to deployed product",
+      "metricNote": "Voice, diagrams, canvas and export — the whole thing, shipped.",
       "items": [
         {
-          "name": "3 retries",
-          "label": "Self-correcting diagrams",
-          "note": "The model fixes its own syntax error, not the user."
+          "name": "Talk → diagram",
+          "label": "No boxes placed by hand",
+          "note": "The conversation is the input; the diagram keeps up with it."
         },
         {
-          "name": "2 languages",
-          "label": "English and Bangla",
-          "note": "Switches with the speaker, not with a setting."
+          "name": "English and Bangla",
+          "label": "Switches with the speaker",
+          "note": "Not a language setting — it follows whoever is talking."
         }
       ]
     },
@@ -248,31 +251,31 @@
     ],
     "summary": "Point it at a GitHub repo or a local folder and get architecture diagrams, module notes and a generated README.",
     "links": [],
-    "situation": "Understanding an unfamiliar codebase is archaeology — and whoever needs the map most has just joined.",
+    "situation": "A new engineer's first week is archaeology — reading entry points, guessing at structure, rebuilding a map that already exists in someone else's head.",
     "task": [
-      "Turn a repo into a readable map of architecture and data flow.",
-      "Make it work on private code, not just public repos."
+      "Turn a repo into a readable map: architecture, request flow, where the data goes.",
+      "Make it usable on private code, not just public repos."
     ],
-    "result": "A working tool producing three Mermaid diagrams, module cards, onboarding steps and a README — cached after the first look.",
+    "result": "Point it at a repo — public, or a folder on your own machine — and get three diagrams, module notes, onboarding steps and a README, cached after the first look.",
     "contributions": [
-      "Analysed local folders entirely in the browser, so private code never leaves the machine.",
-      "Chose the model on quota, not benchmarks: 500 requests a day against 20. For a free tool, that is the product.",
-      "Wrote a Mermaid repair pass that runs only after a render fails, so it can't break a diagram that worked."
+      "Decided privacy was the adoption blocker, not accuracy. Nobody uploads their employer's codebase to a stranger's website, so private folders never leave the browser.",
+      "Chose the model on quota rather than benchmarks: a free tool that dies after 20 uses a day isn't a tool. 500 against 20 settled it.",
+      "Budgeted the prompt deliberately — a dozen ranked files beat the whole repo, cheaper and more accurate than sending everything."
     ],
     "keyResults": {
-      "metric": "37",
-      "metricLabel": "Tests over the parts that break",
-      "metricNote": "One fixture is the real diagram that failed on a public repo.",
+      "metric": "500 vs 20",
+      "metricLabel": "Daily uses the model choice bought",
+      "metricNote": "The difference between a tool people can actually try and a demo that runs out by lunchtime.",
       "items": [
-        {
-          "name": "500 vs 20",
-          "label": "Requests per day",
-          "note": "A free tool that dies after 20 uses isn't a tool."
-        },
         {
           "name": "0 uploads",
           "label": "Private code stays local",
-          "note": "The folder is walked client-side."
+          "note": "The folder is read in the browser, so an employer's repo never leaves the machine."
+        },
+        {
+          "name": "Diagrams, modules, README",
+          "label": "From a URL or a folder",
+          "note": "The map someone would otherwise spend their first week rebuilding by hand."
         }
       ]
     },
@@ -294,26 +297,31 @@
     ],
     "summary": "Feed it a GitHub username and it returns a card-based developer assessment written for recruiters.",
     "links": [],
-    "situation": "A GitHub profile is a wall of repo names. Anyone judging a developer from it is hoping a shape emerges.",
+    "situation": "A GitHub profile is a wall of repository names. Recruiters judge developers from it every day with no real way to read it, so good candidates get missed and bad ones get through.",
     "task": [
-      "Turn a username into archetype, stack, strengths and role fit.",
-      "Accept a username or a full profile URL."
+      "Turn a username into a structured read: archetype, stack, strengths, role fit.",
+      "Accept whatever gets pasted — a username or a full profile URL."
     ],
-    "result": "A working tool returning a seven-card assessment, built across three bursts and deployed on Vercel.",
+    "result": "A profile becomes a seven-card assessment written for the person doing the hiring, not the person being hired.",
     "contributions": [
-      "Moved both API keys behind serverless functions — the original design would have shipped my Gemini key to every visitor.",
-      "Cut to the top 30 repos, seven fields each, and aggregated languages server-side to keep the token bill sane.",
-      "Constrained the model with a JSON contract, then hedged anyway against it not complying."
+      "Wrote for the reader rather than the developer: a recruiter needs a verdict they can act on, so the model fills a fixed structure instead of producing prose someone has to interpret.",
+      "Caught before launch that the original design would have shipped my API key to every visitor — Vite inlines prefixed variables straight into the bundle. Both keys moved server-side.",
+      "Cut to the top 30 repositories: sending a whole profile costs more and says less."
     ],
     "keyResults": {
-      "metric": "30",
-      "metricLabel": "Repos ranked and projected",
-      "metricNote": "Sending a whole profile is neither affordable nor better.",
+      "metric": "7 cards",
+      "metricLabel": "A wall of repo names, made readable",
+      "metricNote": "Archetype, stack, strengths, weaknesses, coding insights, projects, role fit.",
       "items": [
         {
           "name": "Keys off the client",
-          "label": "The refactor that mattered",
-          "note": "Vite inlines prefixed env vars into the bundle."
+          "label": "Caught before it shipped",
+          "note": "Vite inlines prefixed env vars into the bundle — the first design would have leaked the key to every visitor."
+        },
+        {
+          "name": "Top 30, projected",
+          "label": "Deliberate prompt budget",
+          "note": "Ranked and cut to seven fields each, because the whole profile costs more and reads worse."
         }
       ]
     },
@@ -338,26 +346,26 @@
       { "label": "ilm AI", "url": "https://www.ilmtech.app/" },
       { "label": "Source", "url": "https://github.com/Smik022/Socratic-AI-Tutor" }
     ],
-    "situation": "Students use AI to finish assignments without learning. ilm's bet was a tutor that refuses to answer — which only works if the refusal holds.",
+    "situation": "Students use AI to finish assignments and learn nothing from them. ilm's bet was a tutor that refuses to answer — but that bet only pays if the refusal survives a real student pushing for the answer.",
     "task": [
-      "Prove the Socratic line survives a student pushing for the answer.",
-      "Show it working by voice, not just text."
+      "Prove the Socratic line holds under pressure, not just in a demo.",
+      "Show it working by voice, since that is how tutoring actually sounds."
     ],
-    "result": "A working proof of concept — Django REST on Gemini, React front end, full voice loop by speech or text.",
+    "result": "A working proof of concept that held the line — guiding questions, by speech or text — and gave ilm something to put in front of a room rather than describe.",
     "contributions": [
-      "Wrote the constraint into the prompt: an answer only after two or three hints, and only for general knowledge.",
-      "Used the browser's own speech APIs both ways, so voice costs nothing and needs no realtime audio service.",
-      "Kept history in a ref — the recognition callback closes over the first render, wiping memory on spoken turns."
+      "Put the constraint in the prompt rather than hoping for it: an answer only after two or three hints, and only for general knowledge. 'Be Socratic' does not survive a student who keeps asking.",
+      "Chose the browser's own speech engines, so voice costs nothing per minute — the difference between a pilot a school can afford and one it cannot.",
+      "Kept it stateless on purpose. A proof of concept's job is to answer one question, not to be architecture."
     ],
     "keyResults": {
       "metric": "2-3",
       "metricLabel": "Hints before an answer is allowed",
-      "metricNote": "One paragraph of prompt is where the teaching lives.",
+      "metricNote": "One paragraph of prompt is where the teaching actually lives — everything the product claims rests on that line holding.",
       "items": [
         {
-          "name": "$0 voice",
-          "label": "Web Speech API",
-          "note": "No audio service, no per-minute billing, nothing to deploy."
+          "name": "$0 per voice minute",
+          "label": "Speech runs in the browser",
+          "note": "No audio vendor and no per-seat cost — the pricing question a school asks first."
         }
       ]
     },
@@ -385,7 +393,7 @@
     "contributions": [],
     "keyResults": {
       "metric": "400K",
-      "metricLabel": "Talent gap addressed",
+      "metricLabel": "Talent gap the market faces",
       "metricNote": "",
       "items": []
     },

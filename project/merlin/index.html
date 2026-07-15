@@ -75,25 +75,26 @@
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>Discovery meetings were being spent qualifying callers who could have been qualified up front.</p>
+      <p>Every inbound enquiry cost a discovery meeting before anyone knew whether it was worth having. The studio was spending its scarcest asset — senior time — qualifying strangers.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Handle an inbound prospect end to end — greet, qualify, book.</li>
-        <li>Add a mode that returns a structured brief instead of a meeting.</li>
+        <li>Qualify inbound prospects without putting a person on the call.</li>
+        <li>Send the good ones to a booked briefing; turn the rest into a written brief.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>Live and embedded on the studio&#39;s intake page. Two variants, one binary, rollback-capable deploy.</p>
+      <p>Prospects qualify themselves in conversation and leave with a briefing booked or a structured brief in the team&#39;s inbox. Senior time now goes to calls that are already worth having.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Treated the model as untrusted — it can call tools, but it doesn&#39;t decide whether the work happened.</li>
-        <li>A live call ended claiming a brief was sent when none existed. Moved the gate out of the skipped tool into the dispatcher.</li>
-        <li>Decoupled the caller form from the model, which looped on greetings and called the tool late or never.</li>
+        <li>Framed the problem as qualification, not automation. The goal was never to replace discovery — it was to stop paying for discovery that shouldn&#39;t happen.</li>
+        <li>Split one product into two front doors once it was clear a cold prospect and a client with a spec want completely different conversations.</li>
+        <li>Ruled that the agent doesn&#39;t get the last word on whether work happened, after a live call ended announcing a brief that was never submitted.</li>
+        <li>Set the standard that a wrong booking costs more trust than a retry costs patience — so booking tools must prove they know the time before they can act.</li>
       </ul>
     </section>
     </div>
@@ -101,19 +102,19 @@
       <div class="card">
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
-          <span class="metric-value">20</span>
-          <span class="metric-label">Tools callable mid-conversation</span>
-          <p class="metric-note">18 for sales, 8 for intake — one registry, one binary.</p>
+          <span class="metric-value">24/7</span>
+          <span class="metric-label">Qualification with nobody on the call</span>
+          <p class="metric-note">Inbound prospects qualify themselves at any hour and book only when there is something worth discussing.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">~400 tests</span>
-          <span class="metric-label">Across ~10.5k lines</span>
-          <p class="metric-note">Three guards written from real call failures.</p>
+          <span class="metric-name">Meeting → brief</span>
+          <span class="metric-label">Discovery, async</span>
+          <p class="metric-note">A caller describes what they want built without sitting through a meeting to do it.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">Under 900ms</span>
-          <span class="metric-label">Speech-to-audio budget</span>
-          <p class="metric-note">Frames forward on arrival; nothing is buffered.</p>
+          <span class="metric-name">Books, reschedules, cancels</span>
+          <span class="metric-label">It closes the loop</span>
+          <p class="metric-note">The agent completes the transaction rather than handing off a lead.</p>
         </div>
       </div>
       <div class="rail-skills">

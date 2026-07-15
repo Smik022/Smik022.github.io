@@ -74,25 +74,26 @@
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>Femia is a $5M accounting practice. New AML/CTF rules meant identifying, verifying and proving every client — all of it by hand.</p>
+      <p>New AML/CTF rules meant a $5M practice had to identify, verify and prove every client. The principal was doing it by hand across three Excel calculators and paper forms — and the evidence an auditor would ask for existed nowhere a system could produce it.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Replace three Excel calculators and paper forms with one system.</li>
-        <li>Keep pricing private from clients; write every check back to Karbon.</li>
+        <li>Make the firm provably compliant before the date, without slowing down how it sells.</li>
+        <li>Keep pricing confidential from clients — the firm&#39;s one non-negotiable.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>Now runs the firm&#39;s client onboarding end to end — quote → intake → AML record → write-back into Karbon.</p>
+      <p>The firm quotes, onboards and evidences a client in a single flow, with every ID and AML check landing automatically on the client&#39;s record in the practice system its auditors already read.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Split the flow in two: staff see pricing, clients never do. That constraint drove the architecture.</li>
-        <li>Ruled dry-run and live share one code path — Karbon writes are permanent, with no delete.</li>
-        <li>Caught that Karbon&#39;s number-typed Director ID field silently drops the leading zero from IDs starting 036.</li>
+        <li>Mapped the firm&#39;s real process before designing anything — three calculators, paper CDD forms — and found the gap that mattered: compliance was being done, but not provably.</li>
+        <li>Made pricing confidentiality the architectural constraint the moment the firm named it, rather than a feature bolted on later. It split the product into two forms and shaped everything after.</li>
+        <li>Decided the evidence writes into Karbon rather than a new database, so compliance lives where the firm already works and nobody has to be trained onto a second system.</li>
+        <li>Caught a compliance-grade defect in testing: the practice system silently corrupts Director IDs beginning 036. Chose to preserve the identifier over using the field it belonged in.</li>
       </ul>
     </section>
     </div>
@@ -100,19 +101,19 @@
       <div class="card">
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
-          <span class="metric-value">$5M</span>
-          <span class="metric-label">Practice running on it</span>
-          <p class="metric-note">Quote through AML evidence, running on ZeroTouch.</p>
+          <span class="metric-value">0</span>
+          <span class="metric-label">Client details typed twice</span>
+          <p class="metric-note">Entered once at quote; the intake, the AML record and the practice system stay in step on their own.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">576 rows</span>
-          <span class="metric-label">Price matrix, generated not typed</span>
-          <p class="metric-note">Built from the firm&#39;s own Excel quote builder.</p>
+          <span class="metric-name">Evidence, automatically</span>
+          <span class="metric-label">Where auditors already look</span>
+          <p class="metric-note">Every ID and AML check writes to the client&#39;s timeline as it happens, not afterwards.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">269 assertions</span>
-          <span class="metric-label">14 harnesses, no framework</span>
-          <p class="metric-note">Pricing is what a client notices being wrong.</p>
+          <span class="metric-name">One price, every time</span>
+          <span class="metric-label">576-row matrix, from the firm&#39;s own workbook</span>
+          <p class="metric-note">Quotes stop depending on who answered the phone.</p>
         </div>
       </div>
       <div class="rail-skills">

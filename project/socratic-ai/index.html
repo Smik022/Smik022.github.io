@@ -75,25 +75,25 @@
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>Students use AI to finish assignments without learning. ilm&#39;s bet was a tutor that refuses to answer — which only works if the refusal holds.</p>
+      <p>Students use AI to finish assignments and learn nothing from them. ilm&#39;s bet was a tutor that refuses to answer — but that bet only pays if the refusal survives a real student pushing for the answer.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Prove the Socratic line survives a student pushing for the answer.</li>
-        <li>Show it working by voice, not just text.</li>
+        <li>Prove the Socratic line holds under pressure, not just in a demo.</li>
+        <li>Show it working by voice, since that is how tutoring actually sounds.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>A working proof of concept — Django REST on Gemini, React front end, full voice loop by speech or text.</p>
+      <p>A working proof of concept that held the line — guiding questions, by speech or text — and gave ilm something to put in front of a room rather than describe.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Wrote the constraint into the prompt: an answer only after two or three hints, and only for general knowledge.</li>
-        <li>Used the browser&#39;s own speech APIs both ways, so voice costs nothing and needs no realtime audio service.</li>
-        <li>Kept history in a ref — the recognition callback closes over the first render, wiping memory on spoken turns.</li>
+        <li>Put the constraint in the prompt rather than hoping for it: an answer only after two or three hints, and only for general knowledge. &#39;Be Socratic&#39; does not survive a student who keeps asking.</li>
+        <li>Chose the browser&#39;s own speech engines, so voice costs nothing per minute — the difference between a pilot a school can afford and one it cannot.</li>
+        <li>Kept it stateless on purpose. A proof of concept&#39;s job is to answer one question, not to be architecture.</li>
       </ul>
     </section>
     </div>
@@ -103,12 +103,12 @@
         <div class="metric">
           <span class="metric-value">2-3</span>
           <span class="metric-label">Hints before an answer is allowed</span>
-          <p class="metric-note">One paragraph of prompt is where the teaching lives.</p>
+          <p class="metric-note">One paragraph of prompt is where the teaching actually lives — everything the product claims rests on that line holding.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">$0 voice</span>
-          <span class="metric-label">Web Speech API</span>
-          <p class="metric-note">No audio service, no per-minute billing, nothing to deploy.</p>
+          <span class="metric-name">$0 per voice minute</span>
+          <span class="metric-label">Speech runs in the browser</span>
+          <p class="metric-note">No audio vendor and no per-seat cost — the pricing question a school asks first.</p>
         </div>
       </div>
       <div class="rail-skills">

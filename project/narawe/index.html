@@ -71,25 +71,26 @@
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>Firms keep client history in scanned paper. Once a document is an image, it is invisible to search.</p>
+      <p>Professional-services firms hold years of client history in scanned paper. It is legally theirs and sitting on their own server, and it is unfindable — the moment a document becomes an image, search stops working.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Get paper in with no friction, including from a phone camera.</li>
-        <li>Make it searchable by exact words and by meaning.</li>
+        <li>Get paper in with no friction, including straight from a phone camera.</li>
+        <li>Make it findable by the words people half-remember and the ideas they can&#39;t name.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>A working prototype running scan → OCR → keywords → embedding → hybrid search, plus an auto-written client summary.</p>
+      <p>A firm&#39;s scanned history becomes searchable — by exact phrase and by meaning — with an automatic written summary of everything known about a client.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Consolidated three AI providers onto one — Clarifai, OpenRouter and OpenAI became Gemini alone.</li>
-        <li>Fused keyword and semantic search: people search the exact phrase on an invoice and the vague idea of a letter.</li>
-        <li>Treated &#39;the model returned garbage&#39; as a different failure from &#39;the network failed&#39; — each gets its own retry.</li>
+        <li>Identified capture as the real adoption risk, not accuracy. A system nobody feeds is a system nobody uses, so scanning had to work from the phone already in someone&#39;s hand.</li>
+        <li>Chose to fuse keyword and semantic search rather than pick one: the exact phrase on an invoice and the vague idea of a letter are different questions, and firms ask both.</li>
+        <li>Consolidated three AI vendors into one — fewer contracts, fewer failure modes, one bill to defend.</li>
+        <li>Made the AI summary fire-and-forget. An assistant that can fail someone&#39;s upload is worse than no assistant.</li>
       </ul>
     </section>
     </div>
@@ -97,19 +98,19 @@
       <div class="card">
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
-          <span class="metric-value">2</span>
-          <span class="metric-label">Search engines fused into one query</span>
-          <p class="metric-note">Full-text and pgvector, fused by reciprocal rank.</p>
-        </div>
-        <div class="metric">
-          <span class="metric-name">583 lines</span>
-          <span class="metric-label">Markdown to PDF, from scratch</span>
-          <p class="metric-note">Rebuilds OCR&#39;d text into a searchable PDF.</p>
-        </div>
-        <div class="metric">
-          <span class="metric-name">3 into 1</span>
+          <span class="metric-value">3 → 1</span>
           <span class="metric-label">AI vendors consolidated</span>
-          <p class="metric-note">Two relationships and three failure modes removed.</p>
+          <p class="metric-note">Clarifai, OpenRouter and OpenAI became one — two supplier relationships and three failure modes removed.</p>
+        </div>
+        <div class="metric">
+          <span class="metric-name">Phrase and meaning</span>
+          <span class="metric-label">One search, both questions</span>
+          <p class="metric-note">Fused results, with the matched words highlighted so people trust what came back.</p>
+        </div>
+        <div class="metric">
+          <span class="metric-name">Scan from a phone</span>
+          <span class="metric-label">Capture where the paper is</span>
+          <p class="metric-note">No scanner queue, no upload step between the document and the system.</p>
         </div>
       </div>
       <div class="rail-skills">

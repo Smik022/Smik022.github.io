@@ -186,25 +186,26 @@
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>Discovery meetings were being spent qualifying callers who could have been qualified up front.</p>
+      <p>Every inbound enquiry cost a discovery meeting before anyone knew whether it was worth having. The studio was spending its scarcest asset — senior time — qualifying strangers.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Handle an inbound prospect end to end — greet, qualify, book.</li>
-        <li>Add a mode that returns a structured brief instead of a meeting.</li>
+        <li>Qualify inbound prospects without putting a person on the call.</li>
+        <li>Send the good ones to a booked briefing; turn the rest into a written brief.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>Live and embedded on the studio&#39;s intake page. Two variants, one binary, rollback-capable deploy.</p>
+      <p>Prospects qualify themselves in conversation and leave with a briefing booked or a structured brief in the team&#39;s inbox. Senior time now goes to calls that are already worth having.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Treated the model as untrusted — it can call tools, but it doesn&#39;t decide whether the work happened.</li>
-        <li>A live call ended claiming a brief was sent when none existed. Moved the gate out of the skipped tool into the dispatcher.</li>
-        <li>Decoupled the caller form from the model, which looped on greetings and called the tool late or never.</li>
+        <li>Framed the problem as qualification, not automation. The goal was never to replace discovery — it was to stop paying for discovery that shouldn&#39;t happen.</li>
+        <li>Split one product into two front doors once it was clear a cold prospect and a client with a spec want completely different conversations.</li>
+        <li>Ruled that the agent doesn&#39;t get the last word on whether work happened, after a live call ended announcing a brief that was never submitted.</li>
+        <li>Set the standard that a wrong booking costs more trust than a retry costs patience — so booking tools must prove they know the time before they can act.</li>
       </ul>
     </section>
     </div>
@@ -212,19 +213,19 @@
       <div class="card">
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
-          <span class="metric-value">20</span>
-          <span class="metric-label">Tools callable mid-conversation</span>
-          <p class="metric-note">18 for sales, 8 for intake — one registry, one binary.</p>
+          <span class="metric-value">24/7</span>
+          <span class="metric-label">Qualification with nobody on the call</span>
+          <p class="metric-note">Inbound prospects qualify themselves at any hour and book only when there is something worth discussing.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">~400 tests</span>
-          <span class="metric-label">Across ~10.5k lines</span>
-          <p class="metric-note">Three guards written from real call failures.</p>
+          <span class="metric-name">Meeting → brief</span>
+          <span class="metric-label">Discovery, async</span>
+          <p class="metric-note">A caller describes what they want built without sitting through a meeting to do it.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">Under 900ms</span>
-          <span class="metric-label">Speech-to-audio budget</span>
-          <p class="metric-note">Frames forward on arrival; nothing is buffered.</p>
+          <span class="metric-name">Books, reschedules, cancels</span>
+          <span class="metric-label">It closes the loop</span>
+          <p class="metric-note">The agent completes the transaction rather than handing off a lead.</p>
         </div>
       </div>
       <div class="rail-skills">
@@ -257,25 +258,26 @@
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>Femia is a $5M accounting practice. New AML/CTF rules meant identifying, verifying and proving every client — all of it by hand.</p>
+      <p>New AML/CTF rules meant a $5M practice had to identify, verify and prove every client. The principal was doing it by hand across three Excel calculators and paper forms — and the evidence an auditor would ask for existed nowhere a system could produce it.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Replace three Excel calculators and paper forms with one system.</li>
-        <li>Keep pricing private from clients; write every check back to Karbon.</li>
+        <li>Make the firm provably compliant before the date, without slowing down how it sells.</li>
+        <li>Keep pricing confidential from clients — the firm&#39;s one non-negotiable.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>Now runs the firm&#39;s client onboarding end to end — quote → intake → AML record → write-back into Karbon.</p>
+      <p>The firm quotes, onboards and evidences a client in a single flow, with every ID and AML check landing automatically on the client&#39;s record in the practice system its auditors already read.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Split the flow in two: staff see pricing, clients never do. That constraint drove the architecture.</li>
-        <li>Ruled dry-run and live share one code path — Karbon writes are permanent, with no delete.</li>
-        <li>Caught that Karbon&#39;s number-typed Director ID field silently drops the leading zero from IDs starting 036.</li>
+        <li>Mapped the firm&#39;s real process before designing anything — three calculators, paper CDD forms — and found the gap that mattered: compliance was being done, but not provably.</li>
+        <li>Made pricing confidentiality the architectural constraint the moment the firm named it, rather than a feature bolted on later. It split the product into two forms and shaped everything after.</li>
+        <li>Decided the evidence writes into Karbon rather than a new database, so compliance lives where the firm already works and nobody has to be trained onto a second system.</li>
+        <li>Caught a compliance-grade defect in testing: the practice system silently corrupts Director IDs beginning 036. Chose to preserve the identifier over using the field it belonged in.</li>
       </ul>
     </section>
     </div>
@@ -283,19 +285,19 @@
       <div class="card">
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
-          <span class="metric-value">$5M</span>
-          <span class="metric-label">Practice running on it</span>
-          <p class="metric-note">Quote through AML evidence, running on ZeroTouch.</p>
+          <span class="metric-value">0</span>
+          <span class="metric-label">Client details typed twice</span>
+          <p class="metric-note">Entered once at quote; the intake, the AML record and the practice system stay in step on their own.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">576 rows</span>
-          <span class="metric-label">Price matrix, generated not typed</span>
-          <p class="metric-note">Built from the firm&#39;s own Excel quote builder.</p>
+          <span class="metric-name">Evidence, automatically</span>
+          <span class="metric-label">Where auditors already look</span>
+          <p class="metric-note">Every ID and AML check writes to the client&#39;s timeline as it happens, not afterwards.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">269 assertions</span>
-          <span class="metric-label">14 harnesses, no framework</span>
-          <p class="metric-note">Pricing is what a client notices being wrong.</p>
+          <span class="metric-name">One price, every time</span>
+          <span class="metric-label">576-row matrix, from the firm&#39;s own workbook</span>
+          <p class="metric-note">Quotes stop depending on who answered the phone.</p>
         </div>
       </div>
       <div class="rail-skills">
@@ -325,25 +327,26 @@
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>Firms keep client history in scanned paper. Once a document is an image, it is invisible to search.</p>
+      <p>Professional-services firms hold years of client history in scanned paper. It is legally theirs and sitting on their own server, and it is unfindable — the moment a document becomes an image, search stops working.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Get paper in with no friction, including from a phone camera.</li>
-        <li>Make it searchable by exact words and by meaning.</li>
+        <li>Get paper in with no friction, including straight from a phone camera.</li>
+        <li>Make it findable by the words people half-remember and the ideas they can&#39;t name.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>A working prototype running scan → OCR → keywords → embedding → hybrid search, plus an auto-written client summary.</p>
+      <p>A firm&#39;s scanned history becomes searchable — by exact phrase and by meaning — with an automatic written summary of everything known about a client.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Consolidated three AI providers onto one — Clarifai, OpenRouter and OpenAI became Gemini alone.</li>
-        <li>Fused keyword and semantic search: people search the exact phrase on an invoice and the vague idea of a letter.</li>
-        <li>Treated &#39;the model returned garbage&#39; as a different failure from &#39;the network failed&#39; — each gets its own retry.</li>
+        <li>Identified capture as the real adoption risk, not accuracy. A system nobody feeds is a system nobody uses, so scanning had to work from the phone already in someone&#39;s hand.</li>
+        <li>Chose to fuse keyword and semantic search rather than pick one: the exact phrase on an invoice and the vague idea of a letter are different questions, and firms ask both.</li>
+        <li>Consolidated three AI vendors into one — fewer contracts, fewer failure modes, one bill to defend.</li>
+        <li>Made the AI summary fire-and-forget. An assistant that can fail someone&#39;s upload is worse than no assistant.</li>
       </ul>
     </section>
     </div>
@@ -351,19 +354,19 @@
       <div class="card">
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
-          <span class="metric-value">2</span>
-          <span class="metric-label">Search engines fused into one query</span>
-          <p class="metric-note">Full-text and pgvector, fused by reciprocal rank.</p>
-        </div>
-        <div class="metric">
-          <span class="metric-name">583 lines</span>
-          <span class="metric-label">Markdown to PDF, from scratch</span>
-          <p class="metric-note">Rebuilds OCR&#39;d text into a searchable PDF.</p>
-        </div>
-        <div class="metric">
-          <span class="metric-name">3 into 1</span>
+          <span class="metric-value">3 → 1</span>
           <span class="metric-label">AI vendors consolidated</span>
-          <p class="metric-note">Two relationships and three failure modes removed.</p>
+          <p class="metric-note">Clarifai, OpenRouter and OpenAI became one — two supplier relationships and three failure modes removed.</p>
+        </div>
+        <div class="metric">
+          <span class="metric-name">Phrase and meaning</span>
+          <span class="metric-label">One search, both questions</span>
+          <p class="metric-note">Fused results, with the matched words highlighted so people trust what came back.</p>
+        </div>
+        <div class="metric">
+          <span class="metric-name">Scan from a phone</span>
+          <span class="metric-label">Capture where the paper is</span>
+          <p class="metric-note">No scanner queue, no upload step between the document and the system.</p>
         </div>
       </div>
       <div class="rail-skills">
@@ -392,25 +395,25 @@
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>Door-to-door outreach loses its memory, and a volunteer walking a street cannot stop to fill in a spreadsheet.</p>
+      <p>Door-to-door outreach forgets. Who was visited, who actually answered, who is overdue — it lives in volunteers&#39; heads, and someone walking a street cannot stop to update a spreadsheet.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Make the loop hands-free: which house, what route, what happened.</li>
-        <li>Pick by who most needs a visit, not by who is closest.</li>
+        <li>Make the record keep itself, hands-free, while a volunteer walks.</li>
+        <li>Send people to the door that most needs them, not the one that happens to be nearest.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>A working prototype with the full voice loop running. Demo mode runs it with no backend at all.</p>
+      <p>A volunteer is told where to go, shown the route, and records what happened by speaking. The team&#39;s memory survives the walk instead of ending with it.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Cut an always-on server: ephemeral tokens let the browser talk to Gemini while the key stays server-side.</li>
-        <li>Banned the agent from inventing navigation — a confidently invented street sends someone to the wrong door.</li>
-        <li>Kept the last house in server context so the agent never echoes an ID back, removing a class of hallucination.</li>
+        <li>Found the distinction the whole model turns on: a knock is not contact. Only an answered door resets the clock, so the map reflects conversations rather than attempts.</li>
+        <li>Ruled the agent may never invent navigation. A confidently wrong street name sends a volunteer to a stranger&#39;s door — worse than saying nothing.</li>
+        <li>Cut the server entirely once it was clear the browser could hold the conversation, leaving nothing to run or pay for between walks.</li>
       </ul>
     </section>
     </div>
@@ -418,19 +421,19 @@
       <div class="card">
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
-          <span class="metric-value">6</span>
-          <span class="metric-label">Voice tools driving the map</span>
-          <p class="metric-note">The preacher never touches the screen.</p>
+          <span class="metric-value">Hands-free</span>
+          <span class="metric-label">The whole loop, while walking</span>
+          <p class="metric-note">Which house, what route, what happened — spoken, with the phone in a pocket.</p>
         </div>
         <div class="metric">
           <span class="metric-name">14 / 42 days</span>
           <span class="metric-label">Warm and cooling thresholds</span>
-          <p class="metric-note">A no-answer isn&#39;t contact, so it never resets the clock.</p>
+          <p class="metric-note">Priority is driven by when someone last answered, so nobody gets forgotten or knocked twice.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">10 msg/sec</span>
-          <span class="metric-label">Down from 50</span>
-          <p class="metric-note">Mic audio batched into ~100ms chunks.</p>
+          <span class="metric-name">Nothing to maintain</span>
+          <span class="metric-label">No server between walks</span>
+          <p class="metric-note">Runs from the browser, and works with no backend at all in demo mode.</p>
         </div>
       </div>
       <div class="rail-skills">
@@ -463,25 +466,25 @@
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>Describing a system is easy; drawing it is the slow part. Diagram tools make you stop thinking and place boxes.</p>
+      <p>Describing a system takes a minute; drawing it takes an hour. Diagram tools make you stop thinking and start placing boxes, so the diagram in your head rarely survives the trip to the screen.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Describe a system out loud and watch the diagram appear.</li>
+        <li>Let someone talk and watch the diagram appear.</li>
         <li>Work in Bangla as naturally as in English.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>Deployed and working, built in a single day. Voice in, diagram out, with barge-in and SVG export.</p>
+      <p>Speak a system and it draws itself — flowchart, sequence, ER, mindmap — with the code editable and exportable. Idea to deployed in a single day.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Locked the model, prompt and voice into the token — direct audio latency, but the client can&#39;t alter the persona.</li>
-        <li>Fed Mermaid parse errors back to the model so it self-corrects, capped at three tries.</li>
-        <li>Found a Windows bug: tooling injects invisible BOM characters into the API key, which HTTP headers reject.</li>
+        <li>Bet that the bottleneck was the drawing, not the thinking, so the product&#39;s only job is to get out of the way between the two.</li>
+        <li>Made the model fix its own diagrams — parse errors go back to it as feedback, capped — so the user never sees a broken render.</li>
+        <li>Locked the persona and tools into the session token, so the product cannot be quietly repurposed by whoever opens the page.</li>
       </ul>
     </section>
     </div>
@@ -490,18 +493,18 @@
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
           <span class="metric-value">1 day</span>
-          <span class="metric-label">Idea to deployed</span>
-          <p class="metric-note">12 commits — voice, diagrams, canvas and export.</p>
+          <span class="metric-label">Spoken idea to deployed product</span>
+          <p class="metric-note">Voice, diagrams, canvas and export — the whole thing, shipped.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">3 retries</span>
-          <span class="metric-label">Self-correcting diagrams</span>
-          <p class="metric-note">The model fixes its own syntax error, not the user.</p>
+          <span class="metric-name">Talk → diagram</span>
+          <span class="metric-label">No boxes placed by hand</span>
+          <p class="metric-note">The conversation is the input; the diagram keeps up with it.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">2 languages</span>
-          <span class="metric-label">English and Bangla</span>
-          <p class="metric-note">Switches with the speaker, not with a setting.</p>
+          <span class="metric-name">English and Bangla</span>
+          <span class="metric-label">Switches with the speaker</span>
+          <p class="metric-note">Not a language setting — it follows whoever is talking.</p>
         </div>
       </div>
       <div class="rail-skills">
@@ -531,25 +534,25 @@
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>Understanding an unfamiliar codebase is archaeology — and whoever needs the map most has just joined.</p>
+      <p>A new engineer&#39;s first week is archaeology — reading entry points, guessing at structure, rebuilding a map that already exists in someone else&#39;s head.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Turn a repo into a readable map of architecture and data flow.</li>
-        <li>Make it work on private code, not just public repos.</li>
+        <li>Turn a repo into a readable map: architecture, request flow, where the data goes.</li>
+        <li>Make it usable on private code, not just public repos.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>A working tool producing three Mermaid diagrams, module cards, onboarding steps and a README — cached after the first look.</p>
+      <p>Point it at a repo — public, or a folder on your own machine — and get three diagrams, module notes, onboarding steps and a README, cached after the first look.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Analysed local folders entirely in the browser, so private code never leaves the machine.</li>
-        <li>Chose the model on quota, not benchmarks: 500 requests a day against 20. For a free tool, that is the product.</li>
-        <li>Wrote a Mermaid repair pass that runs only after a render fails, so it can&#39;t break a diagram that worked.</li>
+        <li>Decided privacy was the adoption blocker, not accuracy. Nobody uploads their employer&#39;s codebase to a stranger&#39;s website, so private folders never leave the browser.</li>
+        <li>Chose the model on quota rather than benchmarks: a free tool that dies after 20 uses a day isn&#39;t a tool. 500 against 20 settled it.</li>
+        <li>Budgeted the prompt deliberately — a dozen ranked files beat the whole repo, cheaper and more accurate than sending everything.</li>
       </ul>
     </section>
     </div>
@@ -557,19 +560,19 @@
       <div class="card">
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
-          <span class="metric-value">37</span>
-          <span class="metric-label">Tests over the parts that break</span>
-          <p class="metric-note">One fixture is the real diagram that failed on a public repo.</p>
-        </div>
-        <div class="metric">
-          <span class="metric-name">500 vs 20</span>
-          <span class="metric-label">Requests per day</span>
-          <p class="metric-note">A free tool that dies after 20 uses isn&#39;t a tool.</p>
+          <span class="metric-value">500 vs 20</span>
+          <span class="metric-label">Daily uses the model choice bought</span>
+          <p class="metric-note">The difference between a tool people can actually try and a demo that runs out by lunchtime.</p>
         </div>
         <div class="metric">
           <span class="metric-name">0 uploads</span>
           <span class="metric-label">Private code stays local</span>
-          <p class="metric-note">The folder is walked client-side.</p>
+          <p class="metric-note">The folder is read in the browser, so an employer&#39;s repo never leaves the machine.</p>
+        </div>
+        <div class="metric">
+          <span class="metric-name">Diagrams, modules, README</span>
+          <span class="metric-label">From a URL or a folder</span>
+          <p class="metric-note">The map someone would otherwise spend their first week rebuilding by hand.</p>
         </div>
       </div>
       <div class="rail-skills">
@@ -599,25 +602,25 @@
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>A GitHub profile is a wall of repo names. Anyone judging a developer from it is hoping a shape emerges.</p>
+      <p>A GitHub profile is a wall of repository names. Recruiters judge developers from it every day with no real way to read it, so good candidates get missed and bad ones get through.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Turn a username into archetype, stack, strengths and role fit.</li>
-        <li>Accept a username or a full profile URL.</li>
+        <li>Turn a username into a structured read: archetype, stack, strengths, role fit.</li>
+        <li>Accept whatever gets pasted — a username or a full profile URL.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>A working tool returning a seven-card assessment, built across three bursts and deployed on Vercel.</p>
+      <p>A profile becomes a seven-card assessment written for the person doing the hiring, not the person being hired.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Moved both API keys behind serverless functions — the original design would have shipped my Gemini key to every visitor.</li>
-        <li>Cut to the top 30 repos, seven fields each, and aggregated languages server-side to keep the token bill sane.</li>
-        <li>Constrained the model with a JSON contract, then hedged anyway against it not complying.</li>
+        <li>Wrote for the reader rather than the developer: a recruiter needs a verdict they can act on, so the model fills a fixed structure instead of producing prose someone has to interpret.</li>
+        <li>Caught before launch that the original design would have shipped my API key to every visitor — Vite inlines prefixed variables straight into the bundle. Both keys moved server-side.</li>
+        <li>Cut to the top 30 repositories: sending a whole profile costs more and says less.</li>
       </ul>
     </section>
     </div>
@@ -625,14 +628,19 @@
       <div class="card">
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
-          <span class="metric-value">30</span>
-          <span class="metric-label">Repos ranked and projected</span>
-          <p class="metric-note">Sending a whole profile is neither affordable nor better.</p>
+          <span class="metric-value">7 cards</span>
+          <span class="metric-label">A wall of repo names, made readable</span>
+          <p class="metric-note">Archetype, stack, strengths, weaknesses, coding insights, projects, role fit.</p>
         </div>
         <div class="metric">
           <span class="metric-name">Keys off the client</span>
-          <span class="metric-label">The refactor that mattered</span>
-          <p class="metric-note">Vite inlines prefixed env vars into the bundle.</p>
+          <span class="metric-label">Caught before it shipped</span>
+          <p class="metric-note">Vite inlines prefixed env vars into the bundle — the first design would have leaked the key to every visitor.</p>
+        </div>
+        <div class="metric">
+          <span class="metric-name">Top 30, projected</span>
+          <span class="metric-label">Deliberate prompt budget</span>
+          <p class="metric-note">Ranked and cut to seven fields each, because the whole profile costs more and reads worse.</p>
         </div>
       </div>
       <div class="rail-skills">
@@ -666,25 +674,25 @@
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>Students use AI to finish assignments without learning. ilm&#39;s bet was a tutor that refuses to answer — which only works if the refusal holds.</p>
+      <p>Students use AI to finish assignments and learn nothing from them. ilm&#39;s bet was a tutor that refuses to answer — but that bet only pays if the refusal survives a real student pushing for the answer.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Prove the Socratic line survives a student pushing for the answer.</li>
-        <li>Show it working by voice, not just text.</li>
+        <li>Prove the Socratic line holds under pressure, not just in a demo.</li>
+        <li>Show it working by voice, since that is how tutoring actually sounds.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>A working proof of concept — Django REST on Gemini, React front end, full voice loop by speech or text.</p>
+      <p>A working proof of concept that held the line — guiding questions, by speech or text — and gave ilm something to put in front of a room rather than describe.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Wrote the constraint into the prompt: an answer only after two or three hints, and only for general knowledge.</li>
-        <li>Used the browser&#39;s own speech APIs both ways, so voice costs nothing and needs no realtime audio service.</li>
-        <li>Kept history in a ref — the recognition callback closes over the first render, wiping memory on spoken turns.</li>
+        <li>Put the constraint in the prompt rather than hoping for it: an answer only after two or three hints, and only for general knowledge. &#39;Be Socratic&#39; does not survive a student who keeps asking.</li>
+        <li>Chose the browser&#39;s own speech engines, so voice costs nothing per minute — the difference between a pilot a school can afford and one it cannot.</li>
+        <li>Kept it stateless on purpose. A proof of concept&#39;s job is to answer one question, not to be architecture.</li>
       </ul>
     </section>
     </div>
@@ -694,12 +702,12 @@
         <div class="metric">
           <span class="metric-value">2-3</span>
           <span class="metric-label">Hints before an answer is allowed</span>
-          <p class="metric-note">One paragraph of prompt is where the teaching lives.</p>
+          <p class="metric-note">One paragraph of prompt is where the teaching actually lives — everything the product claims rests on that line holding.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">$0 voice</span>
-          <span class="metric-label">Web Speech API</span>
-          <p class="metric-note">No audio service, no per-minute billing, nothing to deploy.</p>
+          <span class="metric-name">$0 per voice minute</span>
+          <span class="metric-label">Speech runs in the browser</span>
+          <p class="metric-note">No audio vendor and no per-seat cost — the pricing question a school asks first.</p>
         </div>
       </div>
       <div class="rail-skills">
@@ -737,7 +745,7 @@
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
           <span class="metric-value">400K</span>
-          <span class="metric-label">Talent gap addressed</span>
+          <span class="metric-label">Talent gap the market faces</span>
           
         </div>
       </div>

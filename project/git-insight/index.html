@@ -71,25 +71,25 @@
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>A GitHub profile is a wall of repo names. Anyone judging a developer from it is hoping a shape emerges.</p>
+      <p>A GitHub profile is a wall of repository names. Recruiters judge developers from it every day with no real way to read it, so good candidates get missed and bad ones get through.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Turn a username into archetype, stack, strengths and role fit.</li>
-        <li>Accept a username or a full profile URL.</li>
+        <li>Turn a username into a structured read: archetype, stack, strengths, role fit.</li>
+        <li>Accept whatever gets pasted — a username or a full profile URL.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>A working tool returning a seven-card assessment, built across three bursts and deployed on Vercel.</p>
+      <p>A profile becomes a seven-card assessment written for the person doing the hiring, not the person being hired.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Moved both API keys behind serverless functions — the original design would have shipped my Gemini key to every visitor.</li>
-        <li>Cut to the top 30 repos, seven fields each, and aggregated languages server-side to keep the token bill sane.</li>
-        <li>Constrained the model with a JSON contract, then hedged anyway against it not complying.</li>
+        <li>Wrote for the reader rather than the developer: a recruiter needs a verdict they can act on, so the model fills a fixed structure instead of producing prose someone has to interpret.</li>
+        <li>Caught before launch that the original design would have shipped my API key to every visitor — Vite inlines prefixed variables straight into the bundle. Both keys moved server-side.</li>
+        <li>Cut to the top 30 repositories: sending a whole profile costs more and says less.</li>
       </ul>
     </section>
     </div>
@@ -97,14 +97,19 @@
       <div class="card">
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
-          <span class="metric-value">30</span>
-          <span class="metric-label">Repos ranked and projected</span>
-          <p class="metric-note">Sending a whole profile is neither affordable nor better.</p>
+          <span class="metric-value">7 cards</span>
+          <span class="metric-label">A wall of repo names, made readable</span>
+          <p class="metric-note">Archetype, stack, strengths, weaknesses, coding insights, projects, role fit.</p>
         </div>
         <div class="metric">
           <span class="metric-name">Keys off the client</span>
-          <span class="metric-label">The refactor that mattered</span>
-          <p class="metric-note">Vite inlines prefixed env vars into the bundle.</p>
+          <span class="metric-label">Caught before it shipped</span>
+          <p class="metric-note">Vite inlines prefixed env vars into the bundle — the first design would have leaked the key to every visitor.</p>
+        </div>
+        <div class="metric">
+          <span class="metric-name">Top 30, projected</span>
+          <span class="metric-label">Deliberate prompt budget</span>
+          <p class="metric-note">Ranked and cut to seven fields each, because the whole profile costs more and reads worse.</p>
         </div>
       </div>
       <div class="rail-skills">

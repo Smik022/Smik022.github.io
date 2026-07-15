@@ -70,25 +70,25 @@
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>Door-to-door outreach loses its memory, and a volunteer walking a street cannot stop to fill in a spreadsheet.</p>
+      <p>Door-to-door outreach forgets. Who was visited, who actually answered, who is overdue — it lives in volunteers&#39; heads, and someone walking a street cannot stop to update a spreadsheet.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Make the loop hands-free: which house, what route, what happened.</li>
-        <li>Pick by who most needs a visit, not by who is closest.</li>
+        <li>Make the record keep itself, hands-free, while a volunteer walks.</li>
+        <li>Send people to the door that most needs them, not the one that happens to be nearest.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>A working prototype with the full voice loop running. Demo mode runs it with no backend at all.</p>
+      <p>A volunteer is told where to go, shown the route, and records what happened by speaking. The team&#39;s memory survives the walk instead of ending with it.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Cut an always-on server: ephemeral tokens let the browser talk to Gemini while the key stays server-side.</li>
-        <li>Banned the agent from inventing navigation — a confidently invented street sends someone to the wrong door.</li>
-        <li>Kept the last house in server context so the agent never echoes an ID back, removing a class of hallucination.</li>
+        <li>Found the distinction the whole model turns on: a knock is not contact. Only an answered door resets the clock, so the map reflects conversations rather than attempts.</li>
+        <li>Ruled the agent may never invent navigation. A confidently wrong street name sends a volunteer to a stranger&#39;s door — worse than saying nothing.</li>
+        <li>Cut the server entirely once it was clear the browser could hold the conversation, leaving nothing to run or pay for between walks.</li>
       </ul>
     </section>
     </div>
@@ -96,19 +96,19 @@
       <div class="card">
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
-          <span class="metric-value">6</span>
-          <span class="metric-label">Voice tools driving the map</span>
-          <p class="metric-note">The preacher never touches the screen.</p>
+          <span class="metric-value">Hands-free</span>
+          <span class="metric-label">The whole loop, while walking</span>
+          <p class="metric-note">Which house, what route, what happened — spoken, with the phone in a pocket.</p>
         </div>
         <div class="metric">
           <span class="metric-name">14 / 42 days</span>
           <span class="metric-label">Warm and cooling thresholds</span>
-          <p class="metric-note">A no-answer isn&#39;t contact, so it never resets the clock.</p>
+          <p class="metric-note">Priority is driven by when someone last answered, so nobody gets forgotten or knocked twice.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">10 msg/sec</span>
-          <span class="metric-label">Down from 50</span>
-          <p class="metric-note">Mic audio batched into ~100ms chunks.</p>
+          <span class="metric-name">Nothing to maintain</span>
+          <span class="metric-label">No server between walks</span>
+          <p class="metric-note">Runs from the browser, and works with no backend at all in demo mode.</p>
         </div>
       </div>
       <div class="rail-skills">

@@ -324,12 +324,16 @@ function renderHome() {
   const items = projects
     .map((p) => {
       const logoSrc = logoFor(p);
-      return `      <li class="work-item${logoSrc ? " has-logo" : ""}" data-slug="${esc(p.slug)}">
+      return `      <li class="work-item" data-slug="${esc(p.slug)}">
         <a class="work-link" href="project/${esc(p.slug)}/" data-project="${esc(p.slug)}">
 ${
   logoSrc
     ? `          <img class="work-logo" src="${esc(logoSrc)}" alt="" aria-hidden="true" loading="lazy">\n`
-    : ""
+    : // No logo yet — a monogram tile keeps the column uniform instead of
+      // leaving a hole. Same size and shape as a real one.
+      `          <span class="work-logo work-logo-fallback" aria-hidden="true">${esc(
+        p.title.trim().charAt(0)
+      )}</span>\n`
 }          <span class="work-year">${esc(p.year)}</span>
           <span class="work-title">${esc(p.title)}${
         p.draft ? '<span class="chip">Draft</span>' : ""
@@ -421,7 +425,7 @@ ${ethos}
       <h2 class="eyebrow">Selected Work</h2>
       <span class="count">${projects.length} projects</span>
     </div>
-    <ul class="work-list${projects.some((p) => logoFor(p)) ? " with-logos" : ""}">
+    <ul class="work-list">
 ${items}
     </ul>
   </div>

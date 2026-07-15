@@ -48,3 +48,21 @@ lockup, copy `_full-repo-map.png` over `repo-map.png` and rebuild.
 
 Wide wordmarks (femia at 1.89:1, Artificers at 4.34:1) are **not** cropped —
 they read fine at 24px tall because width isn't the constraint for them.
+
+## Tiles are normalised at build prep
+
+Source logos arrive in wildly different shapes — the Artificers lockup is 4.34:1,
+femia 1.89:1, ilm 0.94:1. Dropped into a shared slot they render at different
+sizes and the column looks like debris. So each is pre-processed into an
+identical **128x128 square tile**: art trimmed to its ink bounds, scaled to 80%
+of the tile, centred on its own background colour (or the plate, if the source
+was transparent). The page then renders every tile at exactly 32x32.
+
+Where a lockup had a real icon, the icon is used and the wordmark dropped —
+the Artificers triangle, RepoMap's leaf, Git Insight's eye, ilm's book. femia
+has no separate icon, so its whole wordmark sits in the tile and still reads.
+
+Originals are kept as `_full-*.png` and `_icon-*.png`, ignored by the build.
+
+If you replace a file here, it renders at whatever shape it is — re-run the
+normalisation or send a square.

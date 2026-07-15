@@ -33,3 +33,18 @@ the filename lookup.
 
 A project with no file here still renders correctly — its row keeps the same
 alignment as the others and just leaves the logo space empty.
+
+## Cropped icons
+
+RepoMap, Git Insight and ilm shipped as stacked lockups — icon above a wordmark.
+Height-constrained to 24px, the wordmark collapsed into an unreadable smear
+(ilm rendered 22px wide). Each is cropped to its icon: the row band where the
+wordmark starts was found from the image's own ink profile, then the icon was
+trimmed to its content and padded to a square on its original background.
+
+The full lockups are kept alongside as `_full-<slug>.png`. The build ignores
+them — the leading underscore means they match no slug. To go back to a full
+lockup, copy `_full-repo-map.png` over `repo-map.png` and rebuild.
+
+Wide wordmarks (femia at 1.89:1, Artificers at 4.34:1) are **not** cropped —
+they read fine at 24px tall because width isn't the constraint for them.

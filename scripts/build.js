@@ -327,8 +327,7 @@ ${p.links
 /* ---------- home ---------- */
 
 function renderHome() {
-  const items = projects
-    .map((p) => {
+  const renderItem = (p) => {
       const logoSrc = logoFor(p);
       const client = clientLabel(p);
       return `      <li class="work-item" data-slug="${esc(p.slug)}">
@@ -348,8 +347,21 @@ ${
           <p class="work-summary">${esc(p.summary)}</p>
         </a>
       </li>`;
-    })
-    .join("\n");
+  };
+
+  // Client work first, then personal — relative order within each group is
+  // whatever projects.json says. The headings only show in the rail: on the
+  // home list every row already names its client, so a heading there would
+  // just break an otherwise unbroken column.
+  const group = (label, list) =>
+    list.length
+      ? join([`      <li class="work-group" aria-hidden="true">${esc(label)}</li>`, ...list.map(renderItem)])
+      : "";
+
+  const items = join([
+    group("Client Work", projects.filter((p) => !clientLabel(p).personal)),
+    group("Personal", projects.filter((p) => clientLabel(p).personal)),
+  ]);
 
   const ethos = profile.ethos.items
     .map(

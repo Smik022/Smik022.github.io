@@ -581,6 +581,77 @@
     ]
   },
   {
+    "slug": "dev-mentor",
+    "title": "DevMentor",
+    "category": "Career Tool",
+    "role": "Builder",
+    "company": "Personal project",
+    "year": "2026",
+    "draft": false,
+    "logo": "",
+    "tags": [
+      {
+        "label": "Voice AI"
+      },
+      {
+        "label": "Adoption",
+        "variant": "solid"
+      },
+      {
+        "label": "EdTech",
+        "variant": "outline"
+      }
+    ],
+    "summary": "An AI mock interviewer for fresh CS graduates — a real technical interview by voice, then a scored report on how it went.",
+    "links": [
+      {
+        "label": "Live",
+        "url": "https://dev-mentor-2-0.vercel.app"
+      },
+      {
+        "label": "Source",
+        "url": "https://github.com/Smik022/DevMentor-2.0"
+      }
+    ],
+    "situation": "Fresh graduates fail interviews they could pass, because the only place to practise is a real one. There is nowhere low-stakes to be bad first, and the feedback from a rejection is silence.",
+    "task": [
+      "Give a graduate a realistic technical interview they can fail privately.",
+      "Send them away knowing what to fix, not just how it felt."
+    ],
+    "result": "Reached 500+ active users within 14 days. A voice interview with a live transcript, then a scored report — strengths, gaps, and a breakdown by skill.",
+    "contributions": [
+      "Made users bring their own API key. That one decision is why 500 people could arrive in a fortnight without an inference bill — the product scales at zero marginal cost, and I never hold anyone's credentials.",
+      "Insisted the output be a verdict, not a transcript. A chat log tells a graduate nothing; a 0-100 score with strengths, gaps and per-skill feedback tells them what to practise on Monday.",
+      "Chose voice over text, because what graduates actually fail is speaking under pressure — not writing answers with time to think.",
+      "Watched onboarding and iterated on the feature set against real drop-off rather than opinion."
+    ],
+    "keyResults": {
+      "metric": "500+",
+      "metricLabel": "Active users in 14 days",
+      "metricNote": "Reached with no marketing spend and no inference bill — the cost model is why the growth was affordable.",
+      "items": [
+        {
+          "name": "$0 marginal cost",
+          "label": "Bring your own key",
+          "note": "Every user pays for their own inference, so a thousand more costs the same as one."
+        },
+        {
+          "name": "A score, not a chat log",
+          "label": "0-100, with a breakdown",
+          "note": "Technical knowledge, communication and problem solving — each rated, each with what to fix."
+        }
+      ]
+    },
+    "skills": [
+      "Product Strategy",
+      "Voice UX",
+      "Gemini Live API",
+      "React",
+      "TypeScript",
+      "Vite"
+    ]
+  },
+  {
     "slug": "narawe",
     "title": "Narawe",
     "category": "Document Intelligence",

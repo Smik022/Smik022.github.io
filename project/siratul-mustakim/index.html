@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Siratul Mustakim | Sardar Asif Ahmed</title>
-<meta name="description" content="A voice-first field app where an AI guide tells a preacher which house to visit next in Mirrabooka, draws the route, and records what happened at each door — hands-free.">
+<meta name="description" content="A voice-first field app that tells a preacher which house to visit next, draws the route, and records the outcome.">
 <link rel="canonical" href="https://asifahmed.me/project/siratul-mustakim/">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Siratul Mustakim | Sardar Asif Ahmed">
-<meta property="og:description" content="A voice-first field app where an AI guide tells a preacher which house to visit next in Mirrabooka, draws the route, and records what happened at each door — hands-free.">
+<meta property="og:description" content="A voice-first field app that tells a preacher which house to visit next, draws the route, and records the outcome.">
 <meta property="og:url" content="https://asifahmed.me/project/siratul-mustakim/">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -60,33 +60,35 @@
     <li class="pill">2026</li>
   </ul>
   <h1 class="article-title" id="modal-title">Siratul Mustakim</h1>
-  <p class="byline"><span class="byline-role">Builder</span><span class="byline-dot">•</span><span class="byline-org">Personal project</span></p>
-  <p class="lede">A voice-first field app where an AI guide tells a preacher which house to visit next in Mirrabooka, draws the route, and records what happened at each door — hands-free.</p>
+  <div class="byline-row">
+    <div class="byline-id">
+      <p class="byline"><span class="byline-role">Builder</span><span class="byline-dot">•</span><span class="byline-org">Personal project</span></p>
+    </div>
+  </div>
+  <p class="lede">A voice-first field app that tells a preacher which house to visit next, draws the route, and records the outcome.</p>
   <div class="article-grid">
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>Door-to-door outreach loses its memory. Teams forget who was visited, when, and whether anyone actually answered — and a volunteer walking a street cannot stop to fill in a spreadsheet. The distinction that matters is not whether a door was knocked but whether a real conversation happened.</p>
+      <p>Door-to-door outreach loses its memory, and a volunteer walking a street cannot stop to fill in a spreadsheet.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Make the whole loop hands-free: which house next, how to get there, and what happened — all by voice, while walking.</li>
-        <li>Pick the next house by who most needs a visit, based on when someone last actually answered.</li>
+        <li>Make the loop hands-free: which house, what route, what happened.</li>
+        <li>Pick by who most needs a visit, not by who is closest.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>A working prototype with the full voice loop running: the agent answers status questions, picks the next house, draws the route on the map, and records outcomes by speech. Demo mode runs it with no backend at all. Persisting visits to the database is the next milestone.</p>
+      <p>A working prototype with the full voice loop running. Demo mode runs it with no backend at all.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Cut an always-on server process entirely. Moving to short-lived ephemeral tokens let the browser talk to Gemini directly and run the tools client-side, while the API key still never leaves the server.</li>
-        <li>Banned the agent from inventing navigation. It is forbidden from saying street names or &#39;continue for 200 metres&#39; — the drawn route line handles turn-by-turn, because a voice confidently inventing a street sends someone to the wrong door.</li>
-        <li>Kept the last-sent house in server-side context so the agent never has to echo an ID back to record a visit — removing a whole class of hallucination rather than prompting against it.</li>
-        <li>Modelled status on contact recency and never stored the colour. Green, yellow and red are derived from when someone last answered, so the map cannot drift out of date.</li>
-        <li>Batched mic audio into ~100ms chunks — ten messages a second instead of fifty — and fell back to the masjid as route origin when GPS is off, so the line always draws.</li>
+        <li>Cut an always-on server: ephemeral tokens let the browser talk to Gemini while the key stays server-side.</li>
+        <li>Banned the agent from inventing navigation — a confidently invented street sends someone to the wrong door.</li>
+        <li>Kept the last house in server context so the agent never echoes an ID back, removing a class of hallucination.</li>
       </ul>
     </section>
     </div>
@@ -94,24 +96,24 @@
       <div class="card">
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
-          <span class="metric-name">Six voice tools</span>
-          <span class="metric-label">Status, next house, directions, find, record, show</span>
-          <p class="metric-note">The agent drives the map and the record-keeping through tool calls; the preacher never touches the screen.</p>
+          <span class="metric-value">6</span>
+          <span class="metric-label">Voice tools driving the map</span>
+          <p class="metric-note">The preacher never touches the screen.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">Contact-recency model</span>
-          <span class="metric-label">14 days warm, 42 days cooling</span>
-          <p class="metric-note">Derived from the last time someone actually answered — a no-answer does not reset the clock, because it is not contact.</p>
+          <span class="metric-name">14 / 42 days</span>
+          <span class="metric-label">Warm and cooling thresholds</span>
+          <p class="metric-note">A no-answer isn&#39;t contact, so it never resets the clock.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">CSV import with geocoding</span>
-          <span class="metric-label">Address list to map pins</span>
-          <p class="metric-note">Quote-aware parser, fuzzy column matching and throttled address lookup, reporting back exactly which rows failed rather than silently dropping them.</p>
+          <span class="metric-name">10 msg/sec</span>
+          <span class="metric-label">Down from 50</span>
+          <p class="metric-note">Mic audio batched into ~100ms chunks.</p>
         </div>
       </div>
-      <div class="card">
-        <h2 class="card-title">Skills &amp; Technologies</h2>
-        <ul class="tags"><li>Voice UX</li><li>Gemini Live API</li><li>React</li><li>TypeScript</li><li>Leaflet</li><li>OSRM</li><li>Supabase</li><li>Web Audio</li></ul>
+      <div class="rail-skills">
+        <h2 class="eyebrow">Skills &amp; Technologies</h2>
+        <ul class="tags"><li>Voice UX</li><li>Gemini Live API</li><li>React</li><li>Leaflet</li><li>OSRM</li><li>Web Audio</li></ul>
       </div>
     </aside>
   </div>

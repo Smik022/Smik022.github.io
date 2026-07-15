@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Git Insight | Sardar Asif Ahmed</title>
-<meta name="description" content="Feed it a GitHub username and it reads the public profile and repositories, then returns a card-based developer assessment written for recruiters.">
+<meta name="description" content="Feed it a GitHub username and it returns a card-based developer assessment written for recruiters.">
 <link rel="canonical" href="https://asifahmed.me/project/git-insight/">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Git Insight | Sardar Asif Ahmed">
-<meta property="og:description" content="Feed it a GitHub username and it reads the public profile and repositories, then returns a card-based developer assessment written for recruiters.">
+<meta property="og:description" content="Feed it a GitHub username and it returns a card-based developer assessment written for recruiters.">
 <meta property="og:url" content="https://asifahmed.me/project/git-insight/">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -60,32 +60,35 @@
     <li class="pill">2026</li>
   </ul>
   <h1 class="article-title" id="modal-title">Git Insight</h1>
-  <p class="byline"><span class="byline-role">Builder</span><span class="byline-dot">•</span><span class="byline-org">Personal project</span></p>
-  <p class="lede">Feed it a GitHub username and it reads the public profile and repositories, then returns a card-based developer assessment written for recruiters.</p>
+  <div class="byline-row">
+    <div class="byline-id">
+      <p class="byline"><span class="byline-role">Builder</span><span class="byline-dot">•</span><span class="byline-org">Personal project</span></p>
+    </div>
+  </div>
+  <p class="lede">Feed it a GitHub username and it returns a card-based developer assessment written for recruiters.</p>
   <div class="article-grid">
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>A GitHub profile is a wall of repository names. Anyone trying to judge a developer from it — a recruiter, a hiring manager — is reading raw material and hoping to infer a shape from it.</p>
+      <p>A GitHub profile is a wall of repo names. Anyone judging a developer from it is hoping a shape emerges.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Turn a username into a structured read: archetype, stack, strengths, weaknesses, role fit.</li>
-        <li>Accept whatever someone pastes — a username or a full profile URL.</li>
+        <li>Turn a username into archetype, stack, strengths and role fit.</li>
+        <li>Accept a username or a full profile URL.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>A working tool that takes a username or profile URL and returns a seven-card assessment. Built in three bursts across early 2026, deployed on Vercel.</p>
+      <p>A working tool returning a seven-card assessment, built across three bursts and deployed on Vercel.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Moved both API keys behind serverless functions. The original design read them from Vite-prefixed variables, which are inlined into the client bundle — it would have shipped the Gemini key to every visitor. This is the change I&#39;d call the most important one in the project.</li>
-        <li>Aggregated the language histogram server-side and sliced to the top 30 repositories, projected down to seven fields each, to keep the payload and the token bill sane.</li>
-        <li>Constrained the model with an explicit JSON contract rather than parsing prose, so the response maps straight onto the cards.</li>
-        <li>Hedged against the model not complying anyway — stripping markdown fences the prompt already forbids, and tolerating a string where an array was specified.</li>
+        <li>Moved both API keys behind serverless functions — the original design would have shipped my Gemini key to every visitor.</li>
+        <li>Cut to the top 30 repos, seven fields each, and aggregated languages server-side to keep the token bill sane.</li>
+        <li>Constrained the model with a JSON contract, then hedged anyway against it not complying.</li>
       </ul>
     </section>
     </div>
@@ -93,19 +96,19 @@
       <div class="card">
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
-          <span class="metric-name">Keys moved off the client</span>
-          <span class="metric-label">A security refactor mid-project</span>
-          <p class="metric-note">Vite inlines prefixed env vars into the bundle. The migration to serverless proxies is the difference between a demo and something you can actually put a link to.</p>
+          <span class="metric-value">30</span>
+          <span class="metric-label">Repos ranked and projected</span>
+          <p class="metric-note">Sending a whole profile is neither affordable nor better.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">Schema-constrained prompting</span>
-          <span class="metric-label">Eight-key JSON contract</span>
-          <p class="metric-note">The model fills a structure rather than writing prose someone has to parse.</p>
+          <span class="metric-name">Keys off the client</span>
+          <span class="metric-label">The refactor that mattered</span>
+          <p class="metric-note">Vite inlines prefixed env vars into the bundle.</p>
         </div>
       </div>
-      <div class="card">
-        <h2 class="card-title">Skills &amp; Technologies</h2>
-        <ul class="tags"><li>Developer Tooling</li><li>React</li><li>Vite</li><li>Gemini</li><li>GitHub REST API</li><li>Vercel Serverless</li></ul>
+      <div class="rail-skills">
+        <h2 class="eyebrow">Skills &amp; Technologies</h2>
+        <ul class="tags"><li>Developer Tooling</li><li>React</li><li>Vite</li><li>Gemini</li><li>GitHub REST API</li><li>Vercel</li></ul>
       </div>
     </aside>
   </div>

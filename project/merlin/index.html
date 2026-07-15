@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Merlin | Sardar Asif Ahmed</title>
-<meta name="description" content="A realtime voice agent that answers inbound prospects in the browser, qualifies them, and either books a discovery briefing or captures a structured requirements brief.">
+<meta name="description" content="A realtime voice agent that qualifies inbound prospects in the browser, then books the briefing or captures the brief.">
 <link rel="canonical" href="https://asifahmed.me/project/merlin/">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Merlin | Sardar Asif Ahmed">
-<meta property="og:description" content="A realtime voice agent that answers inbound prospects in the browser, qualifies them, and either books a discovery briefing or captures a structured requirements brief.">
+<meta property="og:description" content="A realtime voice agent that qualifies inbound prospects in the browser, then books the briefing or captures the brief.">
 <meta property="og:url" content="https://asifahmed.me/project/merlin/">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -60,33 +60,39 @@
     <li class="pill">2026</li>
   </ul>
   <h1 class="article-title" id="modal-title">Merlin</h1>
-  <p class="byline"><span class="byline-role">Product Manager</span><span class="byline-dot">•</span><span class="byline-org">The Artificer&#39;s AI</span></p>
-  <p class="lede">A realtime voice agent that answers inbound prospects in the browser, qualifies them, and either books a discovery briefing or captures a structured requirements brief.</p>
+  <div class="byline-row">
+    <div class="byline-id">
+      <p class="byline"><span class="byline-role">Product Manager</span><span class="byline-dot">•</span><span class="byline-org">The Artificer&#39;s AI</span></p>
+    </div>
+  <div class="article-links">
+    <a class="button" href="https://www.artificersai.com/intake" target="_blank" rel="noopener">Live intake ↗</a>
+    <a class="button" href="https://merlin.artificersai.com" target="_blank" rel="noopener">Merlin ↗</a>
+  </div>
+  </div>
+  <p class="lede">A realtime voice agent that qualifies inbound prospects in the browser, then books the briefing or captures the brief.</p>
   <div class="article-grid">
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>Discovery meetings were being spent on calls that could have been qualified up front. The intake brief puts the goal plainly: let a caller describe what they want built without sitting through a meeting.</p>
+      <p>Discovery meetings were being spent qualifying callers who could have been qualified up front.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Ship a voice agent that handles an inbound prospect end to end — greet, qualify, explain the offering, book a 45-minute briefing.</li>
-        <li>Add a second mode that interviews a caller and turns the conversation into a structured requirements brief the team can act on.</li>
+        <li>Handle an inbound prospect end to end — greet, qualify, book.</li>
+        <li>Add a mode that returns a structured brief instead of a meeting.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>Live at merlin.artificersai.com and embedded on the studio&#39;s intake page, with a push-button deploy that health-checks the running commit and can roll back. Both modes run off one binary.</p>
+      <p>Live and embedded on the studio&#39;s intake page. Two variants, one binary, rollback-capable deploy.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Decided the model gets treated as untrusted. It can call tools, but it does not get the final say on whether the work actually happened.</li>
-        <li>A live call once ended by announcing the brief had been submitted when no brief existed — no file, no email, nothing. The recap gate lived inside the submit tool, so skipping the tool skipped the gate. Moved the gate up into the dispatcher: the agent cannot end a call claiming success unless the submit actually succeeded.</li>
-        <li>Required booking tools to prove they know what time it is — any of the five booking calls is rejected unless the clock was checked in the last 60 seconds, because a confidently wrong booking time is worse than a retry.</li>
-        <li>Decoupled the caller identity form from the model after live calls showed it looping on the greeting and calling the tool late or never. The form now paints on a timer regardless, with a watchdog that reprompts and eventually cuts the call.</li>
-        <li>Suppressed caller transcripts until the form is submitted, because the model emits phantom transcriptions from mic noise the moment the socket opens.</li>
+        <li>Treated the model as untrusted — it can call tools, but it doesn&#39;t decide whether the work happened.</li>
+        <li>A live call ended claiming a brief was sent when none existed. Moved the gate out of the skipped tool into the dispatcher.</li>
+        <li>Decoupled the caller form from the model, which looped on greetings and called the tool late or never.</li>
       </ul>
     </section>
     </div>
@@ -95,34 +101,23 @@
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
           <span class="metric-value">20</span>
-          <span class="metric-label">Tools the agent can call mid-conversation</span>
-          <p class="metric-note">Filtered per variant — the sales agent sees 18, the intake interviewer sees 8, from one registry on one deployed binary.</p>
+          <span class="metric-label">Tools callable mid-conversation</span>
+          <p class="metric-note">18 for sales, 8 for intake — one registry, one binary.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">Two variants, one binary</span>
-          <span class="metric-label">Sales funnel and intake interview</span>
-          <p class="metric-note">Same process and audio pipeline; the URL decides which prompt and which slice of the tool registry the caller gets.</p>
-        </div>
-        <div class="metric">
-          <span class="metric-name">Full booking lifecycle</span>
-          <span class="metric-label">Find, book, reschedule, cancel</span>
-          <p class="metric-note">Including recovery when a slot is taken between offer and confirmation — it re-fetches alternatives rather than failing the call.</p>
+          <span class="metric-name">~400 tests</span>
+          <span class="metric-label">Across ~10.5k lines</span>
+          <p class="metric-note">Three guards written from real call failures.</p>
         </div>
         <div class="metric">
           <span class="metric-name">Under 900ms</span>
-          <span class="metric-label">Latency budget, speech-stop to audio</span>
-          <p class="metric-note">The design target the audio pipeline was built around — raw PCM frames forwarded the moment they arrive, never buffering a full response.</p>
+          <span class="metric-label">Speech-to-audio budget</span>
+          <p class="metric-note">Frames forward on arrival; nothing is buffered.</p>
         </div>
       </div>
-      <div class="card">
-        <h2 class="card-title">Skills &amp; Technologies</h2>
-        <ul class="tags"><li>Product Strategy</li><li>Voice UX</li><li>Agent Design</li><li>Gemini Live API</li><li>OpenAI Realtime</li><li>TypeScript</li><li>WebSocket</li><li>Cal.com API</li><li>Docker</li><li>Traefik</li></ul>
-      </div>
-      <div class="card">
-        <h2 class="card-title">Links</h2>
-        <div class="article-links">
-          <a class="button" href="https://merlin.artificersai.com" target="_blank" rel="noopener">Live ↗</a>
-        </div>
+      <div class="rail-skills">
+        <h2 class="eyebrow">Skills &amp; Technologies</h2>
+        <ul class="tags"><li>Product Strategy</li><li>Voice UX</li><li>Agent Design</li><li>Gemini Live API</li><li>TypeScript</li><li>Docker</li></ul>
       </div>
     </aside>
   </div>

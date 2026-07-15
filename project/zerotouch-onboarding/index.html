@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ZeroTouch Onboarding | Sardar Asif Ahmed</title>
-<meta name="description" content="Client onboarding for an Australian accounting firm, built against a hard AML/CTF deadline — quote, intake, due diligence, and write-back into the firm&#39;s practice-management system.">
+<meta name="description" content="Client onboarding for an Australian accounting firm, built against a hard AML/CTF compliance deadline.">
 <link rel="canonical" href="https://asifahmed.me/project/zerotouch-onboarding/">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="ZeroTouch Onboarding | Sardar Asif Ahmed">
-<meta property="og:description" content="Client onboarding for an Australian accounting firm, built against a hard AML/CTF deadline — quote, intake, due diligence, and write-back into the firm&#39;s practice-management system.">
+<meta property="og:description" content="Client onboarding for an Australian accounting firm, built against a hard AML/CTF compliance deadline.">
 <meta property="og:url" content="https://asifahmed.me/project/zerotouch-onboarding/">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -60,34 +60,38 @@
     <li class="pill">2026</li>
   </ul>
   <h1 class="article-title" id="modal-title">ZeroTouch Onboarding</h1>
-  <p class="byline"><span class="byline-role">Product Manager</span><span class="byline-dot">•</span><span class="byline-org">Femia Accountants</span></p>
-  <p class="lede">Client onboarding for an Australian accounting firm, built against a hard AML/CTF deadline — quote, intake, due diligence, and write-back into the firm&#39;s practice-management system.</p>
+  <div class="byline-row">
+    <div class="byline-id">
+      <p class="byline"><span class="byline-role">Product Manager</span><span class="byline-dot">•</span><span class="byline-org">Femia Accountants</span></p>
+    </div>
+  <div class="article-links">
+    <a class="button" href="https://femia-accountants.com.au/" target="_blank" rel="noopener">Femia Accountants ↗</a>
+  </div>
+  </div>
+  <p class="lede">Client onboarding for an Australian accounting firm, built against a hard AML/CTF compliance deadline.</p>
   <div class="article-grid">
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>From 1 July 2026, Australian AML/CTF rules required Femia Accountants to identify, verify and prove every client. The principal was running those checks by hand, across three separate Excel quote calculators and paper due-diligence forms. The deadline was not negotiable, and the evidence trail had to survive an audit.</p>
+      <p>New AML/CTF rules meant Femia had to identify, verify and prove every client — all of it by hand.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Turn the firm&#39;s manual quote calculators and AML due-diligence forms into one system, before the compliance date.</li>
-        <li>Keep the firm&#39;s pricing private from clients — a hard requirement that shaped the whole flow.</li>
-        <li>Write every ID and AML check back into Karbon, the firm&#39;s practice-management system, so the evidence lives where auditors look for it.</li>
+        <li>Replace three Excel calculators and paper forms with one system.</li>
+        <li>Keep pricing private from clients; write every check back to Karbon.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>A working system covering quote → client intake → AML record → write-back, proven end to end against the firm&#39;s live Karbon, Microsoft Graph and Stripe Identity tenants. At last commit it was feature-complete on staging; production infrastructure and per-user SSO are the remaining gates before real client data.</p>
+      <p>Quote → intake → AML record → write-back, proven against live Karbon, Graph and Stripe tenants.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Split the flow into two forms — staff-facing with pricing, client-facing without — once the firm made clear that clients must never see the price grid. That single constraint drove the entire information architecture.</li>
-        <li>Ruled that dry-run and live must share one code path. Karbon writes are permanent and have no delete, so what we tested had to be exactly what fired; a flag decides whether the call goes out, nothing else changes.</li>
-        <li>Caught that Karbon&#39;s Director ID field is number-typed, which silently drops the leading zero from Australian Director IDs beginning &#39;036&#39;. Rather than store a corrupted compliance identifier, we skip the field and write the ID verbatim into the AML timeline note.</li>
-        <li>Held every integration awaiting a client decision as a dormant adapter — fully built, returning &#39;not configured&#39;, sending nothing externally until switched on. No client name leaves the server before the firm says so.</li>
-        <li>Reconciled the principal&#39;s master pricing workbook live from SharePoint, surfacing stale fees for one-click review instead of asking him to re-key them.</li>
+        <li>Split the flow in two: staff see pricing, clients never do. That constraint drove the architecture.</li>
+        <li>Ruled dry-run and live share one code path — Karbon writes are permanent, with no delete.</li>
+        <li>Caught that Karbon&#39;s number-typed Director ID field silently drops the leading zero from IDs starting 036.</li>
       </ul>
     </section>
     </div>
@@ -96,28 +100,23 @@
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
           <span class="metric-value">576</span>
-          <span class="metric-label">Row business price matrix</span>
-          <p class="metric-note">Generated directly from the firm&#39;s own Excel quote builder rather than transcribed by hand, so the source of truth stays with the client.</p>
-        </div>
-        <div class="metric">
-          <span class="metric-name">Three quote engines</span>
-          <span class="metric-label">Individual ITR, SMSF, Business</span>
-          <p class="metric-note">Classify-then-price: tick the activities, land on exactly one return type by precedence, then stack schedules for CGT, dividends, foreign income and rentals.</p>
-        </div>
-        <div class="metric">
-          <span class="metric-name">AML/CTF due diligence</span>
-          <span class="metric-label">Individual, Company, Trust</span>
-          <p class="metric-note">The firm&#39;s paper forms digitised into a register with risk, PEP status and CDD level, plus one-click document export and an automatic timeline note against the client record.</p>
+          <span class="metric-label">Row price matrix</span>
+          <p class="metric-note">Generated from the firm&#39;s own Excel builder.</p>
         </div>
         <div class="metric">
           <span class="metric-name">269 assertions</span>
-          <span class="metric-label">14 harnesses, no test framework</span>
-          <p class="metric-note">The pricing engines are the part a client would notice being wrong, so they get a regression net that transpiles the TypeScript in-process — no test dependency to install or maintain.</p>
+          <span class="metric-label">14 harnesses, no framework</span>
+          <p class="metric-note">Pricing is what a client notices being wrong.</p>
+        </div>
+        <div class="metric">
+          <span class="metric-name">3 quote engines</span>
+          <span class="metric-label">Individual ITR, SMSF, Business</span>
+          <p class="metric-note">Classify by precedence, then stack schedules.</p>
         </div>
       </div>
-      <div class="card">
-        <h2 class="card-title">Skills &amp; Technologies</h2>
-        <ul class="tags"><li>Product Strategy</li><li>AML/CTF Compliance</li><li>Requirements Analysis</li><li>Next.js</li><li>TypeScript</li><li>Prisma</li><li>Supabase</li><li>Karbon API</li><li>Microsoft Graph</li><li>Stripe Identity</li></ul>
+      <div class="rail-skills">
+        <h2 class="eyebrow">Skills &amp; Technologies</h2>
+        <ul class="tags"><li>Product Strategy</li><li>AML/CTF Compliance</li><li>Next.js</li><li>Prisma</li><li>Karbon API</li><li>Microsoft Graph</li></ul>
       </div>
     </aside>
   </div>

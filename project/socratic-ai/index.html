@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Socratic AI Tutor | Sardar Asif Ahmed</title>
-<meta name="description" content="A tutor that refuses to just answer. It asks guiding questions until the student gets there themselves — by voice or by text.">
+<meta name="description" content="A tutor that refuses to just answer. It asks guiding questions until the student gets there themselves.">
 <link rel="canonical" href="https://asifahmed.me/project/socratic-ai/">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Socratic AI Tutor | Sardar Asif Ahmed">
-<meta property="og:description" content="A tutor that refuses to just answer. It asks guiding questions until the student gets there themselves — by voice or by text.">
+<meta property="og:description" content="A tutor that refuses to just answer. It asks guiding questions until the student gets there themselves.">
 <meta property="og:url" content="https://asifahmed.me/project/socratic-ai/">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -60,33 +60,38 @@
     <li class="pill">2025</li>
   </ul>
   <h1 class="article-title" id="modal-title">Socratic AI Tutor</h1>
-  <p class="byline"><span class="byline-role">Builder</span><span class="byline-dot">•</span><span class="byline-org">Personal project</span></p>
-  <p class="lede">A tutor that refuses to just answer. It asks guiding questions until the student gets there themselves — by voice or by text.</p>
+  <div class="byline-row">
+    <div class="byline-id">
+      <p class="byline"><span class="byline-role">Builder</span><span class="byline-dot">•</span><span class="byline-org">Personal project</span></p>
+    </div>
+  <div class="article-links">
+    <a class="button" href="https://github.com/Smik022/Socratic-AI-Tutor" target="_blank" rel="noopener">Source ↗</a>
+  </div>
+  </div>
+  <p class="lede">A tutor that refuses to just answer. It asks guiding questions until the student gets there themselves.</p>
   <div class="article-grid">
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>Ask a chatbot a homework question and it hands over the answer. The student gets unstuck and learns nothing — the very thing that makes the tool feel helpful is the thing that removes the learning.</p>
+      <p>Ask a chatbot a homework question and it hands over the answer. The student gets unstuck and learns nothing.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Build a tutor that holds the Socratic line: guiding questions instead of answers, adapting to the student&#39;s level.</li>
-        <li>Let a student talk to it rather than type at it, so it feels like being tutored instead of searching.</li>
+        <li>Hold the Socratic line: guiding questions instead of answers.</li>
+        <li>Let a student talk to it rather than type at it.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>A working prototype: a Django REST backend on Gemini 2.5 Flash, a React front end, and a full voice loop — speak the question, hear the answer, keep the thread. Runs locally; never deployed.</p>
+      <p>A working prototype — Django REST on Gemini, a React front end, and a full voice loop, by speech or text.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Wrote the constraint into the prompt rather than hoping for it. The tutor may only give a direct answer if the question is general knowledge, and only after two or three hints. &#39;Be Socratic&#39; on its own does not survive a student who keeps pushing for the answer.</li>
-        <li>Used the browser&#39;s own speech APIs in both directions — recognition in, synthesis out. Voice costs nothing to run, needs no realtime audio service, and the entire loop stays client-side.</li>
-        <li>Cancel the tutor&#39;s speech the moment the mic opens, so it stops talking when the student wants to.</li>
-        <li>Kept the conversation in a ref alongside React state, because the speech-recognition callback closes over the first render and would otherwise send an empty history on every spoken turn — the answer would be right but the tutor would have forgotten the conversation.</li>
-        <li>Left the backend stateless, with history travelling on each request. That kept it to one endpoint and no schema, at the cost of losing the conversation on refresh — the right trade for a prototype, the first thing to fix for real use.</li>
+        <li>Wrote the constraint into the prompt: an answer only after two or three hints, and only for general knowledge.</li>
+        <li>Used the browser&#39;s own speech APIs both ways, so voice costs nothing and needs no realtime audio service.</li>
+        <li>Kept history in a ref — the recognition callback closes over the first render, wiping memory on spoken turns.</li>
       </ul>
     </section>
     </div>
@@ -94,30 +99,19 @@
       <div class="card">
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
-          <span class="metric-name">Voice both ways, nothing to run</span>
+          <span class="metric-value">2-3</span>
+          <span class="metric-label">Hints before an answer is allowed</span>
+          <p class="metric-note">One paragraph of prompt is where the teaching lives.</p>
+        </div>
+        <div class="metric">
+          <span class="metric-name">$0 voice</span>
           <span class="metric-label">Web Speech API</span>
-          <p class="metric-note">Speech recognition and synthesis ship inside the browser. No realtime audio infrastructure, no per-minute billing, nothing extra to deploy.</p>
-        </div>
-        <div class="metric">
-          <span class="metric-name">The two-to-three hint rule</span>
-          <span class="metric-label">Where the teaching actually lives</span>
-          <p class="metric-note">The prompt draws a hard line about when an answer may be given at all. Everything the product is depends on that one paragraph holding.</p>
-        </div>
-        <div class="metric">
-          <span class="metric-name">One endpoint, no schema</span>
-          <span class="metric-label">Stateless by choice</span>
-          <p class="metric-note">The whole backend is a single chat view. History travels with the request, so there is nothing to migrate and nothing to store.</p>
+          <p class="metric-note">No audio service, no per-minute billing, nothing to deploy.</p>
         </div>
       </div>
-      <div class="card">
-        <h2 class="card-title">Skills &amp; Technologies</h2>
-        <ul class="tags"><li>Prompt Engineering</li><li>Django</li><li>Django REST Framework</li><li>React</li><li>Gemini</li><li>Web Speech API</li></ul>
-      </div>
-      <div class="card">
-        <h2 class="card-title">Links</h2>
-        <div class="article-links">
-          <a class="button" href="https://github.com/Smik022/Socratic-AI-Tutor" target="_blank" rel="noopener">Source ↗</a>
-        </div>
+      <div class="rail-skills">
+        <h2 class="eyebrow">Skills &amp; Technologies</h2>
+        <ul class="tags"><li>Prompt Engineering</li><li>Django</li><li>React</li><li>Gemini</li><li>Web Speech API</li></ul>
       </div>
     </aside>
   </div>

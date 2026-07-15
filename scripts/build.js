@@ -53,6 +53,21 @@ function prose(value) {
 /** Tags accept "Label" or { label, variant: "solid" | "outline" }. */
 const normalizeTag = (t) => (typeof t === "string" ? { label: t } : t);
 
+/**
+ * Find a project's logo. Drop a file named after the slug into
+ * assets/images/logos/ (merlin.svg, narawe.png …) and it is picked up — no
+ * JSON edit needed. An explicit "logo" path in projects.json wins if set.
+ */
+const LOGO_EXTS = [".svg", ".png", ".webp", ".jpg", ".jpeg"];
+function logoFor(p) {
+  if (has(p.logo)) return p.logo;
+  for (const ext of LOGO_EXTS) {
+    const relPath = `assets/images/logos/${p.slug}${ext}`;
+    if (fs.existsSync(path.join(ROOT, relPath))) return relPath;
+  }
+  return "";
+}
+
 /* ---------- icons ---------- */
 
 const icon = {
@@ -182,7 +197,11 @@ function foot(depth) {
 
 /* ---------- case study body (shared by page + modal) ---------- */
 
-function articleInner(p) {
+/**
+ * @param depth  0 when embedded in the home page's <template>, 2 for the
+ *               standalone page — the logo path has to resolve from both.
+ */
+function articleInner(p, depth) {
   const tags = (p.tags || []).map(normalizeTag).filter((t) => has(t.label));
   const pills = join([
     ...tags.map(
@@ -236,38 +255,56 @@ ${join([
       </div>`
       : "";
 
+  // Bare chips rather than a card — the card's padding and title cost more
+  // vertical space than the chips themselves, and the rail is the tall column.
   const skills = has(p.skills)
-    ? `      <div class="card">
-        <h2 class="card-title">Skills &amp; Technologies</h2>
+    ? `      <div class="rail-skills">
+        <h2 class="eyebrow">Skills &amp; Technologies</h2>
         <ul class="tags">${p.skills.map((s) => `<li>${esc(s)}</li>`).join("")}</ul>
       </div>`
     : "";
 
+  // Links sit in the header, not the rail — the rail is the tall column and a
+  // whole extra card there is what pushed case studies past one screen.
   const links = has(p.links)
-    ? `      <div class="card">
-        <h2 class="card-title">Links</h2>
-        <div class="article-links">
+    ? `  <div class="article-links">
 ${p.links
   .map(
     (l) =>
-      `          <a class="button" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(
+      `    <a class="button" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(
         l.label
       )} ↗</a>`
   )
   .join("\n")}
-        </div>
-      </div>`
+  </div>`
     : "";
 
-  const rail = join([keyResults, skills, links]);
+  const rail = join([keyResults, skills]);
   const empty = !has(p.situation) && !has(p.task) && !has(p.result) && !has(p.contributions);
+
+  const logoSrc = logoFor(p);
+  const logo = logoSrc
+    ? `      <img class="article-logo" src="${rel(depth)}${esc(logoSrc)}" alt="${esc(p.title)} logo">`
+    : "";
 
   return join([
     `<div class="article-inner">`,
     pills ? `  <ul class="pills">\n${pills}\n  </ul>` : "",
     `  <h1 class="article-title" id="modal-title">${esc(p.title)}</h1>`,
-    byline ? `  <p class="byline">${byline}</p>` : "",
-    has(p.summary) ? `  <p class="lede">${esc(p.summary)}</p>` : "",
+    // Logo, byline and links all share one row. Each on its own line cost ~40px,
+    // and the case study has to fit a 768px-tall screen without scrolling.
+    byline || links || logo
+      ? `  <div class="byline-row">\n${join([
+          logo || byline
+            ? `    <div class="byline-id">\n${join([logo, byline ? `      <p class="byline">${byline}</p>` : ""])}\n    </div>`
+            : "",
+          links,
+        ])}\n  </div>`
+      : "",
+    // The modal opens over the work list, which already shows this summary —
+    // repeating it costs a screen-full of height for nothing. The standalone
+    // page has no list behind it, so it keeps the lede.
+    has(p.summary) && depth > 0 ? `  <p class="lede">${esc(p.summary)}</p>` : "",
     empty
       ? `  <p class="notice">This case study is still being written. The links are real — the write-up is on its way.</p>`
       : "",
@@ -285,18 +322,23 @@ ${p.links
 
 function renderHome() {
   const items = projects
-    .map(
-      (p) => `      <li class="work-item" data-slug="${esc(p.slug)}">
+    .map((p) => {
+      const logoSrc = logoFor(p);
+      return `      <li class="work-item${logoSrc ? " has-logo" : ""}" data-slug="${esc(p.slug)}">
         <a class="work-link" href="project/${esc(p.slug)}/" data-project="${esc(p.slug)}">
-          <span class="work-year">${esc(p.year)}</span>
+${
+  logoSrc
+    ? `          <img class="work-logo" src="${esc(logoSrc)}" alt="" aria-hidden="true" loading="lazy">\n`
+    : ""
+}          <span class="work-year">${esc(p.year)}</span>
           <span class="work-title">${esc(p.title)}${
         p.draft ? '<span class="chip">Draft</span>' : ""
       }</span>
           <span class="work-meta">${esc(p.category)}</span>
           <p class="work-summary">${esc(p.summary)}</p>
         </a>
-      </li>`
-    )
+      </li>`;
+    })
     .join("\n");
 
   const ethos = profile.ethos.items
@@ -334,7 +376,7 @@ ${profile.failures
   const templates = projects
     .map(
       (p) =>
-        `<template data-project-content="${esc(p.slug)}">\n${articleInner(p)}\n</template>`
+        `<template data-project-content="${esc(p.slug)}">\n${articleInner(p, 0)}\n</template>`
     )
     .join("\n");
 
@@ -379,7 +421,7 @@ ${ethos}
       <h2 class="eyebrow">Selected Work</h2>
       <span class="count">${projects.length} projects</span>
     </div>
-    <ul class="work-list">
+    <ul class="work-list${projects.some((p) => logoFor(p)) ? " with-logos" : ""}">
 ${items}
     </ul>
   </div>
@@ -399,7 +441,7 @@ function renderProject(p) {
     head(2, `${p.title} | ${profile.name}`, p.summary, `${profile.domain}/project/${p.slug}/`),
     `<main class="article" id="main">
   <a class="back" href="../../index.html">← All work</a>
-${articleInner(p)}
+${articleInner(p, 2)}
 </main>`,
     dock(2, { failures: false }),
     foot(2),

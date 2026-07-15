@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Narawe | Sardar Asif Ahmed</title>
-<meta name="description" content="Document intelligence for professional-services firms — scan or upload client PDFs, OCR them, and search across everything with fused keyword and semantic retrieval.">
+<meta name="description" content="Document intelligence for professional-services firms — scan client PDFs and search them by word or by meaning.">
 <link rel="canonical" href="https://asifahmed.me/project/narawe/">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Narawe | Sardar Asif Ahmed">
-<meta property="og:description" content="Document intelligence for professional-services firms — scan or upload client PDFs, OCR them, and search across everything with fused keyword and semantic retrieval.">
+<meta property="og:description" content="Document intelligence for professional-services firms — scan client PDFs and search them by word or by meaning.">
 <meta property="og:url" content="https://asifahmed.me/project/narawe/">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -60,34 +60,35 @@
     <li class="pill">2026</li>
   </ul>
   <h1 class="article-title" id="modal-title">Narawe</h1>
-  <p class="byline"><span class="byline-role">Product Manager</span><span class="byline-dot">•</span><span class="byline-org">The Artificer&#39;s AI</span></p>
-  <p class="lede">Document intelligence for professional-services firms — scan or upload client PDFs, OCR them, and search across everything with fused keyword and semantic retrieval.</p>
+  <div class="byline-row">
+    <div class="byline-id">
+      <p class="byline"><span class="byline-role">Product Manager</span><span class="byline-dot">•</span><span class="byline-org">The Artificer&#39;s AI</span></p>
+    </div>
+  </div>
+  <p class="lede">Document intelligence for professional-services firms — scan client PDFs and search them by word or by meaning.</p>
   <div class="article-grid">
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>Law offices, accountants and consultancies hold their client history in scanned paper. Once a document is an image, it is invisible to search — the knowledge exists but nobody can retrieve it without knowing which folder to open.</p>
+      <p>Firms keep client history in scanned paper. Once a document is an image, it is invisible to search.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Get paper into the system with as little friction as possible, including straight from a phone camera.</li>
-        <li>Make everything searchable afterwards — by wording people half-remember, and by meaning when they don&#39;t.</li>
-        <li>Keep every firm&#39;s documents strictly separated from every other firm&#39;s.</li>
+        <li>Get paper in with no friction, including from a phone camera.</li>
+        <li>Make it searchable by exact words and by meaning.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>A working prototype running the full path: camera scan or bulk upload → OCR → keyword extraction → embedding → hybrid search, plus an auto-synthesised portfolio summarising everything known about a client. Prepared for deploy; not yet in production use.</p>
+      <p>A working prototype running scan → OCR → keywords → embedding → hybrid search, plus an auto-written client summary.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Consolidated three AI providers onto one. The project started split across Clarifai for OCR, OpenRouter for keywords and OpenAI for embeddings; it now runs entirely on Gemini, which removed two vendor relationships and three failure modes.</li>
-        <li>Chose to fuse keyword and semantic search rather than pick one. People search for the exact phrase on the invoice and for the vague idea of what a letter was about — reciprocal rank fusion serves both from a single query.</li>
-        <li>Treated &#39;the model returned garbage&#39; as a different failure from &#39;the network failed&#39;. Transport errors retry with backoff; a response that is empty, too short, or echoing the prompt back triggers a separate content-aware retry that keeps the best attempt rather than returning nothing.</li>
-        <li>Made the client portfolio fire-and-forget, so an AI summary can never fail a document upload. The document reaching &#39;ready&#39; is what the user is waiting on; the summary catches up on its own.</li>
-        <li>Set up scanning from a phone into a laptop-hosted stack over Tailscale, so the camera path could be tested against real paper rather than fixtures.</li>
+        <li>Consolidated three AI providers onto one — Clarifai, OpenRouter and OpenAI became Gemini alone.</li>
+        <li>Fused keyword and semantic search: people search the exact phrase on an invoice and the vague idea of a letter.</li>
+        <li>Treated &#39;the model returned garbage&#39; as a different failure from &#39;the network failed&#39; — each gets its own retry.</li>
       </ul>
     </section>
     </div>
@@ -95,24 +96,24 @@
       <div class="card">
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
-          <span class="metric-name">Hybrid search with RRF fusion</span>
-          <span class="metric-label">Keyword and semantic, one query</span>
-          <p class="metric-note">Postgres full-text and pgvector cosine run as separate passes, then fuse by reciprocal rank — with highlighted snippets so people can see why a result matched.</p>
+          <span class="metric-value">2</span>
+          <span class="metric-label">Search engines fused into one query</span>
+          <p class="metric-note">Full-text and pgvector, fused by reciprocal rank.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">Task-typed embeddings</span>
-          <span class="metric-label">Documents and queries embedded differently</span>
-          <p class="metric-note">A stored document and a search query are not the same kind of text; embedding them with different task types measurably helps recall.</p>
+          <span class="metric-name">583 lines</span>
+          <span class="metric-label">Markdown to PDF, from scratch</span>
+          <p class="metric-note">Rebuilds OCR&#39;d text into a searchable PDF.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">Markdown to PDF engine</span>
-          <span class="metric-label">583 lines, written from scratch</span>
-          <p class="metric-note">Recompiles OCR&#39;d text into a real searchable PDF — block parsing, font-metric word wrap, proportional table columns, pagination. The original scan is always preserved alongside it.</p>
+          <span class="metric-name">3 into 1</span>
+          <span class="metric-label">AI vendors consolidated</span>
+          <p class="metric-note">Two relationships and three failure modes removed.</p>
         </div>
       </div>
-      <div class="card">
-        <h2 class="card-title">Skills &amp; Technologies</h2>
-        <ul class="tags"><li>Product Strategy</li><li>Document AI</li><li>Next.js</li><li>React</li><li>Supabase</li><li>Postgres</li><li>pgvector</li><li>Gemini</li><li>OCR</li><li>Multi-tenant RLS</li></ul>
+      <div class="rail-skills">
+        <h2 class="eyebrow">Skills &amp; Technologies</h2>
+        <ul class="tags"><li>Product Strategy</li><li>Document AI</li><li>Next.js</li><li>pgvector</li><li>Gemini</li><li>Multi-tenant RLS</li></ul>
       </div>
     </aside>
   </div>

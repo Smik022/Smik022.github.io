@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RepoMap | Sardar Asif Ahmed</title>
-<meta name="description" content="Point it at a GitHub repo or a local folder and get architecture diagrams, module descriptions, onboarding steps and a generated README.">
+<meta name="description" content="Point it at a GitHub repo or a local folder and get architecture diagrams, module notes and a generated README.">
 <link rel="canonical" href="https://asifahmed.me/project/repo-map/">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="RepoMap | Sardar Asif Ahmed">
-<meta property="og:description" content="Point it at a GitHub repo or a local folder and get architecture diagrams, module descriptions, onboarding steps and a generated README.">
+<meta property="og:description" content="Point it at a GitHub repo or a local folder and get architecture diagrams, module notes and a generated README.">
 <meta property="og:url" content="https://asifahmed.me/project/repo-map/">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -60,33 +60,35 @@
     <li class="pill">2026</li>
   </ul>
   <h1 class="article-title" id="modal-title">RepoMap</h1>
-  <p class="byline"><span class="byline-role">Builder</span><span class="byline-dot">•</span><span class="byline-org">Personal project</span></p>
-  <p class="lede">Point it at a GitHub repo or a local folder and get architecture diagrams, module descriptions, onboarding steps and a generated README.</p>
+  <div class="byline-row">
+    <div class="byline-id">
+      <p class="byline"><span class="byline-role">Builder</span><span class="byline-dot">•</span><span class="byline-org">Personal project</span></p>
+    </div>
+  </div>
+  <p class="lede">Point it at a GitHub repo or a local folder and get architecture diagrams, module notes and a generated README.</p>
   <div class="article-grid">
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>Understanding an unfamiliar codebase is mostly archaeology — reading entry points, guessing at structure, and building a mental map that already exists in someone else&#39;s head. The people who need that map most are the ones who just joined.</p>
+      <p>Understanding an unfamiliar codebase is archaeology — and whoever needs the map most has just joined.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Turn a repo into a readable map: what the architecture is, how requests flow, where the data goes.</li>
-        <li>Make it usable on private code, not just public repos.</li>
+        <li>Turn a repo into a readable map of architecture and data flow.</li>
+        <li>Make it work on private code, not just public repos.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>A working tool producing three Mermaid diagrams, module cards, onboarding steps and a README from either a GitHub URL or a local folder, with results cached so a repeat look costs nothing.</p>
+      <p>A working tool producing three Mermaid diagrams, module cards, onboarding steps and a README — cached after the first look.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Analysed local folders entirely in the browser via the File System Access API, so private code never leaves the machine — only the selected files&#39; truncated text is ever sent.</li>
-        <li>Chose the model on quota, not benchmarks: the lite model allows 500 requests a day against the standard model&#39;s 20. For a free tool anyone can try, that difference is the product.</li>
-        <li>Budgeted the prompt deliberately — around a dozen ranked files, truncated, plus a file-tree summary — because sending a whole repo is neither affordable nor more accurate.</li>
-        <li>Wrote a Mermaid label sanitiser that runs only after a raw render fails, so it can never break a diagram that already worked. It stashes quoted strings and multi-character shapes before quoting, then restores them.</li>
-        <li>Kept the exact diagram that broke on a real repo as a regression fixture, so the bug that prompted the fix can never come back quietly.</li>
+        <li>Analysed local folders entirely in the browser, so private code never leaves the machine.</li>
+        <li>Chose the model on quota, not benchmarks: 500 requests a day against 20. For a free tool, that is the product.</li>
+        <li>Wrote a Mermaid repair pass that runs only after a render fails, so it can&#39;t break a diagram that worked.</li>
       </ul>
     </section>
     </div>
@@ -95,23 +97,23 @@
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
           <span class="metric-value">37</span>
-          <span class="metric-label">Tests over the parts that actually break</span>
-          <p class="metric-note">URL parsing, file selection, JSON extraction and Mermaid sanitising — the pure logic where a silent regression would be invisible. One fixture is the real diagram that failed to render for a public repo.</p>
+          <span class="metric-label">Tests over the parts that break</span>
+          <p class="metric-note">One fixture is the real diagram that failed on a public repo.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">Local folders never leave the browser</span>
-          <span class="metric-label">File System Access API</span>
-          <p class="metric-note">Private repos get analysed without uploading the codebase — the folder is walked client-side and only the chosen excerpts are sent.</p>
+          <span class="metric-name">500 vs 20</span>
+          <span class="metric-label">Requests per day</span>
+          <p class="metric-note">A free tool that dies after 20 uses isn&#39;t a tool.</p>
         </div>
         <div class="metric">
-          <span class="metric-name">Belt-and-braces JSON handling</span>
-          <span class="metric-label">Three layers</span>
-          <p class="metric-note">Response MIME type, a fence-stripping extractor, and a stricter-prompt retry — because a model that returns prose instead of JSON breaks the whole page.</p>
+          <span class="metric-name">0 uploads</span>
+          <span class="metric-label">Private code stays local</span>
+          <p class="metric-note">The folder is walked client-side.</p>
         </div>
       </div>
-      <div class="card">
-        <h2 class="card-title">Skills &amp; Technologies</h2>
-        <ul class="tags"><li>Developer Tooling</li><li>React</li><li>TypeScript</li><li>Gemini</li><li>Mermaid</li><li>File System Access API</li><li>Vercel</li></ul>
+      <div class="rail-skills">
+        <h2 class="eyebrow">Skills &amp; Technologies</h2>
+        <ul class="tags"><li>Developer Tooling</li><li>React</li><li>TypeScript</li><li>Gemini</li><li>Mermaid</li><li>Vercel</li></ul>
       </div>
     </aside>
   </div>

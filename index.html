@@ -15,7 +15,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/site.css">
 
 <script>
@@ -41,6 +41,15 @@
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
+<div class="backdrop" aria-hidden="true">
+  <div class="backdrop-base"></div>
+  <div class="backdrop-grid"></div>
+  <div class="aurora aurora-cyan"></div>
+  <div class="aurora aurora-blue"></div>
+  <div class="aurora aurora-purple"></div>
+  <div class="aurora aurora-pink"></div>
+  <div class="backdrop-noise"></div>
+</div>
 <main class="shell" id="main">
   <div class="panel">
     <img class="avatar" src="assets/images/hs.png" alt="Sardar Asif Ahmed" width="64" height="64">
@@ -71,52 +80,59 @@
       <span class="count">7 projects</span>
     </div>
     <ul class="work-list">
-      <li class="work-item">
-        <a class="work-link" href="project/socratic-ai/">
+      <li class="work-item" data-slug="socratic-ai">
+        <a class="work-link" href="project/socratic-ai/" data-project="socratic-ai">
+          <span class="work-year">2026</span>
           <span class="work-title">Socratic AI Learning Platform<span class="chip">Draft</span></span>
-          <span class="work-meta">AI Product · 2026</span>
+          <span class="work-meta">AI Product</span>
           <p class="work-summary">Collaborating with an Australian startup to build interactive, intelligent learning experiences driven by Socratic questioning.</p>
         </a>
       </li>
-      <li class="work-item">
-        <a class="work-link" href="project/imagen-ai-image-generator/">
+      <li class="work-item" data-slug="imagen-ai-image-generator">
+        <a class="work-link" href="project/imagen-ai-image-generator/" data-project="imagen-ai-image-generator">
+          <span class="work-year">2025</span>
           <span class="work-title">ImaGEN AI Image Generator<span class="chip">Draft</span></span>
-          <span class="work-meta">Full-Stack AI · 2025</span>
+          <span class="work-meta">Full-Stack AI</span>
           <p class="work-summary">A full-stack AI image generation platform built with Django REST Framework and React, integrated with Pollination AI.</p>
         </a>
       </li>
-      <li class="work-item">
-        <a class="work-link" href="project/green-legal-aid/">
+      <li class="work-item" data-slug="green-legal-aid">
+        <a class="work-link" href="project/green-legal-aid/" data-project="green-legal-aid">
+          <span class="work-year">2025</span>
           <span class="work-title">Green Legal Aid<span class="chip">Draft</span></span>
-          <span class="work-meta">System Analysis · 2025</span>
+          <span class="work-meta">System Analysis</span>
           <p class="work-summary">A centralized legal aid application system for an NGO — documented, analyzed, and delivered end to end.</p>
         </a>
       </li>
-      <li class="work-item">
-        <a class="work-link" href="project/tech-skill-development/">
+      <li class="work-item" data-slug="tech-skill-development">
+        <a class="work-link" href="project/tech-skill-development/" data-project="tech-skill-development">
+          <span class="work-year">2025</span>
           <span class="work-title">Tech-Skill Development Project<span class="chip">Draft</span></span>
-          <span class="work-meta">Program Delivery · 2025</span>
+          <span class="work-meta">Program Delivery</span>
           <p class="work-summary">Analyzed training system needs and defined functional requirements for a program that trained 1,000+ people in digital skills.</p>
         </a>
       </li>
-      <li class="work-item">
-        <a class="work-link" href="project/otsukare/">
+      <li class="work-item" data-slug="otsukare">
+        <a class="work-link" href="project/otsukare/" data-project="otsukare">
+          <span class="work-year">2025</span>
           <span class="work-title">Otsukare<span class="chip">Draft</span></span>
-          <span class="work-meta">Marketplace · 2025</span>
+          <span class="work-meta">Marketplace</span>
           <p class="work-summary">A Japan-focused freelance platform connecting global IT talent with Japanese firms through AI-driven matching.</p>
         </a>
       </li>
-      <li class="work-item">
-        <a class="work-link" href="project/fabric-visualizer/">
+      <li class="work-item" data-slug="fabric-visualizer">
+        <a class="work-link" href="project/fabric-visualizer/" data-project="fabric-visualizer">
+          <span class="work-year">2025</span>
           <span class="work-title">AI-Powered Fabric Visualizer<span class="chip">Draft</span></span>
-          <span class="work-meta">AI Tool · 2025</span>
+          <span class="work-meta">AI Tool</span>
           <p class="work-summary">Converts fabric images into RMG previews using Nano Banana AI, automating a slow manual design step.</p>
         </a>
       </li>
-      <li class="work-item">
-        <a class="work-link" href="project/fabric-qr-web-app/">
+      <li class="work-item" data-slug="fabric-qr-web-app">
+        <a class="work-link" href="project/fabric-qr-web-app/" data-project="fabric-qr-web-app">
+          <span class="work-year">2025</span>
           <span class="work-title">Fabric QR Web App<span class="chip">Draft</span></span>
-          <span class="work-meta">Internal Tool · 2025</span>
+          <span class="work-meta">Internal Tool</span>
           <p class="work-summary">Shares fabric details — images, GSM, type, references — over QR codes, killing a repetitive workflow and its errors.</p>
         </a>
       </li>
@@ -124,7 +140,17 @@
   </div>
 </main>
 
-<dialog id="failures">
+<div class="modal" id="modal" hidden>
+  <div class="modal-scrim" data-modal-close></div>
+  <div class="modal-panel glass" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
+    <button class="modal-close" data-modal-close aria-label="Close case study">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<dialog id="failures" class="glass">
   <div class="dialog-head">
     <h2>Failures</h2>
     <button class="dialog-close" data-dialog-close aria-label="Close">&times;</button>
@@ -137,7 +163,7 @@
   </div>
 </dialog>
 
-<nav class="dock" aria-label="Quick links">
+<nav class="dock glass" aria-label="Quick links">
   <button class="dock-item" data-theme-toggle aria-pressed="false" data-label="Toggle theme">
     <span class="visually-hidden">Toggle theme</span>
     <span class="icon-sun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></span>

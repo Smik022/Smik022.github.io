@@ -8,6 +8,10 @@
  *   index.html
  *   project/<slug>/index.html
  *
+ * The markup inside .article-inner is shared: the standalone project page wraps
+ * it in a page shell, and the home page's modal fetches a project page and
+ * lifts that same block out of it. One source of truth for the case-study HTML.
+ *
  * Empty fields are skipped, so half-written case studies still render cleanly.
  */
 
@@ -35,8 +39,19 @@ const esc = (s) =>
 const has = (v) =>
   Array.isArray(v) ? v.length > 0 : typeof v === "string" ? v.trim() !== "" : Boolean(v);
 
-/** Join non-empty strings with newlines — keeps templates free of `&&` noise. */
 const join = (parts) => parts.filter(Boolean).join("\n");
+
+/** Prose fields accept a string (one paragraph) or an array (bullet list). */
+function prose(value) {
+  if (!has(value)) return "";
+  if (Array.isArray(value)) {
+    return `      <ul>\n${value.map((i) => `        <li>${esc(i)}</li>`).join("\n")}\n      </ul>`;
+  }
+  return `      <p>${esc(value)}</p>`;
+}
+
+/** Tags accept "Label" or { label, variant: "solid" | "outline" }. */
+const normalizeTag = (t) => (typeof t === "string" ? { label: t } : t);
 
 /* ---------- icons ---------- */
 
@@ -57,7 +72,6 @@ const svg = (name) => `<svg viewBox="0 0 24 24" aria-hidden="true">${icon[name]}
 
 /* ---------- shared chrome ---------- */
 
-/** @param depth  0 for root, 2 for project/<slug>/ */
 const rel = (depth) => "../".repeat(depth);
 
 function head(depth, title, description, canonical) {
@@ -79,7 +93,7 @@ function head(depth, title, description, canonical) {
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${base}assets/css/site.css">
 
 <script>
@@ -104,7 +118,21 @@ function head(depth, title, description, canonical) {
 </script>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>`;
+<a class="skip-link" href="#main">Skip to content</a>
+${backdrop()}`;
+}
+
+/** Layered ambient backdrop. Dark theme only — hidden in light. */
+function backdrop() {
+  return `<div class="backdrop" aria-hidden="true">
+  <div class="backdrop-base"></div>
+  <div class="backdrop-grid"></div>
+  <div class="aurora aurora-cyan"></div>
+  <div class="aurora aurora-blue"></div>
+  <div class="aurora aurora-purple"></div>
+  <div class="aurora aurora-pink"></div>
+  <div class="backdrop-noise"></div>
+</div>`;
 }
 
 function dock(depth, opts) {
@@ -112,7 +140,7 @@ function dock(depth, opts) {
   const showFailures = has(profile.failures) && opts.failures;
 
   return `
-<nav class="dock" aria-label="Quick links">
+<nav class="dock glass" aria-label="Quick links">
   <button class="dock-item" data-theme-toggle aria-pressed="false" data-label="Toggle theme">
     <span class="visually-hidden">Toggle theme</span>
     <span class="icon-sun">${svg("sun")}</span>
@@ -152,17 +180,119 @@ function foot(depth) {
 </html>`;
 }
 
+/* ---------- case study body (shared by page + modal) ---------- */
+
+function articleInner(p) {
+  const tags = (p.tags || []).map(normalizeTag).filter((t) => has(t.label));
+  const pills = join([
+    ...tags.map(
+      (t) => `    <li class="pill${t.variant ? " pill-" + t.variant : ""}">${esc(t.label)}</li>`
+    ),
+    has(p.year) ? `    <li class="pill">${esc(p.year)}</li>` : "",
+    p.draft ? `    <li class="pill pill-draft">Draft</li>` : "",
+  ]);
+
+  const byline = [
+    has(p.role) ? `<span class="byline-role">${esc(p.role)}</span>` : "",
+    has(p.company) ? `<span class="byline-org">${esc(p.company)}</span>` : "",
+  ]
+    .filter(Boolean)
+    .join('<span class="byline-dot">•</span>');
+
+  const block = (title, body) =>
+    has(body) ? `    <section class="block">\n      <h2>${esc(title)}</h2>\n${body}\n    </section>` : "";
+
+  const main = join([
+    block("Situation", prose(p.situation)),
+    block("Task", prose(p.task)),
+    block("Result", prose(p.result)),
+    block("My Contribution", prose(p.contributions)),
+  ]);
+
+  /* ----- right rail ----- */
+
+  const kr = p.keyResults || {};
+  const krItems = (kr.items || []).filter((i) => has(i.name));
+  const keyResults =
+    has(kr.metric) || krItems.length
+      ? `      <div class="card">
+        <h2 class="card-title">Key Results</h2>
+${join([
+  has(kr.metric)
+    ? `        <div class="metric">
+          <span class="metric-value">${esc(kr.metric)}</span>
+          ${has(kr.metricLabel) ? `<span class="metric-label">${esc(kr.metricLabel)}</span>` : ""}
+          ${has(kr.metricNote) ? `<p class="metric-note">${esc(kr.metricNote)}</p>` : ""}
+        </div>`
+    : "",
+  ...krItems.map(
+    (i) => `        <div class="metric">
+          <span class="metric-name">${esc(i.name)}</span>
+          ${has(i.label) ? `<span class="metric-label">${esc(i.label)}</span>` : ""}
+          ${has(i.note) ? `<p class="metric-note">${esc(i.note)}</p>` : ""}
+        </div>`
+  ),
+])}
+      </div>`
+      : "";
+
+  const skills = has(p.skills)
+    ? `      <div class="card">
+        <h2 class="card-title">Skills &amp; Technologies</h2>
+        <ul class="tags">${p.skills.map((s) => `<li>${esc(s)}</li>`).join("")}</ul>
+      </div>`
+    : "";
+
+  const links = has(p.links)
+    ? `      <div class="card">
+        <h2 class="card-title">Links</h2>
+        <div class="article-links">
+${p.links
+  .map(
+    (l) =>
+      `          <a class="button" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(
+        l.label
+      )} ↗</a>`
+  )
+  .join("\n")}
+        </div>
+      </div>`
+    : "";
+
+  const rail = join([keyResults, skills, links]);
+  const empty = !has(p.situation) && !has(p.task) && !has(p.result) && !has(p.contributions);
+
+  return join([
+    `<div class="article-inner">`,
+    pills ? `  <ul class="pills">\n${pills}\n  </ul>` : "",
+    `  <h1 class="article-title" id="modal-title">${esc(p.title)}</h1>`,
+    byline ? `  <p class="byline">${byline}</p>` : "",
+    has(p.summary) ? `  <p class="lede">${esc(p.summary)}</p>` : "",
+    empty
+      ? `  <p class="notice">This case study is still being written. The links are real — the write-up is on its way.</p>`
+      : "",
+    `  <div class="article-grid">`,
+    `    <div class="article-main">`,
+    main,
+    `    </div>`,
+    rail ? `    <aside class="article-rail">\n${rail}\n    </aside>` : "",
+    `  </div>`,
+    `</div>`,
+  ]);
+}
+
 /* ---------- home ---------- */
 
 function renderHome() {
   const items = projects
     .map(
-      (p) => `      <li class="work-item">
-        <a class="work-link" href="project/${esc(p.slug)}/">
+      (p) => `      <li class="work-item" data-slug="${esc(p.slug)}">
+        <a class="work-link" href="project/${esc(p.slug)}/" data-project="${esc(p.slug)}">
+          <span class="work-year">${esc(p.year)}</span>
           <span class="work-title">${esc(p.title)}${
         p.draft ? '<span class="chip">Draft</span>' : ""
       }</span>
-          <span class="work-meta">${esc(p.category)} · ${esc(p.year)}</span>
+          <span class="work-meta">${esc(p.category)}</span>
           <p class="work-summary">${esc(p.summary)}</p>
         </a>
       </li>`
@@ -180,7 +310,7 @@ function renderHome() {
 
   const failures = has(profile.failures)
     ? `
-<dialog id="failures">
+<dialog id="failures" class="glass">
   <div class="dialog-head">
     <h2>Failures</h2>
     <button class="dialog-close" data-dialog-close aria-label="Close">&times;</button>
@@ -198,13 +328,20 @@ ${profile.failures
 </dialog>`
     : "";
 
+  // Modal shell — filled at click time from the fetched project page.
+  const modal = `
+<div class="modal" id="modal" hidden>
+  <div class="modal-scrim" data-modal-close></div>
+  <div class="modal-panel glass" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
+    <button class="modal-close" data-modal-close aria-label="Close case study">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>`;
+
   return join([
-    head(
-      0,
-      `${profile.name} | ${profile.title}`,
-      profile.intro,
-      profile.domain + "/"
-    ),
+    head(0, `${profile.name} | ${profile.title}`, profile.intro, profile.domain + "/"),
     `<main class="shell" id="main">
   <div class="panel">
     <img class="avatar" src="${esc(profile.avatar)}" alt="${esc(profile.name)}" width="64" height="64">
@@ -237,91 +374,21 @@ ${items}
     </ul>
   </div>
 </main>`,
+    modal,
     failures,
     dock(0, { failures: true }),
     foot(0),
   ]);
 }
 
-/* ---------- project page ---------- */
+/* ---------- standalone project page ---------- */
 
 function renderProject(p) {
-  const meta = [p.category, p.role, p.year].filter(has).map((m) => `<li>${esc(m)}</li>`).join("");
-
-  const block = (title, body) =>
-    has(body) ? `  <section class="block">\n    <h2>${esc(title)}</h2>\n${body}\n  </section>` : "";
-
-  const para = (text) => `    <p>${esc(text)}</p>`;
-
-  const bullets = (list) =>
-    `    <ul>\n${list.map((i) => `      <li>${esc(i)}</li>`).join("\n")}\n    </ul>`;
-
-  const kr = p.keyResults || {};
-  const keyResultsBody = join([
-    has(kr.metric)
-      ? `    <div class="metric"><span class="metric-value">${esc(
-          kr.metric
-        )}</span><span class="metric-label">${esc(kr.metricLabel)}</span></div>`
-      : "",
-    has(kr.items)
-      ? `    <ul>\n${kr.items
-          .map(
-            (i) =>
-              `      <li><strong>${esc(i.name)}</strong>${i.note ? " — " + esc(i.note) : ""}</li>`
-          )
-          .join("\n")}\n    </ul>`
-      : "",
-  ]);
-
-  const links = has(p.links)
-    ? `  <section class="block">
-    <h2>Links</h2>
-    <div class="article-links">
-${p.links
-  .map(
-    (l) =>
-      `      <a class="button" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(
-        l.label
-      )} ↗</a>`
-  )
-  .join("\n")}
-    </div>
-  </section>`
-    : "";
-
-  const bodyBlocks = join([
-    block("Situation", has(p.situation) ? para(p.situation) : ""),
-    block("Task", has(p.task) ? para(p.task) : ""),
-    block("Result", has(p.result) ? para(p.result) : ""),
-    block("My Contribution", has(p.contributions) ? bullets(p.contributions) : ""),
-    block("Key Results", keyResultsBody),
-    links,
-    block("Skills & Technologies", has(p.skills) ? `    <ul class="tags">${p.skills
-      .map((s) => `<li>${esc(s)}</li>`)
-      .join("")}</ul>` : ""),
-  ]);
-
-  const empty = !has(p.situation) && !has(p.task) && !has(p.result) && !has(p.contributions);
-
   return join([
-    head(
-      2,
-      `${p.title} | ${profile.name}`,
-      p.summary,
-      `${profile.domain}/project/${p.slug}/`
-    ),
+    head(2, `${p.title} | ${profile.name}`, p.summary, `${profile.domain}/project/${p.slug}/`),
     `<main class="article" id="main">
   <a class="back" href="../../index.html">← All work</a>
-
-  <h1 class="article-title">${esc(p.title)}</h1>
-  <ul class="article-meta">${meta}</ul>
-  <p class="lede">${esc(p.summary)}</p>
-${
-  empty
-    ? `  <p class="notice">This case study is still being written. The live links below are real — the write-up is on its way.</p>`
-    : ""
-}
-${bodyBlocks}
+${articleInner(p)}
 </main>`,
     dock(2, { failures: false }),
     foot(2),
@@ -337,7 +404,6 @@ function write(relPath, contents) {
   console.log("  ✓ " + relPath);
 }
 
-// Fail loudly on duplicate slugs — they'd silently overwrite each other.
 const seen = new Set();
 for (const p of projects) {
   if (seen.has(p.slug)) throw new Error(`Duplicate slug in projects.json: "${p.slug}"`);

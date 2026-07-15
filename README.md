@@ -39,6 +39,44 @@ write them and the sections appear on their own.
 Set `"draft": true` on a project to show a "Draft" chip next to its title.
 Remove the flag when the write-up is final.
 
+### Field notes
+
+`situation`, `task`, `result` and `contributions` each accept **either** a
+string (renders as a paragraph) **or** an array of strings (renders as bullets).
+Use whichever suits the project.
+
+`tags` accepts plain strings or objects with a variant:
+
+```json
+"tags": [
+  { "label": "Automation & AI" },
+  { "label": "Scale", "variant": "solid" },
+  { "label": "System Engineering", "variant": "outline" }
+]
+```
+
+`keyResults` drives the highlighted card in the right rail:
+
+```json
+"keyResults": {
+  "metric": "< 5 Minutes",
+  "metricLabel": "Workflow Time Reduction",
+  "metricNote": "Longer explanation under the number.",
+  "items": [{ "name": "Question to Flashcard", "label": "End-to-End", "note": "…" }]
+}
+```
+
+## How clicking a project works
+
+Each project is a real page at `project/<slug>/`. On the home page a click is
+intercepted: the page is fetched, its `.article-inner` block is lifted out and
+shown in a modal, and the URL updates via `pushState` so the link stays
+shareable. Back/forward, Escape and the close button all restore the home view.
+
+The case-study markup is generated **once** and reused by both the standalone
+page and the modal, so the two can't drift apart. If JavaScript is off or the
+fetch fails, the link just navigates to the real page — nothing breaks.
+
 ## Previewing locally
 
 ```bash

@@ -380,11 +380,10 @@ a { color: inherit; text-decoration: none; }
    Rows and columns are both stated explicitly. Leaving rows to auto-placement
    put the category on the year's line instead of the title's. */
 .work-link { grid-template-columns: 32px minmax(0, 1fr) auto; }
-.work-logo  { grid-column: 1; grid-row: 1 / 4; }
-.work-year  { grid-column: 2 / -1; grid-row: 1; }
-.work-title { grid-column: 2;     grid-row: 2; }
-.work-meta  { grid-column: 3;     grid-row: 2; }
-.work-summary { grid-column: 2 / -1; grid-row: 3; }
+.work-logo  { grid-column: 1; grid-row: 1 / 3; }
+.work-title { grid-column: 2;     grid-row: 1; }
+.work-meta  { grid-column: 3;     grid-row: 1; }
+.work-summary { grid-column: 2 / -1; grid-row: 2; }
 
 .work-logo {
   align-self: center;
@@ -412,12 +411,6 @@ a { color: inherit; text-decoration: none; }
   user-select: none;
 }
 
-.work-year {
-  font-size: 0.75rem;
-  color: var(--text-faint);
-  font-variant-numeric: tabular-nums;
-}
-
 .work-title {
   font-family: var(--font-display);
   font-size: 1.125rem;
@@ -440,7 +433,7 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 520px) {
   /* No room for the category beside the title — drop it under the summary. */
   .work-link { grid-template-columns: 32px minmax(0, 1fr); }
-  .work-meta { grid-column: 2; grid-row: 4; white-space: normal; }
+  .work-meta { grid-column: 2; grid-row: 3; white-space: normal; }
 }
 
 .chip {
@@ -505,9 +498,8 @@ body.modal-open .work-title { font-size: 0.9375rem; }
 body.modal-open .work-link { grid-template-columns: 22px minmax(0, 1fr); gap: 0 0.5rem; }
 body.modal-open .work-logo { width: 22px; height: 22px; border-radius: 5px; }
 body.modal-open .work-logo-fallback { font-size: 0.6875rem; }
-/* Summary and category are hidden in the rail, so the title owns row 2 alone. */
-body.modal-open .work-year { grid-row: 1; }
-body.modal-open .work-title { grid-column: 2; grid-row: 2; }
+/* Summary and category are hidden in the rail, so the title owns the row. */
+body.modal-open .work-title { grid-column: 2; grid-row: 1; }
 
 /* Active item in the rail */
 body.modal-open .work-item.is-active .work-link {

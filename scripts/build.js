@@ -334,8 +334,7 @@ ${
       `          <span class="work-logo work-logo-fallback" aria-hidden="true">${esc(
         p.title.trim().charAt(0)
       )}</span>\n`
-}          <span class="work-year">${esc(p.year)}</span>
-          <span class="work-title">${esc(p.title)}${
+}          <span class="work-title">${esc(p.title)}${
         p.draft ? '<span class="chip">Draft</span>' : ""
       }</span>
           <span class="work-meta">${esc(p.category)}</span>

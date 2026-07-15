@@ -415,11 +415,34 @@ body.modal-open .shell {
 }
 
 body.modal-open .panel { display: none; }
-body.modal-open .work-head { opacity: 0; pointer-events: none; }
+body.modal-open .work-head { display: none; }
 body.modal-open .work-summary,
 body.modal-open .work-meta { display: none; }
 body.modal-open .work-list { border-top: 0; }
 body.modal-open .work-item { border-bottom: 0; }
+
+/* The page itself is scroll-locked while the modal is open, so the rail needs
+   its own scroll — and it must sit above the scrim, or it is dead to clicks. */
+body.modal-open .work {
+  position: fixed;
+  top: clamp(1rem, 3vw, 2.5rem);
+  left: var(--page-x);
+  width: 260px;
+  max-height: calc(100vh - 2 * clamp(1rem, 3vw, 2.5rem));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  z-index: 55; /* above .modal (50), below .dock (60) */
+  padding-right: 0.4rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+body.modal-open .work::-webkit-scrollbar { width: 6px; }
+body.modal-open .work::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 3px;
+}
+body.modal-open .work::-webkit-scrollbar-track { background: transparent; }
 
 body.modal-open .work-link {
   padding: 0.6rem 0.75rem;

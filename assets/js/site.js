@@ -222,12 +222,16 @@
 
   document.querySelectorAll("[data-project]").forEach(function (link) {
     var slug = link.getAttribute("data-project");
+    // Resolve the absolute URL *now*, while the document URL is still the home
+    // page. pushState moves the base, so reading link.href later would resolve
+    // the relative href against /project/<slug>/ and compound the path.
+    var href = link.href;
 
     link.addEventListener("click", function (e) {
       // Let modified clicks (new tab, download, middle-click) behave normally.
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
       e.preventDefault();
-      openModal(slug, link.href, true);
+      openModal(slug, href, true);
     });
   });
 

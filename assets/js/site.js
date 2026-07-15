@@ -125,10 +125,27 @@
   var homeUrl = location.href;
   var homeTitle = document.title;
 
-  /** The case-study markup baked into this page for a given project. */
+  /** The inert <template> holding a project's case study, or null. */
   function contentFor(slug) {
-    var tpl = document.querySelector('template[data-project-content="' + slug + '"]');
-    return tpl ? tpl.innerHTML : null;
+    return document.querySelector('template[data-project-content="' + slug + '"]');
+  }
+
+  /**
+   * Re-point relative URLs at the site root.
+   *
+   * pushState moves the document's base URL to /project/<slug>/, so a relative
+   * path injected afterwards resolves against *that* rather than the root —
+   * switching projects from inside the modal asked for
+   * /project/a/assets/... and 404'd. Fixed on the fragment before it enters
+   * the document, so the wrong request is never made.
+   */
+  function absolutise(frag) {
+    frag.querySelectorAll("img[src], source[srcset]").forEach(function (el) {
+      var attr = el.hasAttribute("src") ? "src" : "srcset";
+      var raw = el.getAttribute(attr);
+      if (!raw || /^([a-z][a-z0-9+.-]*:|\/\/|\/|data:)/i.test(raw)) return; // already absolute
+      el.setAttribute(attr, new URL(raw, homeUrl).href);
+    });
   }
 
   function markActive(slug) {
@@ -137,8 +154,13 @@
     });
   }
 
-  function render(markup) {
-    modalBody.innerHTML = markup;
+  function render(tpl) {
+    // Clone rather than assign innerHTML: template content is inert, so URLs
+    // can be corrected before anything is fetched.
+    var frag = tpl.content.cloneNode(true);
+    absolutise(frag);
+    modalBody.innerHTML = "";
+    modalBody.appendChild(frag);
     panel.scrollTop = 0;
     panel.focus();
     var title = modalBody.querySelector(".article-title");
@@ -146,8 +168,8 @@
   }
 
   function openModal(slug, url, push) {
-    var markup = contentFor(slug);
-    if (!markup) {
+    var tpl = contentFor(slug);
+    if (!tpl) {
       // Nothing baked in for this slug — fall back to the real page.
       window.location.href = url;
       return;
@@ -159,7 +181,7 @@
     modal.hidden = false;
     document.body.classList.add("modal-open", "modal-locked");
     markActive(slug);
-    render(markup);
+    render(tpl);
 
     // Unhide, force a layout so the transition has a start value, then animate.
     // A forced reflow beats rAF here: it still works when frames are throttled.

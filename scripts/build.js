@@ -328,7 +328,17 @@ ${profile.failures
 </dialog>`
     : "";
 
-  // Modal shell — filled at click time from the fetched project page.
+  // Case-study markup for every project, inert until cloned into the modal.
+  // Embedded rather than fetched at click time: no network, so it works from
+  // file://, offline, and on any host — and opens with zero latency.
+  const templates = projects
+    .map(
+      (p) =>
+        `<template data-project-content="${esc(p.slug)}">\n${articleInner(p)}\n</template>`
+    )
+    .join("\n");
+
+  // Modal shell — filled at click time from the template above.
   const modal = `
 <div class="modal" id="modal" hidden>
   <div class="modal-scrim" data-modal-close></div>
@@ -374,6 +384,7 @@ ${items}
     </ul>
   </div>
 </main>`,
+    templates,
     modal,
     failures,
     dock(0, { failures: true }),

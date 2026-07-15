@@ -459,9 +459,15 @@ body.modal-open .work-item.is-active .work-title { color: var(--text); }
   z-index: 50;
   display: grid;
   align-items: center;
-  justify-items: end;
+  justify-items: center;
   padding: clamp(1rem, 3vw, 2.5rem);
-  padding-right: clamp(1rem, 3vw, 2.5rem);
+}
+
+/* Centre the panel in the space *beside* the rail rather than pinning it to
+   the right edge — otherwise wide screens get a dead gap in the middle.
+   Offset = page gutter (64px) + rail (260px) + breathing room. */
+@media (min-width: 1101px) {
+  .modal { padding-left: 360px; }
 }
 
 .modal[hidden] { display: none; }
@@ -526,18 +532,6 @@ body.modal-open .work-item.is-active .work-title { color: var(--text); }
 }
 
 .modal-body .back { display: none; }
-
-/* Loading + error states */
-.modal-status {
-  padding: 3rem 1rem;
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 0.9375rem;
-}
-
-@media (max-width: 1100px) {
-  .modal { justify-items: center; }
-}
 
 @media (max-width: 640px) {
   .modal { padding: 0; align-items: stretch; }

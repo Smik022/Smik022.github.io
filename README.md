@@ -69,13 +69,18 @@ Use whichever suits the project.
 ## How clicking a project works
 
 Each project is a real page at `project/<slug>/`. On the home page a click is
-intercepted: the page is fetched, its `.article-inner` block is lifted out and
-shown in a modal, and the URL updates via `pushState` so the link stays
-shareable. Back/forward, Escape and the close button all restore the home view.
+intercepted: the case study is read from an inert `<template>` already embedded
+in `index.html`, shown in a modal, and the URL updates via `pushState` so the
+link stays shareable. Back/forward, Escape and the close button all restore the
+home view.
 
-The case-study markup is generated **once** and reused by both the standalone
-page and the modal, so the two can't drift apart. If JavaScript is off or the
-fetch fails, the link just navigates to the real page — nothing breaks.
+The markup is **embedded, not fetched**. That means no network request, so the
+modal cannot stall, and it works over `file://` and offline. `index.html` carries
+all seven case studies and still weighs ~22 KB.
+
+The same `articleInner()` function generates both the template and the
+standalone page, so the two cannot drift apart. If JavaScript is off — or a slug
+has no template — the link simply navigates to the real page. Nothing breaks.
 
 ## Previewing locally
 

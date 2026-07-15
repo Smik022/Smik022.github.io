@@ -132,9 +132,11 @@
      Project modal
 
      Progressive enhancement: every project link is a real URL to a real
-     static page. We intercept the click, fetch that page, and lift its
-     .article-inner into a modal — so there is one source of truth for the
-     markup. If anything fails, we fall back to normal navigation.
+     static page. We intercept the click and show the case study from an
+     inert <template> already in the page — no network, so this cannot stall
+     and works from file:// or offline. Both the template and the standalone
+     page come from the same generator, so they cannot drift apart.
+     If the template is missing, the link just navigates.
      ============================================================ */
 
   var modal = document.getElementById("modal");
@@ -142,39 +144,15 @@
   if (!modal || !modalBody) return; // not the home page
 
   var panel = modal.querySelector(".modal-panel");
-  var cache = new Map();
-  var inflight = new Map();
   var lastFocused = null;
   var openSlug = null;
   var homeUrl = location.href;
   var homeTitle = document.title;
 
-  /** Fetch a project page and extract the shared case-study block. */
-  function loadProject(slug, url) {
-    if (cache.has(slug)) return Promise.resolve(cache.get(slug));
-    if (inflight.has(slug)) return inflight.get(slug);
-
-    var req = fetch(url)
-      .then(function (res) {
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        return res.text();
-      })
-      .then(function (html) {
-        var doc = new DOMParser().parseFromString(html, "text/html");
-        var inner = doc.querySelector(".article-inner");
-        if (!inner) throw new Error("no .article-inner in " + url);
-        var markup = inner.outerHTML;
-        cache.set(slug, markup);
-        inflight.delete(slug);
-        return markup;
-      })
-      .catch(function (err) {
-        inflight.delete(slug);
-        throw err;
-      });
-
-    inflight.set(slug, req);
-    return req;
+  /** The case-study markup baked into this page for a given project. */
+  function contentFor(slug) {
+    var tpl = document.querySelector('template[data-project-content="' + slug + '"]');
+    return tpl ? tpl.innerHTML : null;
   }
 
   function markActive(slug) {
@@ -192,12 +170,20 @@
   }
 
   function openModal(slug, url, push) {
+    var markup = contentFor(slug);
+    if (!markup) {
+      // Nothing baked in for this slug — fall back to the real page.
+      window.location.href = url;
+      return;
+    }
+
     openSlug = slug;
     lastFocused = document.activeElement;
 
     modal.hidden = false;
     document.body.classList.add("modal-open", "modal-locked");
     markActive(slug);
+    render(markup);
 
     // Unhide, force a layout so the transition has a start value, then animate.
     // A forced reflow beats rAF here: it still works when frames are throttled.
@@ -205,25 +191,6 @@
     modal.classList.add("is-open");
 
     if (push) history.pushState({ slug: slug, url: url }, "", url);
-
-    // Prefetched on hover in the common case, so skip the placeholder entirely.
-    if (cache.has(slug)) {
-      render(cache.get(slug));
-      return;
-    }
-
-    modalBody.innerHTML = '<p class="modal-status">Loading…</p>';
-    loadProject(slug, url).then(
-      function (markup) {
-        if (openSlug !== slug) return; // a different project won the race
-        render(markup);
-      },
-      function () {
-        if (openSlug !== slug) return;
-        // Could not fetch — just go to the real page.
-        window.location.href = url;
-      }
-    );
   }
 
   function closeModal(push) {
@@ -255,13 +222,6 @@
 
   document.querySelectorAll("[data-project]").forEach(function (link) {
     var slug = link.getAttribute("data-project");
-
-    // Warm the cache so the open feels instant.
-    var prefetch = function () {
-      loadProject(slug, link.href).catch(function () {});
-    };
-    link.addEventListener("mouseenter", prefetch);
-    link.addEventListener("focus", prefetch);
 
     link.addEventListener("click", function (e) {
       // Let modified clicks (new tab, download, middle-click) behave normally.

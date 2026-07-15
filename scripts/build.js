@@ -420,7 +420,7 @@ ${ethos}
 
   <div class="work">
     <div class="work-head">
-      <h2 class="eyebrow">Selected Work</h2>
+      <h2 class="eyebrow">${esc(profile.workHeading || "Key Projects")}</h2>
       <span class="count">${projects.length} projects</span>
     </div>
     <ul class="work-list">

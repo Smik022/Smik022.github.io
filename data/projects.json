@@ -144,7 +144,7 @@
     "title": "Siratul Mustakim",
     "category": "Voice AI",
     "role": "Builder",
-    "company": "Personal project",
+    "company": "CIEA",
     "year": "2026",
     "draft": false,
     "logo": "",
@@ -168,36 +168,37 @@
       "Make the record keep itself, hands-free, while a volunteer walks.",
       "Send people to the door that most needs them, not the one that happens to be nearest."
     ],
-    "result": "A volunteer is told where to go, shown the route, and records what happened by speaking. The team's memory survives the walk instead of ending with it.",
+    "result": "A volunteer is told where to go, shown the route, and records what happened by speaking. Piloted with Masjidul Ibrahim — the team's memory survives the walk instead of ending with it.",
     "contributions": [
       "Found the distinction the whole model turns on: a knock is not contact. Only an answered door resets the clock, so the map reflects conversations rather than attempts.",
-      "Ruled the agent may never invent navigation. A confidently wrong street name sends a volunteer to a stranger's door — worse than saying nothing.",
-      "Cut the server entirely once it was clear the browser could hold the conversation, leaving nothing to run or pay for between walks."
+      "Ruled the agent may never invent navigation. A confidently wrong street name sends a volunteer to a stranger's door — worse than saying nothing at all.",
+      "Built it as an agent rather than a form: the volunteer talks, and the tools behind the conversation pick the house, draw the route and file the outcome.",
+      "Cut the server entirely once it was clear the browser could hold the conversation. A community organisation shouldn't carry hosting costs between walks."
     ],
     "keyResults": {
-      "metric": "Hands-free",
-      "metricLabel": "The whole loop, while walking",
-      "metricNote": "Which house, what route, what happened — spoken, with the phone in a pocket.",
+      "metric": "Piloted",
+      "metricLabel": "With Masjidul Ibrahim",
+      "metricNote": "Built for CIEA and put in front of a real congregation's outreach team, rather than left as a demo.",
       "items": [
+        {
+          "name": "Hands-free",
+          "label": "The whole loop, while walking",
+          "note": "Which house, what route, what happened — spoken, with the phone still in a pocket."
+        },
         {
           "name": "14 / 42 days",
           "label": "Warm and cooling thresholds",
-          "note": "Priority is driven by when someone last answered, so nobody gets forgotten or knocked twice."
-        },
-        {
-          "name": "Nothing to maintain",
-          "label": "No server between walks",
-          "note": "Runs from the browser, and works with no backend at all in demo mode."
+          "note": "Priority follows when someone last answered, so nobody is forgotten or knocked twice."
         }
       ]
     },
     "skills": [
+      "Agentic AI",
       "Voice UX",
       "Gemini Live API",
       "React",
       "Leaflet",
-      "OSRM",
-      "Web Audio"
+      "OSRM"
     ]
   },
   {

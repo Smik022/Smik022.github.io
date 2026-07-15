@@ -414,6 +414,9 @@ ${
       <a class="pill-link" href="mailto:${esc(profile.email)}">
         ${svg("mail")}<span>Email</span>
       </a>
+      <a class="pill-link" href="${esc(profile.links.resume)}" target="_blank" rel="noopener">
+        ${svg("file")}<span>CV</span>
+      </a>
     </div>
 
     <section class="ethos">

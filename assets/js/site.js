@@ -1,4 +1,4 @@
-/* Theme toggle, email copy, dialogs, and the project modal.
+/* Theme toggle, email copy, and the project modal.
    The initial theme is set by an inline script in <head> to avoid a flash. */
 (function () {
   "use strict";
@@ -103,30 +103,6 @@
       }
     });
   }
-
-  /* ============================================================
-     Failures dialog
-     ============================================================ */
-
-  document.querySelectorAll("[data-dialog-open]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var dialog = document.getElementById(btn.getAttribute("data-dialog-open"));
-      if (dialog && typeof dialog.showModal === "function") dialog.showModal();
-    });
-  });
-
-  document.querySelectorAll("[data-dialog-close]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var dialog = btn.closest("dialog");
-      if (dialog) dialog.close();
-    });
-  });
-
-  document.querySelectorAll("dialog").forEach(function (dialog) {
-    dialog.addEventListener("click", function (e) {
-      if (e.target === dialog) dialog.close();
-    });
-  });
 
   /* ============================================================
      Project modal

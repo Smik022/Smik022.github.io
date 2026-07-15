@@ -96,7 +96,6 @@ const icon = {
     '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-13h4v1.5A6 6 0 0 1 16 8z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>',
   github:
     '<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-1-2.6c3-.3 6.2-1.5 6.2-6.7A5.2 5.2 0 0 0 19.8 5a4.9 4.9 0 0 0-.1-3.6s-1.2-.4-3.9 1.5a13.4 13.4 0 0 0-7 0C6.1 1 4.9 1.4 4.9 1.4A4.9 4.9 0 0 0 4.8 5a5.2 5.2 0 0 0-1.4 3.6c0 5.2 3.2 6.4 6.2 6.7a3.4 3.4 0 0 0-1 2.6V22"/>',
-  flag: '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/>',
 };
 
 const svg = (name) => `<svg viewBox="0 0 24 24" aria-hidden="true">${icon[name]}</svg>`;
@@ -166,9 +165,8 @@ function backdrop() {
 </div>`;
 }
 
-function dock(depth, opts) {
+function dock(depth) {
   const base = rel(depth);
-  const showFailures = has(profile.failures) && opts.failures;
 
   return `
 <nav class="dock glass" aria-label="Quick links">
@@ -193,14 +191,6 @@ function dock(depth, opts) {
   <a class="dock-item" href="${esc(profile.links.github)}" target="_blank" rel="noopener" data-label="GitHub">
     <span class="visually-hidden">GitHub</span>${svg("github")}
   </a>
-  ${
-    showFailures
-      ? `<span class="dock-sep"></span>
-  <button class="dock-item" data-dialog-open="failures" data-label="Failures">
-    <span class="visually-hidden">Open failures</span>${svg("flag")}
-  </button>`
-      : ""
-  }
 </nav>`;
 }
 
@@ -370,26 +360,6 @@ ${
     )
     .join("\n");
 
-  const failures = has(profile.failures)
-    ? `
-<dialog id="failures" class="glass">
-  <div class="dialog-head">
-    <h2>Failures</h2>
-    <button class="dialog-close" data-dialog-close aria-label="Close">&times;</button>
-  </div>
-  <div class="dialog-body">
-${profile.failures
-  .map(
-    (f) => `    <div class="failure-item">
-      <h3>${esc(f.title)}${f.draft ? '<span class="chip">Draft</span>' : ""}</h3>
-      <p>${esc(f.note)}</p>
-    </div>`
-  )
-  .join("\n")}
-  </div>
-</dialog>`
-    : "";
-
   // Case-study markup for every project, inert until cloned into the modal.
   // Embedded rather than fetched at click time: no network, so it works from
   // file://, offline, and on any host — and opens with zero latency.
@@ -460,8 +430,7 @@ ${items}
 </main>`,
     templates,
     modal,
-    failures,
-    dock(0, { failures: true }),
+    dock(0),
     foot(0),
   ]);
 }
@@ -475,7 +444,7 @@ function renderProject(p) {
   <a class="back" href="../../index.html">← All work</a>
 ${articleInner(p, 2)}
 </main>`,
-    dock(2, { failures: false }),
+    dock(2),
     foot(2),
   ]);
 }

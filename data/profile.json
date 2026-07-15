@@ -27,13 +27,5 @@
   },
 
   "analyticsId": "G-XF56S93S3H",
-  "domain": "https://asifahmed.me",
-
-  "failures": [
-    {
-      "draft": true,
-      "title": "Placeholder — replace me",
-      "note": "This is where you write the things that did not work and what they taught you. Mukit's site has this and it is the most disarming part of it. Send me two or three real ones and I will write them up properly."
-    }
-  ]
+  "domain": "https://asifahmed.me"
 }

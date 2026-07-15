@@ -37,25 +37,27 @@
   --radius: 16px;
 }
 
+/* Dark theme is built on one hue family — teal through jade — descended from
+   the old site's #00FFE7. Deliberately no violet, no pink, no slate-blue. */
 [data-theme="dark"] {
-  --bg: #111827;
+  --bg: #070d0c;
   --bg-soft: rgba(255, 255, 255, 0.04);
-  --text: #f1f5f9;
-  --text-muted: #a8b3c4;
-  --text-faint: #7c8798;
+  --text: #e9f1ef;
+  --text-muted: #9fb5af;
+  --text-faint: #7b918b;
   --line: rgba(255, 255, 255, 0.1);
   --line-strong: rgba(255, 255, 255, 0.18);
   --accent: #2ee6d6;
-  --accent-text: #67e8f9;
+  --accent-text: #5eead4;
   --accent-soft: rgba(46, 230, 214, 0.14);
 
-  --glass-bg: rgba(17, 24, 39, 0.55);
+  --glass-bg: rgba(7, 13, 12, 0.55);
   --glass-border: rgba(255, 255, 255, 0.12);
   --glass-blur: blur(24px) saturate(160%);
   --card-bg: rgba(255, 255, 255, 0.04);
-  --dock-bg: rgba(17, 24, 39, 0.6);
-  --shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
-  --scrim: rgba(3, 7, 18, 0.6);
+  --dock-bg: rgba(7, 13, 12, 0.62);
+  --shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+  --scrim: rgba(2, 8, 7, 0.62);
 }
 
 *,
@@ -136,7 +138,7 @@ a { color: inherit; text-decoration: none; }
 .backdrop-base {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom right, #111827, #0f172a, #111827);
+  background: linear-gradient(to bottom right, #070d0c, #0a1512, #070d0c);
 }
 
 /* Faint engineering grid. */
@@ -168,31 +170,41 @@ a { color: inherit; text-decoration: none; }
   will-change: transform;
 }
 
-.aurora-cyan {
-  background: radial-gradient(1200px 900px at 20% 30%,
-    rgba(6, 182, 212, 0.35) 0%, rgba(6, 182, 212, 0.22) 25%,
-    rgba(6, 182, 212, 0.14) 45%, rgba(6, 182, 212, 0.08) 65%, transparent 90%);
+/* One family, so depth comes from lightness rather than hue: two bright fields,
+   one soft green, and a deep jade that sinks instead of glowing. Alphas run
+   lower than a multi-hue sweep would need — stacked greens go muddy fast. */
+
+/* Tuned by compositing the stack numerically, not by eye.
+   Two constraints a single-hue aurora has that a rainbow one doesn't:
+   radii stay well under the viewport, so the blobs read as separate pools
+   instead of one flood, and peak alphas stay low, so the page stays near-black
+   with a green glow rather than turning into a forest-green wash. */
+
+.aurora-teal {
+  background: radial-gradient(620px 520px at 18% 26%,
+    rgba(20, 184, 166, 0.3) 0%, rgba(20, 184, 166, 0.17) 30%,
+    rgba(20, 184, 166, 0.08) 55%, rgba(20, 184, 166, 0.03) 75%, transparent 92%);
   animation: drift-a 26s ease-in-out infinite alternate;
 }
 
-.aurora-blue {
-  background: radial-gradient(1000px 1100px at 80% 70%,
-    rgba(59, 130, 246, 0.35) 0%, rgba(59, 130, 246, 0.22) 25%,
-    rgba(59, 130, 246, 0.14) 45%, rgba(59, 130, 246, 0.08) 65%, transparent 90%);
+.aurora-emerald {
+  background: radial-gradient(560px 600px at 84% 72%,
+    rgba(16, 185, 129, 0.24) 0%, rgba(16, 185, 129, 0.13) 30%,
+    rgba(16, 185, 129, 0.06) 55%, rgba(16, 185, 129, 0.02) 75%, transparent 92%);
   animation: drift-b 32s ease-in-out infinite alternate;
 }
 
-.aurora-purple {
-  background: radial-gradient(900px 1000px at 60% 40%,
-    rgba(147, 51, 234, 0.48) 0%, rgba(147, 51, 234, 0.32) 25%,
-    rgba(147, 51, 234, 0.2) 45%, rgba(147, 51, 234, 0.12) 65%, transparent 90%);
+.aurora-spring {
+  background: radial-gradient(480px 520px at 58% 44%,
+    rgba(34, 197, 94, 0.14) 0%, rgba(34, 197, 94, 0.08) 30%,
+    rgba(34, 197, 94, 0.04) 55%, rgba(34, 197, 94, 0.015) 75%, transparent 92%);
   animation: drift-c 38s ease-in-out infinite alternate;
 }
 
-.aurora-pink {
-  background: radial-gradient(1100px 800px at 40% 80%,
-    rgba(236, 72, 153, 0.45) 0%, rgba(236, 72, 153, 0.3) 25%,
-    rgba(236, 72, 153, 0.19) 45%, rgba(236, 72, 153, 0.11) 65%, transparent 90%);
+.aurora-jade {
+  background: radial-gradient(600px 460px at 38% 86%,
+    rgba(4, 120, 87, 0.34) 0%, rgba(4, 120, 87, 0.19) 30%,
+    rgba(4, 120, 87, 0.09) 55%, rgba(4, 120, 87, 0.03) 75%, transparent 92%);
   animation: drift-d 30s ease-in-out infinite alternate;
 }
 
@@ -453,7 +465,7 @@ body.modal-open .work-title { font-size: 0.9375rem; }
 
 /* Active item in the rail */
 body.modal-open .work-item.is-active .work-link {
-  background: linear-gradient(135deg, rgba(46, 230, 214, 0.16), rgba(59, 130, 246, 0.14));
+  background: linear-gradient(135deg, rgba(46, 230, 214, 0.16), rgba(16, 185, 129, 0.12));
   border: 1px solid var(--glass-border);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
@@ -656,7 +668,7 @@ body.modal-open .work-item.is-active .work-title { color: var(--text); }
 .byline-dot { margin: 0 0.5rem; opacity: 0.6; }
 .byline-org { color: var(--text-muted); }
 
-[data-theme="dark"] .byline-org { color: #c4b5fd; }
+[data-theme="dark"] .byline-org { color: #86efac; }
 
 .lede {
   font-size: 1.0625rem;

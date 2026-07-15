@@ -127,10 +127,10 @@ function backdrop() {
   return `<div class="backdrop" aria-hidden="true">
   <div class="backdrop-base"></div>
   <div class="backdrop-grid"></div>
-  <div class="aurora aurora-cyan"></div>
-  <div class="aurora aurora-blue"></div>
-  <div class="aurora aurora-purple"></div>
-  <div class="aurora aurora-pink"></div>
+  <div class="aurora aurora-teal"></div>
+  <div class="aurora aurora-emerald"></div>
+  <div class="aurora aurora-spring"></div>
+  <div class="aurora aurora-jade"></div>
   <div class="backdrop-noise"></div>
 </div>`;
 }

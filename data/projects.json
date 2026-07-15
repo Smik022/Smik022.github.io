@@ -9,45 +9,67 @@
     "draft": false,
     "logo": "",
     "tags": [
-      { "label": "Voice AI" },
-      { "label": "Realtime", "variant": "solid" },
-      { "label": "Agent Design", "variant": "outline" }
+      {
+        "label": "Voice AI"
+      },
+      {
+        "label": "Realtime",
+        "variant": "solid"
+      },
+      {
+        "label": "Agent Design",
+        "variant": "outline"
+      }
     ],
     "summary": "A realtime voice agent that qualifies inbound prospects in the browser, then books the briefing or captures the brief.",
     "links": [
-      { "label": "Live intake", "url": "https://www.artificersai.com/intake" },
-      { "label": "Merlin", "url": "https://merlin.artificersai.com" }
+      {
+        "label": "Live intake",
+        "url": "https://www.artificersai.com/intake"
+      },
+      {
+        "label": "Merlin",
+        "url": "https://merlin.artificersai.com"
+      }
     ],
-    "situation": "Every inbound enquiry cost a discovery meeting before anyone knew whether it was worth having. The studio was spending its scarcest asset — senior time — qualifying strangers.",
+    "situation": "Every inbound enquiry cost a discovery meeting before anyone knew whether it was worth having, and a missed call was a missed client. The studio was spending its scarcest asset — senior time — qualifying strangers, and still handling one caller at a time.",
     "task": [
       "Qualify inbound prospects without putting a person on the call.",
-      "Send the good ones to a booked briefing; turn the rest into a written brief."
+      "Never miss a caller, however many arrive at once."
     ],
-    "result": "Prospects qualify themselves in conversation and leave with a briefing booked or a structured brief in the team's inbox. Senior time now goes to calls that are already worth having.",
+    "result": "Callers are handled concurrently and qualify themselves in conversation, leaving with a briefing booked or a structured brief in the team's inbox. Nothing rings out, and senior time goes to calls already worth having.",
     "contributions": [
       "Framed the problem as qualification, not automation. The goal was never to replace discovery — it was to stop paying for discovery that shouldn't happen.",
+      "Argued the case on coverage rather than novelty: a person answers one call and works one shift. The comparison that mattered was against the role, not against a chatbot.",
       "Split one product into two front doors once it was clear a cold prospect and a client with a spec want completely different conversations.",
       "Ruled that the agent doesn't get the last word on whether work happened, after a live call ended announcing a brief that was never submitted.",
       "Set the standard that a wrong booking costs more trust than a retry costs patience — so booking tools must prove they know the time before they can act."
     ],
     "keyResults": {
-      "metric": "24/7",
-      "metricLabel": "Qualification with nobody on the call",
-      "metricNote": "Inbound prospects qualify themselves at any hour and book only when there is something worth discussing.",
+      "metric": "AU$60–70K",
+      "metricLabel": "The salaried role it covers",
+      "metricNote": "SEEK's 2026 band for an Australian receptionist — the job Merlin does without, except it takes every caller at once and none out of hours.",
       "items": [
+        {
+          "name": "Never rings out",
+          "label": "Concurrent by default",
+          "note": "A person answers one call at a time. A missed call was a missed client."
+        },
         {
           "name": "Meeting → brief",
           "label": "Discovery, async",
           "note": "A caller describes what they want built without sitting through a meeting to do it."
-        },
-        {
-          "name": "Books, reschedules, cancels",
-          "label": "It closes the loop",
-          "note": "The agent completes the transaction rather than handing off a lead."
         }
       ]
     },
-    "skills": ["Product Strategy", "Voice UX", "Agent Design", "Gemini Live API", "TypeScript", "Docker"]
+    "skills": [
+      "Product Strategy",
+      "Voice UX",
+      "Agent Design",
+      "Gemini Live API",
+      "TypeScript",
+      "Docker"
+    ]
   },
   {
     "slug": "zerotouch-onboarding",
@@ -59,42 +81,63 @@
     "draft": false,
     "logo": "",
     "tags": [
-      { "label": "Compliance" },
-      { "label": "Product Decisions", "variant": "solid" },
-      { "label": "Fintech", "variant": "outline" }
+      {
+        "label": "Compliance"
+      },
+      {
+        "label": "Product Decisions",
+        "variant": "solid"
+      },
+      {
+        "label": "Fintech",
+        "variant": "outline"
+      }
     ],
     "summary": "Client onboarding for an Australian accounting firm, built against a hard AML/CTF compliance deadline.",
-    "links": [{ "label": "Femia Accountants", "url": "https://femia-accountants.com.au/" }],
-    "situation": "New AML/CTF rules meant a $5M practice had to identify, verify and prove every client. The principal was doing it by hand across three Excel calculators and paper forms — and the evidence an auditor would ask for existed nowhere a system could produce it.",
+    "links": [
+      {
+        "label": "Femia Accountants",
+        "url": "https://femia-accountants.com.au/"
+      }
+    ],
+    "situation": "Femia's team re-keyed the same client across Xero, QuickBooks and Karbon, quoted off three Excel calculators, and assembled AML evidence by hand. New AML/CTF rules turned that manual trail into a legal exposure for a $5M practice.",
     "task": [
-      "Make the firm provably compliant before the date, without slowing down how it sells.",
+      "Collapse the platform-hopping into one flow, and make compliance provable before the date.",
       "Keep pricing confidential from clients — the firm's one non-negotiable."
     ],
-    "result": "The firm quotes, onboards and evidences a client in a single flow, with every ID and AML check landing automatically on the client's record in the practice system its auditors already read.",
+    "result": "One platform instead of three. Around 20 hours a week of duplicate entry gone, and every ID and AML check now lands automatically on the client's record in the system auditors already read.",
     "contributions": [
-      "Mapped the firm's real process before designing anything — three calculators, paper CDD forms — and found the gap that mattered: compliance was being done, but not provably.",
+      "Mapped where the time was actually going before designing anything: not the work itself, but the same client being typed into Xero, then QuickBooks, then Karbon.",
+      "Found the gap that mattered for the deadline — compliance was being done, but not provably. The evidence an auditor would ask for existed nowhere a system could produce it.",
       "Made pricing confidentiality the architectural constraint the moment the firm named it, rather than a feature bolted on later. It split the product into two forms and shaped everything after.",
-      "Decided the evidence writes into Karbon rather than a new database, so compliance lives where the firm already works and nobody has to be trained onto a second system.",
+      "Decided the evidence writes into Karbon rather than a new database, so compliance lives where the firm already works and nobody learns a second system.",
       "Caught a compliance-grade defect in testing: the practice system silently corrupts Director IDs beginning 036. Chose to preserve the identifier over using the field it belonged in."
     ],
     "keyResults": {
-      "metric": "0",
-      "metricLabel": "Client details typed twice",
-      "metricNote": "Entered once at quote; the intake, the AML record and the practice system stay in step on their own.",
+      "metric": "20 hrs",
+      "metricLabel": "A week of duplicate work removed",
+      "metricNote": "Staff were carrying the same client between Xero, QuickBooks and Karbon by hand. One platform ended the round trip.",
       "items": [
+        {
+          "name": "3 → 1",
+          "label": "Platforms in the onboarding path",
+          "note": "Client details entered once; quote, AML record and practice system stay in step on their own."
+        },
         {
           "name": "Evidence, automatically",
           "label": "Where auditors already look",
-          "note": "Every ID and AML check writes to the client's timeline as it happens, not afterwards."
-        },
-        {
-          "name": "One price, every time",
-          "label": "576-row matrix, from the firm's own workbook",
-          "note": "Quotes stop depending on who answered the phone."
+          "note": "Every ID and AML check writes to the client's timeline as it happens, not reconstructed afterwards."
         }
       ]
     },
-    "skills": ["Product Strategy", "AML/CTF Compliance", "Next.js", "Prisma", "Karbon API", "Microsoft Graph"]
+    "skills": [
+      "Product Strategy",
+      "AML/CTF Compliance",
+      "Next.js",
+      "Prisma",
+      "Karbon API",
+      "Microsoft Graph"
+    ]
   },
   {
     "slug": "narawe",
@@ -106,42 +149,58 @@
     "draft": false,
     "logo": "",
     "tags": [
-      { "label": "Document AI" },
-      { "label": "Search", "variant": "solid" },
-      { "label": "Multi-tenant", "variant": "outline" }
+      {
+        "label": "Document AI"
+      },
+      {
+        "label": "Search",
+        "variant": "solid"
+      },
+      {
+        "label": "Multi-tenant",
+        "variant": "outline"
+      }
     ],
     "summary": "Document intelligence for professional-services firms — scan client PDFs and search them by word or by meaning.",
     "links": [],
-    "situation": "Professional-services firms hold years of client history in scanned paper. It is legally theirs and sitting on their own server, and it is unfindable — the moment a document becomes an image, search stops working.",
+    "situation": "Professional-services firms hold years of client history in scanned paper. Finding one document meant people searching by hand for hours — so firms staffed for the searching rather than the work.",
     "task": [
       "Get paper in with no friction, including straight from a phone camera.",
       "Make it findable by the words people half-remember and the ideas they can't name."
     ],
-    "result": "A firm's scanned history becomes searchable — by exact phrase and by meaning — with an automatic written summary of everything known about a client.",
+    "result": "A firm's scanned history becomes searchable by phrase and by meaning. Hours of hunting collapse into a query, and the people left are verifying results rather than looking for them.",
     "contributions": [
+      "Reframed the cost from time to headcount: firms weren't only losing hours, they were staffing around a search problem. That reframing is what made the business case.",
       "Identified capture as the real adoption risk, not accuracy. A system nobody feeds is a system nobody uses, so scanning had to work from the phone already in someone's hand.",
       "Chose to fuse keyword and semantic search rather than pick one: the exact phrase on an invoice and the vague idea of a letter are different questions, and firms ask both.",
       "Consolidated three AI vendors into one — fewer contracts, fewer failure modes, one bill to defend.",
       "Made the AI summary fire-and-forget. An assistant that can fail someone's upload is worse than no assistant."
     ],
     "keyResults": {
-      "metric": "3 → 1",
-      "metricLabel": "AI vendors consolidated",
-      "metricNote": "Clarifai, OpenRouter and OpenAI became one — two supplier relationships and three failure modes removed.",
+      "metric": "A team → 1–2",
+      "metricLabel": "People needed, once search works",
+      "metricNote": "What is left is verifying what came back, not hunting for it — hours of manual searching become a query.",
       "items": [
         {
           "name": "Phrase and meaning",
           "label": "One search, both questions",
-          "note": "Fused results, with the matched words highlighted so people trust what came back."
+          "note": "Fused results with matched words highlighted, so people trust what came back."
         },
         {
-          "name": "Scan from a phone",
-          "label": "Capture where the paper is",
-          "note": "No scanner queue, no upload step between the document and the system."
+          "name": "3 → 1",
+          "label": "AI vendors consolidated",
+          "note": "Clarifai, OpenRouter and OpenAI became one — two supplier relationships and three failure modes removed."
         }
       ]
     },
-    "skills": ["Product Strategy", "Document AI", "Next.js", "pgvector", "Gemini", "Multi-tenant RLS"]
+    "skills": [
+      "Product Strategy",
+      "Document AI",
+      "Next.js",
+      "pgvector",
+      "Gemini",
+      "Multi-tenant RLS"
+    ]
   },
   {
     "slug": "siratul-mustakim",
@@ -153,9 +212,17 @@
     "draft": false,
     "logo": "",
     "tags": [
-      { "label": "Voice AI" },
-      { "label": "Field Tool", "variant": "solid" },
-      { "label": "Maps", "variant": "outline" }
+      {
+        "label": "Voice AI"
+      },
+      {
+        "label": "Field Tool",
+        "variant": "solid"
+      },
+      {
+        "label": "Maps",
+        "variant": "outline"
+      }
     ],
     "summary": "A voice-first field app that tells a preacher which house to visit next, draws the route, and records the outcome.",
     "links": [],
@@ -187,7 +254,14 @@
         }
       ]
     },
-    "skills": ["Voice UX", "Gemini Live API", "React", "Leaflet", "OSRM", "Web Audio"]
+    "skills": [
+      "Voice UX",
+      "Gemini Live API",
+      "React",
+      "Leaflet",
+      "OSRM",
+      "Web Audio"
+    ]
   },
   {
     "slug": "mofiz-marma",
@@ -199,12 +273,25 @@
     "draft": false,
     "logo": "",
     "tags": [
-      { "label": "Voice AI" },
-      { "label": "Diagrams", "variant": "solid" },
-      { "label": "Bilingual", "variant": "outline" }
+      {
+        "label": "Voice AI"
+      },
+      {
+        "label": "Diagrams",
+        "variant": "solid"
+      },
+      {
+        "label": "Bilingual",
+        "variant": "outline"
+      }
     ],
     "summary": "Talk, and Mofiz draws. A voice agent that renders live Mermaid diagrams as you describe them, in English or Bangla.",
-    "links": [{ "label": "Live demo", "url": "https://mofiz-marma.vercel.app" }],
+    "links": [
+      {
+        "label": "Live demo",
+        "url": "https://mofiz-marma.vercel.app"
+      }
+    ],
     "situation": "Describing a system takes a minute; drawing it takes an hour. Diagram tools make you stop thinking and start placing boxes, so the diagram in your head rarely survives the trip to the screen.",
     "task": [
       "Let someone talk and watch the diagram appear.",
@@ -233,7 +320,14 @@
         }
       ]
     },
-    "skills": ["Voice UX", "Gemini Live API", "Next.js", "Mermaid", "Web Audio", "Bangla"]
+    "skills": [
+      "Voice UX",
+      "Gemini Live API",
+      "Next.js",
+      "Mermaid",
+      "Web Audio",
+      "Bangla"
+    ]
   },
   {
     "slug": "repo-map",
@@ -245,9 +339,17 @@
     "draft": false,
     "logo": "",
     "tags": [
-      { "label": "Developer Tool" },
-      { "label": "Code Analysis", "variant": "solid" },
-      { "label": "Privacy", "variant": "outline" }
+      {
+        "label": "Developer Tool"
+      },
+      {
+        "label": "Code Analysis",
+        "variant": "solid"
+      },
+      {
+        "label": "Privacy",
+        "variant": "outline"
+      }
     ],
     "summary": "Point it at a GitHub repo or a local folder and get architecture diagrams, module notes and a generated README.",
     "links": [],
@@ -279,7 +381,14 @@
         }
       ]
     },
-    "skills": ["Developer Tooling", "React", "TypeScript", "Gemini", "Mermaid", "Vercel"]
+    "skills": [
+      "Developer Tooling",
+      "React",
+      "TypeScript",
+      "Gemini",
+      "Mermaid",
+      "Vercel"
+    ]
   },
   {
     "slug": "git-insight",
@@ -291,9 +400,17 @@
     "draft": false,
     "logo": "",
     "tags": [
-      { "label": "Developer Tool" },
-      { "label": "LLM", "variant": "solid" },
-      { "label": "GitHub API", "variant": "outline" }
+      {
+        "label": "Developer Tool"
+      },
+      {
+        "label": "LLM",
+        "variant": "solid"
+      },
+      {
+        "label": "GitHub API",
+        "variant": "outline"
+      }
     ],
     "summary": "Feed it a GitHub username and it returns a card-based developer assessment written for recruiters.",
     "links": [],
@@ -325,7 +442,14 @@
         }
       ]
     },
-    "skills": ["Developer Tooling", "React", "Vite", "Gemini", "GitHub REST API", "Vercel"]
+    "skills": [
+      "Developer Tooling",
+      "React",
+      "Vite",
+      "Gemini",
+      "GitHub REST API",
+      "Vercel"
+    ]
   },
   {
     "slug": "socratic-ai",
@@ -337,39 +461,65 @@
     "draft": false,
     "logo": "",
     "tags": [
-      { "label": "EdTech" },
-      { "label": "Proof of Concept", "variant": "solid" },
-      { "label": "Prompt Design", "variant": "outline" }
+      {
+        "label": "EdTech"
+      },
+      {
+        "label": "Proof of Concept",
+        "variant": "solid"
+      },
+      {
+        "label": "Prompt Design",
+        "variant": "outline"
+      }
     ],
     "summary": "The proof of concept for ilm AI — a tutor that refuses to just answer, asking guiding questions until the student gets there themselves.",
     "links": [
-      { "label": "ilm AI", "url": "https://www.ilmtech.app/" },
-      { "label": "Source", "url": "https://github.com/Smik022/Socratic-AI-Tutor" }
+      {
+        "label": "ilm AI",
+        "url": "https://www.ilmtech.app/"
+      },
+      {
+        "label": "Source",
+        "url": "https://github.com/Smik022/Socratic-AI-Tutor"
+      }
     ],
     "situation": "Students use AI to finish assignments and learn nothing from them. ilm's bet was a tutor that refuses to answer — but that bet only pays if the refusal survives a real student pushing for the answer.",
     "task": [
       "Prove the Socratic line holds under pressure, not just in a demo.",
       "Show it working by voice, since that is how tutoring actually sounds."
     ],
-    "result": "A working proof of concept that held the line — guiding questions, by speech or text — and gave ilm something to put in front of a room rather than describe.",
+    "result": "A working proof of concept that held the line — guiding questions, by speech or text — and carried ilm to nomination for the Innovation Booster Grant.",
     "contributions": [
       "Put the constraint in the prompt rather than hoping for it: an answer only after two or three hints, and only for general knowledge. 'Be Socratic' does not survive a student who keeps asking.",
+      "Aimed the product at the policy question, not just the classroom one. Australia's concern is children using AI safely, and a tutor that refuses to do the homework is an answer to it.",
       "Chose the browser's own speech engines, so voice costs nothing per minute — the difference between a pilot a school can afford and one it cannot.",
       "Kept it stateless on purpose. A proof of concept's job is to answer one question, not to be architecture."
     ],
     "keyResults": {
-      "metric": "2-3",
-      "metricLabel": "Hints before an answer is allowed",
-      "metricNote": "One paragraph of prompt is where the teaching actually lives — everything the product claims rests on that line holding.",
+      "metric": "AU$50K",
+      "metricLabel": "Innovation Booster Grant — nominated",
+      "metricNote": "The proof of concept is what took ilm from a proposition to something demonstrable in the room.",
       "items": [
+        {
+          "name": "Safe AI for children",
+          "label": "Aimed at the policy, not just the market",
+          "note": "A tutor that refuses to do the homework answers the question Australian regulators are actually asking."
+        },
         {
           "name": "$0 per voice minute",
           "label": "Speech runs in the browser",
-          "note": "No audio vendor and no per-seat cost — the pricing question a school asks first."
+          "note": "No audio vendor, no per-seat cost — the pricing question a school asks first."
         }
       ]
     },
-    "skills": ["Prompt Engineering", "Django", "React", "Gemini", "Web Speech API"]
+    "skills": [
+      "Prompt Engineering",
+      "Django",
+      "React",
+      "Gemini",
+      "Web Speech API"
+    ]
   },
   {
     "slug": "otsukare",
@@ -378,48 +528,113 @@
     "role": "Product Lead",
     "company": "Otsukare",
     "year": "2025",
-    "draft": true,
+    "draft": false,
     "logo": "",
     "tags": [
-      { "label": "Marketplace" },
-      { "label": "AI Matching", "variant": "solid" },
-      { "label": "Product Strategy", "variant": "outline" }
+      {
+        "label": "Marketplace"
+      },
+      {
+        "label": "AI Matching",
+        "variant": "solid"
+      },
+      {
+        "label": "Product Strategy",
+        "variant": "outline"
+      }
     ],
     "summary": "A Japan-focused freelance platform connecting global IT talent with Japanese firms through AI-driven matching.",
-    "links": [{ "label": "Live site", "url": "https://www.otsukare.work/" }],
-    "situation": "",
-    "task": "",
-    "result": "",
-    "contributions": [],
+    "links": [
+      {
+        "label": "Live site",
+        "url": "https://www.otsukare.work/"
+      }
+    ],
+    "situation": "METI projects Japan will be short 400,000 IT workers. The talent exists globally — the barrier is that Japanese firms and foreign engineers cannot find or assess one another across the language and process gap.",
+    "task": [
+      "Connect global IT talent to Japanese firms with matching that survives the language gap.",
+      "Win the prefecture stakeholders who would have to back it."
+    ],
+    "result": "A platform argued against METI's own shortfall figure, and acknowledged by the Vice Chairman of Miyazaki Prefecture — the project's key stakeholder.",
+    "contributions": [
+      "Grounded the thesis in METI's own gap analysis rather than a market guess. 400,000 is the government's number, which made it the room's number too — and made the problem theirs rather than ours to prove.",
+      "Took the case to the prefecture directly rather than to the market first. In Japan, the backing that mattered came from the government side.",
+      "Positioned AI matching as the bridge across the assessment gap, not as the product. The barrier was never the supply of engineers — it was firms being unable to judge them."
+    ],
     "keyResults": {
       "metric": "400K",
-      "metricLabel": "Talent gap the market faces",
-      "metricNote": "",
-      "items": []
+      "metricLabel": "The IT shortfall METI projects",
+      "metricNote": "Japan's own ministry figure — the gap the platform exists to close, and the number that opened the conversation.",
+      "items": [
+        {
+          "name": "Vice Chairman, Miyazaki Prefecture",
+          "label": "Key stakeholder — acknowledged",
+          "note": "The endorsement that mattered came from the government side rather than the market side."
+        }
+      ]
     },
-    "skills": ["Product Strategy", "AI Matching", "Marketplace Design"]
+    "skills": [
+      "Product Strategy",
+      "AI Matching",
+      "Marketplace Design"
+    ]
   },
   {
     "slug": "fabric-qr-web-app",
     "title": "Fabric QR Web App",
     "category": "Internal Tool",
     "role": "Builder",
-    "company": "RMG industry",
+    "company": "Echotex",
     "year": "2025",
-    "draft": true,
+    "draft": false,
     "logo": "",
     "tags": [
-      { "label": "Internal Tool" },
-      { "label": "Automation", "variant": "solid" },
-      { "label": "Workflow", "variant": "outline" }
+      {
+        "label": "Internal Tool"
+      },
+      {
+        "label": "Automation",
+        "variant": "solid"
+      },
+      {
+        "label": "Workflow",
+        "variant": "outline"
+      }
     ],
     "summary": "Shares fabric details — images, GSM, type, references — over QR codes, killing a repetitive workflow and its errors.",
-    "links": [{ "label": "Live demo", "url": "https://fabric-link-maker.lovable.app/" }],
-    "situation": "",
-    "task": "",
-    "result": "",
-    "contributions": [],
-    "keyResults": { "metric": "", "metricLabel": "", "metricNote": "", "items": [] },
-    "skills": ["Rapid Prototyping", "Workflow Automation", "QR Systems"]
+    "links": [
+      {
+        "label": "Live demo",
+        "url": "https://fabric-link-maker.lovable.app/"
+      }
+    ],
+    "situation": "Every time anyone asked about a fabric, someone photographed it, typed out the GSM, type and references, and sent it on WhatsApp. Same fabric, same details, again for every person who asked — and a typo travelled exactly as far as the photo did.",
+    "task": [
+      "Kill the repetition: capture a fabric once, share it any number of times.",
+      "Make the spec travel with the photo so nothing gets retyped."
+    ],
+    "result": "Photograph the fabric, get a QR, share the QR. Five minutes of photographing and retyping became ten seconds.",
+    "contributions": [
+      "Traced the cost to repetition rather than effort. The task was never hard — it was done again from scratch for every person who asked, which is why nobody had flagged it as a problem.",
+      "Made the QR the deliverable instead of the message. One code carries the image, GSM, type and references, so the spec stops being retyped and stops drifting between people.",
+      "Fixed the workflow where it already lived. People were going to keep working over WhatsApp, so the output had to be one shareable thing — not another system to log into."
+    ],
+    "keyResults": {
+      "metric": "5 min → 10 sec",
+      "metricLabel": "Sharing a fabric spec",
+      "metricNote": "Thirty times faster, and the details stop depending on who typed them that time.",
+      "items": [
+        {
+          "name": "Typed once, not every time",
+          "label": "So the errors go too",
+          "note": "A retyped spec is a spec that can drift. The QR carries the original."
+        }
+      ]
+    },
+    "skills": [
+      "Rapid Prototyping",
+      "Workflow Automation",
+      "QR Systems"
+    ]
   }
 ]

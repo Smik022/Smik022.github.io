@@ -74,25 +74,26 @@
     <div class="article-main">
     <section class="block">
       <h2>Situation</h2>
-      <p>New AML/CTF rules meant a $5M practice had to identify, verify and prove every client. The principal was doing it by hand across three Excel calculators and paper forms — and the evidence an auditor would ask for existed nowhere a system could produce it.</p>
+      <p>Femia&#39;s team re-keyed the same client across Xero, QuickBooks and Karbon, quoted off three Excel calculators, and assembled AML evidence by hand. New AML/CTF rules turned that manual trail into a legal exposure for a $5M practice.</p>
     </section>
     <section class="block">
       <h2>Task</h2>
       <ul>
-        <li>Make the firm provably compliant before the date, without slowing down how it sells.</li>
+        <li>Collapse the platform-hopping into one flow, and make compliance provable before the date.</li>
         <li>Keep pricing confidential from clients — the firm&#39;s one non-negotiable.</li>
       </ul>
     </section>
     <section class="block">
       <h2>Result</h2>
-      <p>The firm quotes, onboards and evidences a client in a single flow, with every ID and AML check landing automatically on the client&#39;s record in the practice system its auditors already read.</p>
+      <p>One platform instead of three. Around 20 hours a week of duplicate entry gone, and every ID and AML check now lands automatically on the client&#39;s record in the system auditors already read.</p>
     </section>
     <section class="block">
       <h2>My Contribution</h2>
       <ul>
-        <li>Mapped the firm&#39;s real process before designing anything — three calculators, paper CDD forms — and found the gap that mattered: compliance was being done, but not provably.</li>
+        <li>Mapped where the time was actually going before designing anything: not the work itself, but the same client being typed into Xero, then QuickBooks, then Karbon.</li>
+        <li>Found the gap that mattered for the deadline — compliance was being done, but not provably. The evidence an auditor would ask for existed nowhere a system could produce it.</li>
         <li>Made pricing confidentiality the architectural constraint the moment the firm named it, rather than a feature bolted on later. It split the product into two forms and shaped everything after.</li>
-        <li>Decided the evidence writes into Karbon rather than a new database, so compliance lives where the firm already works and nobody has to be trained onto a second system.</li>
+        <li>Decided the evidence writes into Karbon rather than a new database, so compliance lives where the firm already works and nobody learns a second system.</li>
         <li>Caught a compliance-grade defect in testing: the practice system silently corrupts Director IDs beginning 036. Chose to preserve the identifier over using the field it belonged in.</li>
       </ul>
     </section>
@@ -101,19 +102,19 @@
       <div class="card">
         <h2 class="card-title">Key Results</h2>
         <div class="metric">
-          <span class="metric-value">0</span>
-          <span class="metric-label">Client details typed twice</span>
-          <p class="metric-note">Entered once at quote; the intake, the AML record and the practice system stay in step on their own.</p>
+          <span class="metric-value">20 hrs</span>
+          <span class="metric-label">A week of duplicate work removed</span>
+          <p class="metric-note">Staff were carrying the same client between Xero, QuickBooks and Karbon by hand. One platform ended the round trip.</p>
+        </div>
+        <div class="metric">
+          <span class="metric-name">3 → 1</span>
+          <span class="metric-label">Platforms in the onboarding path</span>
+          <p class="metric-note">Client details entered once; quote, AML record and practice system stay in step on their own.</p>
         </div>
         <div class="metric">
           <span class="metric-name">Evidence, automatically</span>
           <span class="metric-label">Where auditors already look</span>
-          <p class="metric-note">Every ID and AML check writes to the client&#39;s timeline as it happens, not afterwards.</p>
-        </div>
-        <div class="metric">
-          <span class="metric-name">One price, every time</span>
-          <span class="metric-label">576-row matrix, from the firm&#39;s own workbook</span>
-          <p class="metric-note">Quotes stop depending on who answered the phone.</p>
+          <p class="metric-note">Every ID and AML check writes to the client&#39;s timeline as it happens, not reconstructed afterwards.</p>
         </div>
       </div>
       <div class="rail-skills">

@@ -127,28 +127,6 @@
     ]
   },
   {
-    "slug": "socratic-ai",
-    "title": "Socratic AI Learning Platform",
-    "category": "AI Product",
-    "role": "Product Strategist",
-    "company": "Australian startup (stealth)",
-    "year": "2026",
-    "draft": true,
-    "tags": [
-      { "label": "AI Product" },
-      { "label": "EdTech", "variant": "solid" },
-      { "label": "Product Strategy", "variant": "outline" }
-    ],
-    "summary": "Collaborating with an Australian startup to build interactive, intelligent learning experiences driven by Socratic questioning.",
-    "links": [],
-    "situation": "",
-    "task": "",
-    "result": "",
-    "contributions": [],
-    "keyResults": { "metric": "", "metricLabel": "", "metricNote": "", "items": [] },
-    "skills": ["AI Product", "Prompt Engineering", "Requirements Analysis"]
-  },
-  {
     "slug": "narawe",
     "title": "Narawe",
     "category": "Document Intelligence",
@@ -438,6 +416,65 @@
       "Gemini",
       "GitHub REST API",
       "Vercel Serverless"
+    ]
+  },
+  {
+    "slug": "socratic-ai",
+    "title": "Socratic AI Tutor",
+    "category": "EdTech",
+    "role": "Builder",
+    "company": "Personal project",
+    "year": "2025",
+    "draft": false,
+    "tags": [
+      { "label": "EdTech" },
+      { "label": "Voice", "variant": "solid" },
+      { "label": "Prompt Design", "variant": "outline" }
+    ],
+    "summary": "A tutor that refuses to just answer. It asks guiding questions until the student gets there themselves — by voice or by text.",
+    "links": [{ "label": "Source", "url": "https://github.com/Smik022/Socratic-AI-Tutor" }],
+    "situation": "Ask a chatbot a homework question and it hands over the answer. The student gets unstuck and learns nothing — the very thing that makes the tool feel helpful is the thing that removes the learning.",
+    "task": [
+      "Build a tutor that holds the Socratic line: guiding questions instead of answers, adapting to the student's level.",
+      "Let a student talk to it rather than type at it, so it feels like being tutored instead of searching."
+    ],
+    "result": "A working prototype: a Django REST backend on Gemini 2.5 Flash, a React front end, and a full voice loop — speak the question, hear the answer, keep the thread. Runs locally; never deployed.",
+    "contributions": [
+      "Wrote the constraint into the prompt rather than hoping for it. The tutor may only give a direct answer if the question is general knowledge, and only after two or three hints. 'Be Socratic' on its own does not survive a student who keeps pushing for the answer.",
+      "Used the browser's own speech APIs in both directions — recognition in, synthesis out. Voice costs nothing to run, needs no realtime audio service, and the entire loop stays client-side.",
+      "Cancel the tutor's speech the moment the mic opens, so it stops talking when the student wants to.",
+      "Kept the conversation in a ref alongside React state, because the speech-recognition callback closes over the first render and would otherwise send an empty history on every spoken turn — the answer would be right but the tutor would have forgotten the conversation.",
+      "Left the backend stateless, with history travelling on each request. That kept it to one endpoint and no schema, at the cost of losing the conversation on refresh — the right trade for a prototype, the first thing to fix for real use."
+    ],
+    "keyResults": {
+      "metric": "",
+      "metricLabel": "",
+      "metricNote": "",
+      "items": [
+        {
+          "name": "Voice both ways, nothing to run",
+          "label": "Web Speech API",
+          "note": "Speech recognition and synthesis ship inside the browser. No realtime audio infrastructure, no per-minute billing, nothing extra to deploy."
+        },
+        {
+          "name": "The two-to-three hint rule",
+          "label": "Where the teaching actually lives",
+          "note": "The prompt draws a hard line about when an answer may be given at all. Everything the product is depends on that one paragraph holding."
+        },
+        {
+          "name": "One endpoint, no schema",
+          "label": "Stateless by choice",
+          "note": "The whole backend is a single chat view. History travels with the request, so there is nothing to migrate and nothing to store."
+        }
+      ]
+    },
+    "skills": [
+      "Prompt Engineering",
+      "Django",
+      "Django REST Framework",
+      "React",
+      "Gemini",
+      "Web Speech API"
     ]
   },
   {

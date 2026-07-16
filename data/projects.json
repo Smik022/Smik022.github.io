@@ -599,72 +599,6 @@
     ]
   },
   {
-    "slug": "dulles-global",
-    "title": "Investment Workflow Automation",
-    "category": "Process Automation",
-    "role": "Business System Analyst",
-    "company": "Dulles Global Investment",
-    "year": "2025",
-    "draft": false,
-    "logo": "",
-    "tags": [
-      {
-        "label": "Process Automation"
-      },
-      {
-        "label": "Workflow",
-        "variant": "solid"
-      },
-      {
-        "label": "Investment",
-        "variant": "outline"
-      }
-    ],
-    "summary": "An investment application that routes itself — one form submission reaches every department it needs to, and one system tracks it from received to disbursed.",
-    "links": [
-      {
-        "label": "Dulles Global",
-        "url": "https://dullesglobal.org/"
-      }
-    ],
-    "situation": "An investment application arrived as a form and then stopped moving on its own. Someone had to read it, work out which departments needed which documents, and forward them by hand — while the status of any given application lived in whoever last touched it.",
-    "task": [
-      "Get every submitted document to the right department and system without anyone forwarding it.",
-      "Put the whole pipeline — received, sanctioned, disbursed — in one place that is always current."
-    ],
-    "result": "A submitted application now routes itself to every department, email and system that needs it, and a single control layer carries it through sanction to disbursement. The manual forwarding step is gone.",
-    "contributions": [
-      "Mapped the process end to end before automating any of it. The bottleneck was not the decisions — it was the handoffs between them, which is where applications sat.",
-      "Made routing a property of the submission rather than a person's job. The form knows which departments need what, so nothing waits on someone remembering to forward it.",
-      "Centralised status instead of leaving it in inboxes. Received, sanctioned, disbursed — one system holds the truth, so nobody has to ask where an application got to.",
-      "Automated the full lifecycle rather than the intake alone. Stopping at submission would have moved the bottleneck downstream rather than removing it."
-    ],
-    "keyResults": {
-      "metric": "1 → all",
-      "metricLabel": "One submission, every department reached",
-      "metricNote": "Documents route themselves to the departments, emails and systems that need them — no one forwards anything by hand.",
-      "items": [
-        {
-          "name": "Received to disbursed",
-          "label": "One control layer",
-          "note": "Sanction, disbursement and status tracked in one place instead of across inboxes."
-        },
-        {
-          "name": "No manual handoffs",
-          "label": "The step that used to lose applications",
-          "note": "Routing is a property of the submission, so nothing waits on someone remembering."
-        }
-      ]
-    },
-    "skills": [
-      "Business System Analysis",
-      "Process Mapping",
-      "Workflow Automation",
-      "Requirements Analysis",
-      "Stakeholder Management"
-    ]
-  },
-  {
     "slug": "siratul-mustakim",
     "title": "Siratul Mustakim",
     "category": "Voice AI",
@@ -792,6 +726,72 @@
       "pgvector",
       "Gemini",
       "Multi-tenant RLS"
+    ]
+  },
+  {
+    "slug": "dulles-global",
+    "title": "Investment Workflow Automation",
+    "category": "Process Automation",
+    "role": "Business System Analyst",
+    "company": "Dulles Global Investment",
+    "year": "2025",
+    "draft": false,
+    "logo": "",
+    "tags": [
+      {
+        "label": "Process Automation"
+      },
+      {
+        "label": "Workflow",
+        "variant": "solid"
+      },
+      {
+        "label": "Investment",
+        "variant": "outline"
+      }
+    ],
+    "summary": "An investment application that routes itself — one form submission reaches every department it needs to, and one system tracks it from received to disbursed.",
+    "links": [
+      {
+        "label": "Dulles Global",
+        "url": "https://dullesglobal.org/"
+      }
+    ],
+    "situation": "An investment application arrived as a form and then stopped moving on its own. Someone had to read it, work out which departments needed which documents, and forward them by hand — while the status of any given application lived in whoever last touched it.",
+    "task": [
+      "Get every submitted document to the right department and system without anyone forwarding it.",
+      "Put the whole pipeline — received, sanctioned, disbursed — in one place that is always current."
+    ],
+    "result": "A submitted application now routes itself to every department, email and system that needs it, and a single control layer carries it through sanction to disbursement. The manual forwarding step is gone.",
+    "contributions": [
+      "Mapped the process end to end before automating any of it. The bottleneck was not the decisions — it was the handoffs between them, which is where applications sat.",
+      "Made routing a property of the submission rather than a person's job. The form knows which departments need what, so nothing waits on someone remembering to forward it.",
+      "Centralised status instead of leaving it in inboxes. Received, sanctioned, disbursed — one system holds the truth, so nobody has to ask where an application got to.",
+      "Automated the full lifecycle rather than the intake alone. Stopping at submission would have moved the bottleneck downstream rather than removing it."
+    ],
+    "keyResults": {
+      "metric": "1 → all",
+      "metricLabel": "One submission, every department reached",
+      "metricNote": "Documents route themselves to the departments, emails and systems that need them — no one forwards anything by hand.",
+      "items": [
+        {
+          "name": "Received to disbursed",
+          "label": "One control layer",
+          "note": "Sanction, disbursement and status tracked in one place instead of across inboxes."
+        },
+        {
+          "name": "No manual handoffs",
+          "label": "The step that used to lose applications",
+          "note": "Routing is a property of the submission, so nothing waits on someone remembering."
+        }
+      ]
+    },
+    "skills": [
+      "Business System Analysis",
+      "Process Mapping",
+      "Workflow Automation",
+      "Requirements Analysis",
+      "Stakeholder Management"
     ]
   }
 ]

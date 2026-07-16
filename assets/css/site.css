@@ -547,16 +547,12 @@ body.modal-open .work {
   overscroll-behavior: contain;
   z-index: 55; /* above .modal (50), below .dock (60) */
   padding-right: 0.4rem;
-  scrollbar-width: thin;
-  scrollbar-color: var(--line-strong) transparent;
+  /* Hidden here too, to match the panel — both still scroll. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-body.modal-open .work::-webkit-scrollbar { width: 6px; }
-body.modal-open .work::-webkit-scrollbar-thumb {
-  background: var(--line-strong);
-  border-radius: 3px;
-}
-body.modal-open .work::-webkit-scrollbar-track { background: transparent; }
+body.modal-open .work::-webkit-scrollbar { width: 0; height: 0; }
 
 body.modal-open .work-link {
   padding: 0.6rem 0.75rem;
@@ -635,6 +631,10 @@ body.modal-open .dock { display: none; }
   max-height: min(94vh, 1000px);
   overflow-y: auto;
   overscroll-behavior: contain;
+  /* Scrolls, but the bar stays out of the way — it cut across the glass edge
+     and the rounded corner. Wheel, trackpad, keys and touch all still work. */
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* old Edge/IE */
   border-radius: 22px;
   box-shadow: var(--shadow);
   padding: clamp(1.25rem, 2.4vw, 2rem);
@@ -644,6 +644,8 @@ body.modal-open .dock { display: none; }
 }
 
 .modal.is-open .modal-panel { opacity: 1; transform: none; }
+
+.modal-panel::-webkit-scrollbar { width: 0; height: 0; } /* Chrome, Safari */
 
 .modal-panel:focus { outline: none; }
 

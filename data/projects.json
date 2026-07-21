@@ -24,11 +24,7 @@
     "summary": "A realtime voice agent that qualifies inbound prospects in the browser, then books the briefing or captures the brief.",
     "links": [
       {
-        "label": "Live intake",
-        "url": "https://www.artificersai.com/intake"
-      },
-      {
-        "label": "Merlin",
+        "label": "Live",
         "url": "https://merlin.artificersai.com"
       }
     ],

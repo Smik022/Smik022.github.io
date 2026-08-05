@@ -381,6 +381,15 @@ a { color: inherit; text-decoration: none; }
 
 .count { font-size: 0.8125rem; color: var(--text-faint); font-variant-numeric: tabular-nums; }
 
+/* Tells a first-time visitor the rows are openable — the hover cue is
+   invisible until you hover, and absent entirely on touch. Hidden in the rail,
+   where the modal is already open and the point is made. */
+.work-hint {
+  margin: 0 0 1rem;
+  font-size: 0.8125rem;
+  color: var(--text-faint);
+}
+
 .work-list {
   list-style: none;
   margin: 0; padding: 0;
@@ -410,7 +419,8 @@ body.modal-open .work-group:first-child { padding-top: 0; }
   display: grid;
   align-items: baseline;
   gap: 0.15rem 0.85rem;
-  padding: 1.15rem 0;
+  /* Right gutter reserves room for the affordance arrow. */
+  padding: 1.15rem 1.6rem 1.15rem 0;
   position: relative;
   border-radius: 10px;
   transition: padding 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.25s ease;
@@ -427,8 +437,27 @@ body.modal-open .work-group:first-child { padding-top: 0; }
   transition: height 0.25s ease;
 }
 
+/* Persistent "open me" arrow on the right of every row. Faint at rest so it
+   reads as an affordance rather than a button; brightens and nudges on hover. */
+.work-link::after {
+  content: "→";
+  position: absolute;
+  right: 0.15rem; top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--text-faint);
+  opacity: 0.55;
+  transition: opacity 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
 .work-link:hover { padding-left: 1rem; }
 .work-link:hover::before { height: 60%; }
+.work-link:hover::after {
+  opacity: 1;
+  color: var(--accent-text);
+  transform: translateY(-50%) translateX(3px);
+}
 
 /* Every row carries a tile — a real logo or a monogram — so the column is
    always uniform and never leaves a hole. Tiles are pre-normalised to 128x128
@@ -559,6 +588,8 @@ body.modal-open .work-link {
   gap: 0;
 }
 body.modal-open .work-link::before { display: none; }
+body.modal-open .work-link::after { display: none; }
+body.modal-open .work-hint { display: none; }
 body.modal-open .work-title { font-size: 0.9375rem; }
 body.modal-open .work-link { grid-template-columns: 22px minmax(0, 1fr); gap: 0 0.5rem; }
 body.modal-open .work-logo { width: 22px; height: 22px; border-radius: 5px; }

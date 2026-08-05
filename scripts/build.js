@@ -442,7 +442,7 @@ ${ethos}
       <h2 class="eyebrow">${esc(profile.workHeading || "Key Projects")}</h2>
       <span class="count">${projects.length} projects</span>
     </div>
-    <p class="work-hint">Open any project for the full case study — the problem, the decisions, the results.</p>
+    <p class="work-hint"><span class="work-hint-cursor" aria-hidden="true">👆</span> <strong>Click any project</strong> to open its full case study.</p>
     <ul class="work-list">
 ${items}
     </ul>

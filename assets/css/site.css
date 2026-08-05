@@ -385,10 +385,23 @@ a { color: inherit; text-decoration: none; }
    invisible until you hover, and absent entirely on touch. Hidden in the rail,
    where the modal is already open and the point is made. */
 .work-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   margin: 0 0 1rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  background: var(--accent-soft);
   font-size: 0.8125rem;
-  color: var(--text-faint);
+  /* Full-strength text, not muted — this is an instruction, and on a 10% tint
+     it stays clearly legible in both themes without depending on measurement. */
+  color: var(--text);
 }
+
+.work-hint strong { color: var(--accent-text); font-weight: 600; }
+
+.work-hint-cursor { font-size: 0.9rem; line-height: 1; }
 
 .work-list {
   list-style: none;

@@ -441,11 +441,11 @@ body.modal-open .work-group:first-child { padding-top: 0; }
   content: "";
   position: absolute;
   left: 0; top: 50%;
-  width: 3px; height: 0;
+  width: 3px; height: 60%;
   background: var(--accent);
   border-radius: 3px;
-  transform: translateY(-50%);
-  transition: height 0.25s ease;
+  transform: translateY(-50%) scaleY(0);
+  transition: transform 0.25s ease;
 }
 
 /* Persistent "open me" arrow on the right of every row. Faint at rest so it
@@ -463,7 +463,7 @@ body.modal-open .work-group:first-child { padding-top: 0; }
 }
 
 .work-link:hover { padding-left: 1rem; }
-.work-link:hover::before { height: 60%; }
+.work-link:hover::before { transform: translateY(-50%) scaleY(1); }
 .work-link:hover::after {
   opacity: 1;
   color: var(--accent-text);

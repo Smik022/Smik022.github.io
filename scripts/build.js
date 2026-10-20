@@ -405,7 +405,10 @@ ${
     <img class="avatar" src="${esc(profile.avatar)}" alt="${esc(profile.name)}" width="64" height="64">
     <p class="greeting">Hello there, I'm</p>
     <h1 class="name">${esc(profile.firstName)} <span class="wave">👋</span></h1>
-    <p class="tagline">${esc(profile.tagline)}</p>
+    <p class="tagline">${esc(profile.tagline).replace(
+      / \| /g,
+      '<span class="tagline-sep" aria-hidden="true">|</span>'
+    )}</p>
     <p class="intro">${esc(profile.intro)}</p>
 
     <div class="panel-links">

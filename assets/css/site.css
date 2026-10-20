@@ -282,7 +282,20 @@ a { color: inherit; text-decoration: none; }
   50% { transform: rotate(10deg); }
 }
 
-.tagline { margin: 0.75rem 0 0; color: var(--text-muted); font-size: 1.0625rem; }
+.tagline {
+  margin: 1.25rem 0 0;          /* room below the large name */
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+  line-height: 1.4;
+}
+
+/* Let the two titles breathe either side of the divider instead of being
+   glued to it. Thin and faint so it reads as a separator, not a character. */
+.tagline-sep {
+  margin: 0 0.55rem;
+  color: var(--text-faint);
+  font-weight: 300;
+}
 .intro { margin: 1.5rem 0 0; max-width: 46ch; color: var(--text-muted); font-size: 0.9375rem; }
 
 /* Contact sits under the intro — where someone lands after working out who you
